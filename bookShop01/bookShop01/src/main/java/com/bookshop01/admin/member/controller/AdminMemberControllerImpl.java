@@ -33,7 +33,7 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		ModelAndView mav = new ModelAndView(viewName);
 
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
-		String section = dateMap.get("section");
+		String section = dateMap.get("section");	
 		String pageNum = dateMap.get("pageNum");
 		String beginDate=null,endDate=null;
 		
@@ -48,7 +48,7 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		if(section== null) {
 			section = "1";
 		}
-		condMap.put("section",section);
+		condMap.put("chapter",section);
 		if(pageNum== null) {
 			pageNum = "1";
 		}
@@ -67,7 +67,7 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		mav.addObject("endMonth",endDate2[1]);
 		mav.addObject("endDay",endDate2[2]);
 		
-		mav.addObject("section", section);
+		mav.addObject("chapter", section);
 		mav.addObject("pageNum", pageNum);
 		return mav;
 		

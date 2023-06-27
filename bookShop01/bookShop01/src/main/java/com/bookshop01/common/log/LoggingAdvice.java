@@ -1,6 +1,8 @@
 package com.bookshop01.common.log;
 
+import java.text.SimpleDateFormat ;
 import java.util.Arrays;
+import java.util.Date ;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class LoggingAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(LoggingAdvice.class);
 
-	// target ¸Þ¼­µåÀÇ ÆÄ¶ó¹ÌÅÍµî Á¤º¸¸¦ Ãâ·ÂÇÕ´Ï´Ù.
+	// target ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	@Before("execution(* com.bookshop01.*.service.*.*(..)) or "
 			+ "execution(* com.bookshop01.*.dao.*.*(..))")
 	public void startLog(JoinPoint jp) {
@@ -25,20 +27,25 @@ public class LoggingAdvice {
 		logger.info("-------------------------------------");
 		logger.info("-------------------------------------");
 
-		// Àü´ÞµÇ´Â ¸ðµç ÆÄ¶ó¹ÌÅÍµéÀ» ObjectÀÇ ¹è¿­·Î °¡Á®¿É´Ï´Ù. 
+		// ï¿½ï¿½ï¿½ÞµÇ´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ Objectï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½. 
 		logger.info("1:" + Arrays.toString(jp.getArgs()));
 
-		//ÇØ´ç AdviceÀÇ Å¸ÀÔÀ» ¾Ë¾Æ³À´Ï´Ù. 
+		//ï¿½Ø´ï¿½ Adviceï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ï¿½Ï´ï¿½. 
 		logger.info("2:" + jp.getKind());
 
-		// ½ÇÇàÇÏ´Â ´ë»ó °´Ã¼ÀÇ ¸Þ¼Òµå¿¡ ´ëÇÑ Á¤º¸¸¦ ¾Ë¾Æ³¾ ¶§ »ç¿ëÇÕ´Ï´Ù. 
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Þ¼Òµå¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. 
 		logger.info("3:" + jp.getSignature().getName());
 
-		// target °´Ã¼¸¦ ¾Ë¾Æ³¾ ¶§ »ç¿ëÇÕ´Ï´Ù. 
+		// target ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. 
 		logger.info("4:" + jp.getTarget().toString());
 
-		// Advice¸¦ ÇàÇÏ´Â °´Ã¼¸¦ ¾Ë¾Æ³¾ ¶§ »ç¿ëÇÕ´Ï´Ù. 
+		// Adviceï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. 
 		logger.info("5:" + jp.getThis().toString());
+
+		// print date
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+		logger.info("6:" + formatter.format(date));
 
 	}
 	
@@ -48,40 +55,45 @@ public class LoggingAdvice {
 		logger.info("-------------------------------------");
 		logger.info("-------------------------------------");
 
-		// Àü´ÞµÇ´Â ¸ðµç ÆÄ¶ó¹ÌÅÍµéÀ» ObjectÀÇ ¹è¿­·Î °¡Á®¿É´Ï´Ù. 
+		// ï¿½ï¿½ï¿½ÞµÇ´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ Objectï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½. 
 		logger.info("1:" + Arrays.toString(jp.getArgs()));
 
-		// ÇØ´ç AdviceÀÇ Å¸ÀÔÀ» ¾Ë¾Æ³À´Ï´Ù. 
+		// ï¿½Ø´ï¿½ Adviceï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ï¿½Ï´ï¿½. 
 		logger.info("2:" + jp.getKind());
 
-		// ½ÇÇàÇÏ´Â ´ë»ó °´Ã¼ÀÇ ¸Þ¼Òµå¿¡ ´ëÇÑ Á¤º¸¸¦ ¾Ë¾Æ³¾ ¶§ »ç¿ëÇÕ´Ï´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Þ¼Òµå¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 		logger.info("3:" + jp.getSignature().getName());
 
-		// target °´Ã¼¸¦ ¾Ë¾Æ³¾ ¶§ »ç¿ëÇÕ´Ï´Ù. 
+		// target ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. 
 		logger.info("4:" + jp.getTarget().toString());
 
-		// Advice¸¦ ÇàÇÏ´Â °´Ã¼¸¦ ¾Ë¾Æ³¾ ¶§ »ç¿ëÇÕ´Ï´Ù 
+		// Adviceï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½ 
 		logger.info("5:" + jp.getThis().toString());
+		
+		// print date
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+		logger.info("6:" + formatter.format(date));
 	
 	}
 
 
-	// target ¸Þ¼ÒµåÀÇ µ¿ÀÛ ½Ã°£À» ÃøÁ¤ÇÕ´Ï´Ù.
+	// target ï¿½Þ¼Òµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	@Around("execution(* com.bookshop01.*.service.*.*(..)) or "
 			+ "execution(* com.bookshop01.*.dao.*.*(..))")
 	public Object timeLog(ProceedingJoinPoint pjp) throws Throwable {
 		long startTime = System.currentTimeMillis();
 		logger.info(Arrays.toString(pjp.getArgs()));
 
-		// ½ÇÁ¦ Å¸°ÙÀ» ½ÇÇàÇÏ´Â ºÎºÐÀÌ´Ù. ÀÌ ºÎºÐÀÌ ¾øÀ¸¸é advice°¡ Àû¿ëµÈ ¸Þ¼Òµå°¡ µ¿ÀÛÇÏÁö¾Ê½À´Ï´Ù.
-		Object result = pjp.proceed(); // proceed´Â Exception º¸´Ù »óÀ§ ThrowableÀ» Ã³¸®ÇØ¾ß ÇÕ´Ï´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½ï¿½Ì´ï¿½. ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ adviceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ï´ï¿½.
+		Object result = pjp.proceed(); // proceedï¿½ï¿½ Exception ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Throwableï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.
 
 		long endTime = System.currentTimeMillis();
-		// target ¸Þ¼ÒµåÀÇ µ¿ÀÛ ½Ã°£À» Ãâ·ÂÇÑ´Ù.
+		// target ï¿½Þ¼Òµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		logger.info(pjp.getSignature().getName() + " : " + (endTime - startTime)); 
 		logger.info("==============================");
 
-		// Around¸¦ »ç¿ëÇÒ °æ¿ì ¹Ýµå½Ã Object¸¦ ¸®ÅÏÇØ¾ß ÇÕ´Ï´Ù.
+		// Aroundï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ Objectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.
 		return result;
 	}
 

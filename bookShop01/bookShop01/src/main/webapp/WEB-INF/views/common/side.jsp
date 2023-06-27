@@ -12,6 +12,7 @@
 <ul>
 <c:choose>
 <c:when test="${side_menu=='admin_mode' }">
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <a class="navbar-brand" href="${contextPath}/main/main.do">Steplant</a>
 	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -29,11 +30,12 @@
 	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">배송관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">게시판관리</a>
+	        <a class="nav-link" href="${contextPath}/admin/goods/adminBoardMain.do" style="padding-left:30px; font-size:20px;">게시판관리</a>
 	      </li>
 	    </ul>
 	  </div>
 	</nav>
+
 </c:when>
 <c:when test="${side_menu=='my_page' }">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
