@@ -43,9 +43,9 @@ function fn_cancel_order(order_id){
 <h1>최근주문내역
     <A href="#"> <IMG  src="${contextPath}/resources/image/btn_more_see.jpg">  </A> 
 </h1>
-<table class="list_view table-bordered table-hover">
+<table class="list_view">
 		<tbody align=center >
-			<tr style="background: #e0e0e0" >
+			<tr style="background:#33ff00" >
 				<td>주문번호</td>
 				<td>주문일자</td>
 				<td>주문상품</td>
@@ -66,13 +66,13 @@ function fn_cancel_order(order_id){
               <c:when test="${ pre_order_id != item.order_id}">
                 <c:choose>
 	              <c:when test="${item.delivery_state=='delivery_prepared' }">
-	                <tr  bgcolor="rgb(0,180,0)">
+	                <tr  bgcolor="lightgreen">    
 	              </c:when>
 	              <c:when test="${item.delivery_state=='finished_delivering' }">
-	                <tr  bgcolor="rgb(100,180,0)">
+	                <tr  bgcolor="lightgray">    
 	              </c:when>
 	              <c:otherwise>
-	                <tr  bgcolor="orange">
+	                <tr  bgcolor="orange">   
 	              </c:otherwise>
 	            </c:choose> 
             <tr>
