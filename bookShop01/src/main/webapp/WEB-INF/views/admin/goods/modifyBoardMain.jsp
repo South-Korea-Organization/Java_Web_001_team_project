@@ -379,11 +379,14 @@ function init(){
 </head>
 <BODY>
 <form action="${contextPath}/admin/goods/addNewGoods.do" method="post"  enctype="multipart/form-data">
+
 		<h1>관리자 게시판 관리</h1>
+
 <div class="tab_container">
 	<!-- 내용 들어 가는 곳 -->
 	<div class="tab_container" id="container">
 		<ul class="tabs">
+
 			<li><a href="#tab1">상품관리</a></li>
 			<li><a href="#tab2">주문관리</a></li>
 			<li><a href="#tab3">회원관리</a></li>
@@ -1186,6 +1189,7 @@ function init(){
 			
 			
 			
+
 			<div class="tab_content" id="tab4">
 				<H4>제품소개</H4>
 				<table>
@@ -1195,9 +1199,7 @@ function init(){
 				    </tr>
 			    </table>
 			</div>
-			
-			
-			
+
 		</div>
 	</div>
 	<div class="clear"></div>
