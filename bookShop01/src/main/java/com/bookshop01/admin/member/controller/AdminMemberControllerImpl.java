@@ -73,11 +73,13 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		return mav;
 		
 	}
+	
 	@RequestMapping(value="/memberDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		String member_id=request.getParameter("member_id");
+		
 		MemberVO member_info=adminMemberService.memberDetail(member_id);
 		mav.addObject("member_info",member_info);
 		return mav;

@@ -1202,15 +1202,19 @@ function init(){
 		</div>
 	</div>
 	<div class="clear"></div>
+	
+<!-- 	
 <center>	
 	 <table>
 	 <tr>
 			  <td align=center>
-				<!--   <input  type="submit" value="상품 등록하기"> --> 
+				<!--   <input  type="submit" value="상품 등록하기"> --><!--  
 				  <input  type="button" value="상품 등록하기"  onClick="fn_add_new_goods(this.form)">
 			  </td>
 			</tr>
 	 </table>
-</center>	 
+</center>
+ -->	
+  
 </div>
 </form>	 
