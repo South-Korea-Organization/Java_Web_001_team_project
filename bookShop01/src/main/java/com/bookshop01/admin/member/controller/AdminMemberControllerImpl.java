@@ -45,6 +45,7 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		
 		
 		HashMap<String,Object> condMap=new HashMap<String,Object>();
+		
 		if(section== null) {
 			section = "1";
 		}
