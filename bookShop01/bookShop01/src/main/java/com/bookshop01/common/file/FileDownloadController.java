@@ -19,7 +19,7 @@ import net.coobird.thumbnailator.Thumbnails;
 public class FileDownloadController {
 	private static String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
 	
-	@RequestMapping("/download")
+	@RequestMapping("/download.do")
 	protected void download(@RequestParam("imageFileName") String imageFileName,
 		                 	@RequestParam("articleNO") String articleNO,
 			                 HttpServletResponse response) throws Exception {
@@ -27,8 +27,8 @@ public class FileDownloadController {
 		String filePath=CURR_IMAGE_REPO_PATH+"\\"+articleNO+"\\"+imageFileName;
 		File image=new File(filePath);
 
-		if (image.exists()) {
-			Thumbnails.of(image).size(300,200).outputFormat("png").toOutputStream(out);
+		if (image.exists()) { 
+			Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
 		}
 		byte[] buffer = new byte[1024 * 8];
 		out.write(buffer);

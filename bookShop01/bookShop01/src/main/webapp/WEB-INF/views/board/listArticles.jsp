@@ -15,7 +15,7 @@
    .cls2{text-align:center; font-size:30px;}
   </style>
   <meta charset="UTF-8">
-  <title>글목록</title>
+  <title>글목록창</title>
 </head>
 <script>
 	function fn_articleForm(isLogOn,articleForm,loginForm){
@@ -28,17 +28,13 @@
 	}
 </script>
 <body>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Number</th>
-      <th scope="col">WRITER</th>
-      <th scope="col">TITLE</th>
-      <th scope="col">DATE</th>
-    </tr>
-  </thead>
-  <tbody>
+<table align="center" border="1"  width="80%"  >
+  <tr height="10" align="center"  bgcolor="lightgreen">
+     <td >글번호</td>
+     <td >작성자</td>              
+     <td >제목</td>
+     <td >작성일</td>
+  </tr>
 <c:choose>
   <c:when test="${articlesList ==null }" >
     <tr  height="10">
@@ -59,7 +55,7 @@
 	   <c:choose>
 	      <c:when test='${article.level > 1 }'>  
 	         <c:forEach begin="1" end="${article.level }" step="1">
-	              <span style="padding-left:20px"></span>
+	              <span style="padding-left:20px"></span>    
 	         </c:forEach>
 	         <span style="font-size:12px;">[답변]</span>
                    <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
@@ -75,8 +71,8 @@
      </c:when>
     </c:choose>
 </table>
-
-<a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', 
-                                                    '${contextPath}/member/loginForm.do')">글 게시</a>
+<!-- <a  class="cls1"  href="#"><p class="cls2">글쓰기</p></a> -->
+<a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', 
+                                                    '${contextPath}/member/loginForm.do')"><p class="cls2">글쓰기</p></a>
 </body>
 </html>

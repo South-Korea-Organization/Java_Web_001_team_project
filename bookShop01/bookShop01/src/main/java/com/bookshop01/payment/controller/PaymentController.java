@@ -1,5 +1,4 @@
 package com.bookshop01.payment.controller;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,28 +8,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookshop01.payment.service.PaymentService;
-
-
-//@controller¶û @RestController´Â ´Ù¸¨´Ï´Ù.
-@RestController 
+//@controllerë‘ @RestControllerëŠ” ë‹¤ë¦…ë‹ˆë‹¤.
+@RestController
 public class PaymentController {
+	
 	@Autowired
 	private PaymentService paymentService;
 	
 	@RequestMapping(value="/payment/kakao/order.do")
 	public Map<String,String> kakaoOrder(@RequestParam Map<String, String> receiverMap)  throws Exception{
-		
+	
 		Map<String,String> resultMap = new HashMap<String,String>();
 		
-		//Á¦´ë·Î µé¾î¿À´ÂÁö È®ÀÎ
-		System.out.println("kakaoOrder È®ÀÎ");
+		//ì œëŒ€ë¡œ ë“¤ì–´ì˜¤ëŠ”ì§€ í™•ì¸
+		System.out.println("kakaoOrder í™•ì¸");
 		
-		//ÁÖ¹® API¸¦ ½ğ´ÙÀ½¿¡
-		
-		//°á°ú Á¦´ë·Î ³ª°¡´ÂÁö Å×½ºÆ® µ¥ÀÌÅÍ
+		//ì£¼ë¬¸ APIë¥¼ ì“´ ë‹¤ìŒì—
+		//resultMap ì£¼ë¬¸ ê²°ê³¼ë¥¼ ë„£ìŒ
 		
 		resultMap = paymentService.kakaoOrder(receiverMap);
-		/* resultMap.put("test","test°ª");  ¾Æ¿ôÇ² È®ÀÎ*/
+		
+		
+		//ê²°ê³¼ê°€ ì œëŒ€ë¡œ ë‚˜ê°€ëŠ”ì§€ í…ŒìŠ¤íŠ¸ ë°ì´í„°
+		//resultMap.put("test", "testê°’");
 		
 		return resultMap;
 	}

@@ -14,14 +14,6 @@ window.onload=function()
 	init();
 }
 
-<style>{
-.table:hover{
-	background-color:green;
-}
-}
-</style>
-
-
 //화면이 표시되면서  각각의 주문건에 대한 배송 상태를 표시한다.
 function init(){
 	var frm_delivery_list=document.frm_delivery_list;
@@ -474,9 +466,9 @@ function fn_detail_search(){
 	</div>
 	
 <div class="clear"></div>
-<table class="list_view table-bordered">
+<table class="list_view">
 		<tbody align=center >
-			<tr style="background:lightgray" >
+			<tr style="background:#33ff00" >
 				<td class="fixed" >주문번호</td>
 				<td class="fixed">주문일자</td>
 				<td>주문내역</td>
@@ -497,13 +489,13 @@ function fn_detail_search(){
           <c:when test="${item.order_id != pre_order_id }">  
             <c:choose>
               <c:when test="${item.delivery_state=='delivery_prepared' }">
-                <tr  bgcolor="white">
+                <tr  bgcolor="lightgreen">    
               </c:when>
               <c:when test="${item.delivery_state=='finished_delivering' }">
-                <tr  bgcolor="#64FE2E">
+                <tr  bgcolor="lightgray">    
               </c:when>
               <c:otherwise>
-                <tr  bgcolor="#31B404">
+                <tr  bgcolor="orange">   
               </c:otherwise>
             </c:choose>   
 				 <td width=10%>

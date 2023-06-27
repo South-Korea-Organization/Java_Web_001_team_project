@@ -91,7 +91,7 @@ function  calcPeriod(search_period){
 <body>
 	<H3>상품 조회</H3>
 	<form  method="post">	
-		<TABLE cellpadding="10" cellspacing="10" >
+		<TABLE cellpadding="10" cellspacing="10"  >
 			<TBODY>
 				<TR >
 					<TD>
@@ -190,9 +190,9 @@ function  calcPeriod(search_period){
 	</DIV>
 </form>	
 <DIV class="clear"></DIV>
-<TABLE class="list_view table-bordered table-hover">
+<TABLE class="list_view">
 		<TBODY align=center >
-			<tr style="background:lightgray" >
+			<tr style="background:#33ff00" >
 				<td>상품번호</td>
 				<td>상품이름</td>
 				<td>저자</td>

@@ -4,49 +4,56 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookshop01.payment.service.PaymentService;
 
-
-//@controller¶û @RestController´Â ´Ù¸¨´Ï´Ù.
-@RestController 
+@Controller
 public class PaymentController2 {
+	
 	@Autowired
 	private PaymentService paymentService;
 	
 	@RequestMapping(value="/payment/kakao/pay.do")
-	public ModelAndView kakaoPay(@RequestParam Map<String, String> receiverMap)  throws Exception{
+	public ModelAndView kakaoPay(@RequestParam Map<String,String> receiverMap) throws Exception{
 		
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("ì¸ì¦ ë°ì´í„° í™•ì¸ = " + receiverMap.toString());
 		
 		Map<String,String> resultMap = new HashMap<String,String>();
 		
 		resultMap = paymentService.kakaoPay(receiverMap);
 		
-		//resultMap ½ÂÀÎ °á°ú ³»¿ëÀÌ ´ã°ÜÀÖÀ½.
+		//resultMap ìŠ¹ì¸ ê²°ê³¼ ë‚´ìš©ì´ ë‹´ê²¨ìˆìŠµë‹ˆë‹¤
 		
 		String responseCode = resultMap.get("responseCode");
-	
-		if ("0000".equals(responseCode)) {
+		//ê°„ë‹¨í•˜ê²Œ ìŠ¹ì¸ ëëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ ì•„ë˜ ì½”ë“œ ë„£ìŒ
+		//String responseCode = "0000"; 
+		
+		if("0000".equals(responseCode)) {
+			//ìŠ¹ì¸ì™„ë£Œ
 			
-			mav.setViewName("/payment/kakaoS");//tiles ¼³Á¤À¸·Î °£´Ù.
+			//ì–´ë–¤ í˜ì´ì§€ë¡œ ê°ˆì§€ ì„¤ì •
+			mav.setViewName("/payment/kakaoS");
 			
-			//°áÁ¦ ¼º°ø °ü·Ã µ¥ÀÌÅÍ ³Ö¾î¼­
-			mav.addObject("amount",resultMap.get("amount"));
-			mav.addObject("authDateTime",resultMap.get("authDateTime"));
-
+			//ê²°ì œ ì„±ê³µê´€ë ¨ ë°ì´í„° í•˜ë‚˜ì”© ë„£ê¸°
+			mav.addObject("amount", resultMap.get("amount"));
+			mav.addObject("authDateTime", resultMap.get("authDateTime"));
+			mav.addObject("type", resultMap.get("type"));
+			
+			//ê²°ê³¼ê°’ í†µìœ¼ë¡œ ë„£ê¸°
+			//mav.addObject("kakaoData", resultMap);
 		} else {
+			//ìŠ¹ì¸ì‹¤íŒ¨
 			mav.setViewName("/payment/kakaoF");
 		}
 		
-		//Á¦´ë·Î µé¾î¿À´ÂÁö È®ÀÎ
-		System.out.println("ÀÎÁõ µ¥ÀÌÅÍ È®ÀÎ" + receiverMap.toString());
-
-		
 		return mav;
 	}
+	
+
 }
