@@ -15,8 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.slf4j.Logger ;
-import org.slf4j.LoggerFactory ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,7 +28,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bookshop01.admin.goods.service.AdminGoodsService;
 import com.bookshop01.admin.order.service.AdminOrderService;
 import com.bookshop01.common.base.BaseController;
-import com.bookshop01.common.log.LoggingAdvice ;
 import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.goods.vo.ImageFileVO;
 import com.bookshop01.member.vo.MemberVO;
@@ -44,17 +41,10 @@ public class AdminOrderControllerImpl extends BaseController  implements AdminOr
 	@Autowired
 	private AdminOrderService adminOrderService;
 	
-	
-	
-	private static final Logger logger = LoggerFactory.getLogger(LoggingAdvice.class);
-	
-	
-	
 	@Override
 	@RequestMapping(value="/adminOrderMain.do" ,method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView adminOrderMain(@RequestParam Map<String, String> dateMap,
 			                          HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		logger.info("테스트 1 ~~~~~~~~~~~~~~~~~~~");
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 
@@ -95,7 +85,6 @@ public class AdminOrderControllerImpl extends BaseController  implements AdminOr
 		
 		mav.addObject("section", section);
 		mav.addObject("pageNum", pageNum);
-		logger.info("테스트 2 ~~~~~~~~~~~~~~~~~~~");
 		return mav;
 		
 	}

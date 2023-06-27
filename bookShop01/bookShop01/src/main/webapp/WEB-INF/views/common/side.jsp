@@ -5,91 +5,104 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
 	
 <nav>
 <ul>
 <c:choose>
 <c:when test="${side_menu=='admin_mode' }">
-   <li>
-		<H3>주요기능</H3>
-		<ul>
-			<li><a href="${contextPath}/admin/goods/adminGoodsMain.do">상품관리</a></li>
-			<li><a href="${contextPath}/admin/order/adminOrderMain.do">주문관리</a></li>
-			<li><a href="${contextPath}/admin/member/adminMemberMain.do">회원관리</a></li>
-			<li><a href="#">배송관리</a></li>
-			<li><a href="#">게시판관리</a></li>
-		</ul>
-	</li>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="${contextPath}/main/main.do">Steplant</a>
+	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath}/admin/goods/adminGoodsMain.do" style="padding-left:30px; font-size:20px;">상품관리</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath}/admin/order/adminOrderMain.do" style="padding-left:30px; font-size:20px;">주문관리</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath}/admin/member/adminMemberMain.do" style="padding-left:30px; font-size:20px;">회원관리</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">배송관리</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">게시판관리</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
 </c:when>
 <c:when test="${side_menu=='my_page' }">
-	<li>
-		<h3>주문내역</h3>
-		<ul>
-			<li><a href="${contextPath}/mypage/listMyOrderHistory.do">주문내역/배송 조회</a></li>
-			<li><a href="#">반품/교환 신청 및 조회</a></li>
-			<li><a href="#">취소 주문 내역</a></li>
-			<li><a href="#">세금 계산서</a></li>
-		</ul>
-	</li>
-	<li>
-		<h3>정보내역</h3>
-		<ul>
-			<li><a href="${contextPath}/mypage/myDetailInfo.do">회원정보관리</a></li>
-			<li><a href="#">나의 주소록</a></li>
-			<li><a href="#">개인정보 동의내역</a></li>
-			<li><a href="#">회원탈퇴</a></li>
-		</ul>
-	</li>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="${contextPath}/main/main.do">Steplant</a>
+	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath}/mypage/listMyOrderHistory.do" style="padding-left:5px; font-size:1.3em;">주문내역/배송조회</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:5px; font-size:1.3em;">반품/교환 신청 및 조회</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:5px; font-size:1.3em;">주문 취소 내역</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:5px; font-size:1.3em;">세금계산서</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath}/mypage/myDetailInfo.do" style="padding-left:5px; font-size:1.3em;">회원 정보 관리</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:5px; font-size:1.3em;">나의 주소록</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:5px; font-size:1.3em;">회원탈퇴</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+
 </c:when>
 <c:otherwise>
-	<li>
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;국내외 도서</h3>
-		<ul>
-			<li><a href="${contextPath}/goods/goodsList.do">IT/인터넷</a></li>
-			<li><a href="#">경제/경영</a></li>
-			<li><a href="#">대학교재</a></li>
-			<li><a href="#">자기계발</a></li>
-			<li><a href="#">자연과학/공학</a></li>
-			<li><a href="#">역사/인문학</a></li>
-		</ul>
-	</li>
-	<li>
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;음반</h3>
-		<ul>
-			<li><a href="#">가요</a></li>
-			<li><a href="#">록</a></li>
-			<li><a href="#">클래식</a></li>
-			<li><a href="#">뉴에이지</a></li>
-			<li><a href="#">재즈</a></li>
-			<li><a href="#">기타</a></li>
-		</ul>
-	</li>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Steplant</a>
+	  	<div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath }/goods/goodsList.do" style="padding-left:30px; font-size:20px;">Home</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">소형 식물</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">중형 식물</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">대형 식물</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;"> 화환 </a>
+	      </li>
+	      
+	    </ul>
+	  </div>
+	</nav>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+	
  </c:otherwise>
 </c:choose>	
 </ul>
 </nav>
 <div class="clear"></div>
-<div id="banner">
-	<a href="#"><img width="190" height="163" src="${contextPath}/resources/image/n-pay.jpg"> </a>
-</div>
-<DIV id="notice">
-	<H2>공지사항</H2>
-	<UL>
-	
-	<c:forEach  var="i" begin="1" end="5" step="1">
-		<li><a href="#">공지사항입니다.${ i}</a></li>
-	</c:forEach>
-	</ul>
-</div>
-
-
-<div id="banner">
-	<a href="#"><img width="190" height="362" src="${contextPath}/resources/image/side_banner1.jpg"></a>
-</div>
-<div id="banner">
-	<a href="#"><img width="190" height="104" src="${contextPath}/resources/image/call_center_logo.jpg"></a>
-</div>
-<div id="banner">
-	<a href="#"><img width="190" height="69" src="${contextPath}/resources/image/QnA_logo.jpg"></a>
-</div>
 </html>

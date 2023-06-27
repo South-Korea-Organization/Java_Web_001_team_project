@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger ;
-import org.slf4j.LoggerFactory ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,31 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookshop01.admin.member.service.AdminMemberService;
 import com.bookshop01.common.base.BaseController;
-import com.bookshop01.common.log.LoggingAdvice ;
 import com.bookshop01.member.vo.MemberVO;
 
 @Controller("adminMemberController")
 @RequestMapping(value="/admin/member")
 public class AdminMemberControllerImpl extends BaseController  implements AdminMemberController{
-	
-	
-	
-	private static final Logger logger = LoggerFactory.getLogger(LoggingAdvice.class);
-	
-	
-	
 	@Autowired
 	private AdminMemberService adminMemberService;
 	
-	
-	@RequestMapping(value="/adminMemberMain.do", method={RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/adminMemberMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
 			                           HttpServletRequest request, HttpServletResponse response)  throws Exception{
-				
-		
-		logger.info("adminMemberMain.do 진입");
-		
-		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 
@@ -68,10 +52,10 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		if(pageNum== null) {
 			pageNum = "1";
 		}
-		condMap.put("pageNum", pageNum);
-		condMap.put("beginDate", beginDate);
+		condMap.put("pageNum",pageNum);
+		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
-		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap);  // 오류발생
+		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap);
 		mav.addObject("member_list", member_list);
 		
 		String beginDate1[]=beginDate.split("-");
@@ -85,14 +69,9 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		
 		mav.addObject("section", section);
 		mav.addObject("pageNum", pageNum);
-		
-		logger.info("mav 리턴", mav.toString( ));
-		
 		return mav;
 		
 	}
-	
-	
 	@RequestMapping(value="/memberDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		String viewName=(String)request.getAttribute("viewName");

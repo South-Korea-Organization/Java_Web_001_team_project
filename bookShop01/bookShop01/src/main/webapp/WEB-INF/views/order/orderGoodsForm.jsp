@@ -186,7 +186,7 @@
 		e_namujiAddress.value = h_namujiAddress.value;
 
 	}
-	
+/* 	
 function fn_pay_phone(){
 	
 	
@@ -195,7 +195,7 @@ function fn_pay_phone(){
 	e_card.style.visibility="hidden";
 	e_phone.style.visibility="visible";
 }
-
+ */
 function fn_pay_card(){
 	var e_card=document.getElementById("tr_pay_card");
 	var e_phone=document.getElementById("tr_pay_phone");
@@ -249,6 +249,59 @@ var card_pay_month;
 var pay_orderer_hp_num;
 
 function fn_show_order_detail(){
+	
+	//결제방식 카카오로 선택했는지 확인.
+	
+	var payType = $('input[name="pay_method"]:checked').val();
+	//payType 선택된 라디오버튼 value 값이 있음.
+	
+	alert(payType);
+	
+	if(payType == 'kakao'){
+		//value값이 카카오면.
+		$.ajax({
+			type:"post",
+			url : "${contextPath}/payment/kakao/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+				
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				/* 인풋박스 name = ordr_idxx value값을 ordr_idxx로 변경; */
+				
+				document.getElementsByName("ordr_idxx")[0].value = ordr_idxx;
+				document.getElementsByName("good_name")[0].value = good_name;
+				document.getElementsByName("buyr_name")[0].value = buyr_name;
+				document.getElementsByName("site_cd")[0].value = site_cd;
+				document.getElementsByName("good_mny")[0].value = good_mny;
+				
+ 				jsf__pay();
+
+			},
+			error : function(data, textStatus) {
+				alert("에러 발생");
+			},
+			complete : function (data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+			}
+		}) // ajax 끝.
+		
+		return false; // 아래 코드 실행 안되게.
+	}
+	
+	
 	goods_id="";
 	goods_title="";
 	
@@ -491,7 +544,32 @@ function fn_process_pay_order(){
     formObj.appendChild(i_card_pay_month);
     formObj.appendChild(i_pay_orderer_hp_num);
     
-
+  //카드번호 데이터 보내는법
+	var cardNo = document.createElement("input");
+	cardNo.name = "cardNo";
+	cardNo.value = document.getElementById("cardNo").value;
+    formObj.appendChild(cardNo);
+    
+	var expireYear = document.createElement("input");
+	expireYear.name = "expireYear";
+	expireYear.value = document.getElementById("expireYear").value;
+    formObj.appendChild(expireYear);
+    
+	var expireMonth = document.createElement("input");
+	expireMonth.name = "expireMonth";
+	expireMonth.value = document.getElementById("expireMonth").value;
+    formObj.appendChild(expireMonth);
+    
+	var cardPw = document.createElement("input");
+	cardPw.name = "cardPw";
+	cardPw.value = document.getElementById("cardPw").value;
+    formObj.appendChild(cardPw);
+    
+	var birthday = document.createElement("input");
+	birthday.name = "birthday";
+	birthday.value = document.getElementById("birthday").value;
+    formObj.appendChild(birthday);
+	
     document.body.appendChild(formObj); 
     formObj.method="post";
     formObj.action="${contextPath}/order/payToOrderGoods.do";
@@ -503,9 +581,9 @@ function fn_process_pay_order(){
 <body>
 	<H1>1.주문확인</H1>
 <form  name="form_order">	
-	<table class="list_view">
-		<tbody align=center>
-			<tr style="background: #33ff00">
+	<table class="list_view table table-hover">
+		<thead>
+			<tr style="background: #e0e0e0">
 				<td colspan=2 class="fixed">주문상품명</td>
 				<td>수량</td>
 				<td>주문금액</td>
@@ -513,6 +591,8 @@ function fn_process_pay_order(){
 				<td>예상적립금</td>
 				<td>주문금액합계</td>
 			</tr>
+		</thead>
+		<tbody align=center>
 			<tr>
 				<c:forEach var="item" items="${myOrderList }">
 					<td class="goods_image">
@@ -559,7 +639,7 @@ function fn_process_pay_order(){
 		<table>
 			<tbody>
 				<tr class="dot_line">
-					<td class="fixed_join">배송방법</td>
+					<th class="fixed_join">배송방법</td>
 					<td>
 					    <input type="radio" id="delivery_method" name="delivery_method" value="일반택배" checked>일반택배 &nbsp;&nbsp;&nbsp; 
 						<input type="radio" id="delivery_method" name="delivery_method" value="편의점택배">편의점택배 &nbsp;&nbsp;&nbsp; 
@@ -705,9 +785,9 @@ function fn_process_pay_order(){
 	<H1>3.할인 정보</H1>
 	<div class="detail_table">
 		<table>
-			<tbody>
+			<tbody class="discount">
 				<tr class="dot_line">
-					<td width=100>적립금</td>
+					<td>적립금</td>
 					<td><input name="discount_juklip" type="text" size="10" />원/1000원
 						&nbsp;&nbsp;&nbsp; <input type="checkbox" /> 모두 사용하기</td>
 				</tr>
@@ -740,7 +820,7 @@ function fn_process_pay_order(){
 	<div class="clear"></div>
 
 	<br>
-	<table width=80% class="list_view" style="background: #ccffff">
+	<table width=80% class="list_view" style="background: #e0e0e0">
 		<tbody>
 			<tr align=center class="fixed">
 				<td class="fixed">총 상품수</td>
@@ -793,22 +873,17 @@ function fn_process_pay_order(){
 				<tr >
 					<td>
 					   <input type="radio" id="pay_method" name="pay_method" value="신용카드"   onClick="fn_pay_card()" checked>신용카드 &nbsp;&nbsp;&nbsp; 
-					   <input type="radio" id="pay_method" name="pay_method" value="제휴 신용카드"  >제휴 신용카드 &nbsp;&nbsp;&nbsp; 
+<!-- 					   <input type="radio" id="pay_method" name="pay_method" value="제휴 신용카드"  >제휴 신용카드 &nbsp;&nbsp;&nbsp; 
 					   <input type="radio" id="pay_method" name="pay_method" value="실시간 계좌이체">실시간 계좌이체 &nbsp;&nbsp;&nbsp;
-					   <input type="radio" id="pay_method" name="pay_method" value="무통장 입금">무통장 입금 &nbsp;&nbsp;&nbsp;
+					   <input type="radio" id="pay_method" name="pay_method" value="무통장 입금">무통장 입금 &nbsp;&nbsp;&nbsp; -->
 					</td>
 				</tr>
 				<tr >
 					<td>
-					   <input type="radio" id="pay_method" name="pay_method" value="휴대폰결제" onClick="fn_pay_phone()">휴대폰 결제 &nbsp;&nbsp;&nbsp;
-					   <input type="radio" id="pay_method" name="pay_method" value="카카오페이(간편결제)">카카오페이(간편결제) &nbsp;&nbsp;&nbsp; 
+					   <input type="radio" id="pay_method" name="pay_method" value="kakao">카카오페이(간편결제) &nbsp;&nbsp;&nbsp; 
+<!-- 					   <input type="radio" id="pay_method" name="pay_method" value="휴대폰결제" onClick="fn_pay_phone()">휴대폰 결제 &nbsp;&nbsp;&nbsp;
 					   <input type="radio" id="pay_method" name="pay_method" value="페이나우(간편결제)">페이나우(간편결제) &nbsp;&nbsp;&nbsp; 
-					   <input type="radio" id="pay_method" name="pay_method" value="페이코(간편결제)">페이코(간편결제) &nbsp;&nbsp;&nbsp;
-					</td>
-				</tr>
-				<tr >
-					<td>
-					   <input type="radio"  id="pay_method" name="pay_method" value="직접입금">직접입금&nbsp;&nbsp;&nbsp;
+					   <input type="radio" id="pay_method" name="pay_method" value="페이코(간편결제)">페이코(간편결제) &nbsp;&nbsp;&nbsp; -->
 					</td>
 				</tr>
 				<tr id="tr_pay_card">
@@ -836,6 +911,36 @@ function fn_process_pay_order(){
 							<option value="6개월">6개월</option>
 					</select>
 					
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>카드 번호 : </strong>
+						<input type="text" name="cardNo" id="cardNo" maxLength=20>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>유효기간 (년) : </strong>
+						<input type="text" name="expireYear" id="expireYear" maxLength=2 style="width:50px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>유효기간 (월) : </strong>
+						<input type="text" name="expireMonth" id="expireMonth" maxLength=2 style="width:50px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>생년월일 : </strong>
+						<input type="text" name="birthday" id="birthday" maxLength=6 style="width:100px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>비밀번호 앞 두자리 : </strong>
+						<input type="password" name="cardPw" id="cardPw" maxLength=2 style="width:30px">
 					</td>
 				</tr>
 				<tr id="tr_pay_phone" style="visibility:hidden">
@@ -990,6 +1095,70 @@ function fn_process_pay_order(){
 			<div class="clear"></div>	
 			<br> 
 			
-			
+<form name="order_info" method="post" accept-charset="euc-kr">
+	<input type="hidden" name="ordr_idxx" value="">
+	<input type="hidden" name="good_name" value="">
+	<input type="hidden" name="good_mny" value="">
+	<input type="hidden" name="buyr_name" value="">
+	<input type="hidden" name="site_cd" value="">
+	<input type="hidden" name="req_tx" value="pay">
+	<input type="hidden" name="pay_method" value="100000000000"/>
+	<input type="hidden" name="currency" value="410">
+	<input type="hidden" name="kakaopay_direct" value="Y">
+	<input type="hidden" name="module_type" value="01"/>
+	<input type="hidden" name="ordr_chk" value=""/>
+	<input type="hidden" name="param_opt_1" value="">
+	<input type="hidden" name="param_opt_2" value="">
+	<input type="hidden" name="param_opt_3" value="">
+	<input type="hidden" name="res_cd" value=""/>
+	<input type="hidden" name="res_msg" value=""/>
+	<input type="hidden" name="enc_info" value=""/>
+	<input type="hidden" name="enc_data" value=""/>
+	<input type="hidden" name="ret_pay_method" value=""/>
+	<input type="hidden" name="tran_cd" value=""/>
+	<input type="hidden" name="use_pay_method" value=""/>
+	<input type="hidden" name="card_pay_method" value=""/>
+</form>
+<script>
+function m_Completepayment(FormOrJson, closeEvent) {
+var frm = document.order_info;
+/********************************************************************/
+/* FormOrJson은 가맹점 임의 활용 금지 */
+/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다. */
+/********************************************************************/
+GetField(frm, FormOrJson);
+if (frm.res_cd.value == "0000") {
+/*
+ [가맹점 리턴값 처리 영역]
+인증이 완료되면 frm에 인증값이 들어갑니다. 해당 데이터를 가지고
+승인요청을 진행 해주시면 됩니다.
+*/
+// 인증성공 시 오는 곳.
+
+console.log(frm);
+alert("인증완료");
+
+$("form[name=order_info]").attr("action", "/payment/kakao/pay.do");
+$("form[name=order_info]").submit();
+
+// 폼 이름 = order_info 서브밋 하면 된다.
+
+} else {
+closeEvent();
+}
+}
+/* 이 함수를 실행하여 카카오결제창을 호출 합니다*/
+function jsf__pay() {
+try {
+var form = document.order_info;
+KCP_Pay_Execute(form);
+} catch{
+/* IE 에서 결제 정상종료시 throw로 스크립트 종료 */
+ alert("dhfb");
+}
+}
+</script>
+<script type="text/javascript"
+src="https://pay.kcp.co.kr/plugin/payplus_web.jsp"></script>	
 			
 			

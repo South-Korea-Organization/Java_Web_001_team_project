@@ -12,6 +12,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * 
  * August 2011
+	
  */
 
 (function($){
@@ -21,7 +22,7 @@
 		
 	var defaults = {
 		width: 775,					// Width + Height used to ensure consistency
-		height: 145,				// Width + Height used to ensure consistency
+		height: 145,			   	// Width + Height used to ensure consistency
 		animation: 'slide',			// The type of animation (slide or fade)
 		animationDuration: 450, 	// The duration in ms of the transition between slides
 		automatic: true,			// Automatically rotate through the slides
@@ -36,7 +37,6 @@
 		keyboardNav: true,			// Allow navigation with arrow keys
 		useCaptions: true			// Use image title text as caption
 	}
-	
 	// Overwrite the defaults with the provided options (if any)
 	settings = $.extend({}, defaults, options);
 	

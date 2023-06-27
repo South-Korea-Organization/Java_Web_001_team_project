@@ -1,0 +1,22 @@
+
+Z	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(À’>
+Z	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(À’>
+k	java:S117)"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û«Äàùÿÿÿÿ
+u
+java:S3008"_Rename this field "CURR_IMAGE_REPO_PATH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±æÒ”
+W
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(±æÒ”
+A
+java:S1075"&Remove this hard-coded path-delimiter.(Ûÿ‰žøÿÿÿÿ
+A
+java:S1075"&Remove this hard-coded path-delimiter.(Ûÿ‰žøÿÿÿÿ
+A
+java:S1075,"&Remove this hard-coded path-delimiter.(•þó°ýÿÿÿÿ
+A
+java:S1075,"&Remove this hard-coded path-delimiter.(•þó°ýÿÿÿÿ
+Q
+java:S1128"4Remove this unused import 'java.io.FileInputStream'.(˜³ÉÓ8ÙÊÿ‰Ž1
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úýÿÿÿÿ8ÿû²‰Ž1
+X
+java:S1128";Remove this unused import 'javax.servlet.ServletException'.(Š‰™Œ8ÿû²‰Ž1

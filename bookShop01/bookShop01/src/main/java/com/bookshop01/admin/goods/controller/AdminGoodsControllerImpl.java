@@ -57,18 +57,14 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		dateMap.put("endDate", endDate);
 		
 		Map<String,Object> condMap=new HashMap<String,Object>();
-		
 		if(section== null) {
 			section = "1";
 		}
 		condMap.put("section",section);
-		
 		if(pageNum== null) {
 			pageNum = "1";
 		}
 		condMap.put("pageNum",pageNum);
-		
-		// null 이 입력되지 않도록 sql / db 와 비교해서 data 형식에 맞게 default 값을 입력해주어야 함
 		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
