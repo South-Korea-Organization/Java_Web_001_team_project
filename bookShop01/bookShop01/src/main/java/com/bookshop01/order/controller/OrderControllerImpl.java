@@ -1,7 +1,6 @@
 package com.bookshop01.order.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +21,7 @@ import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.member.vo.MemberVO;
 import com.bookshop01.order.service.OrderService;
 import com.bookshop01.order.vo.OrderVO;
+import com.bookshop01.payment.service.PaymentService;
 
 @Controller("orderController")
 @RequestMapping(value="/order")
@@ -30,6 +30,8 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	private OrderService orderService;
 	@Autowired
 	private OrderVO orderVO;
+	@Autowired
+	private PaymentService paymentService;
 	
 	@RequestMapping(value="/orderEachGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO,
@@ -41,9 +43,7 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
 		String action=(String)session.getAttribute("action");
-		//로그인 여부 체크
-		//이전에 로그인 상태인 경우는 주문과정 진행
-		//로그아웃 상태인 경우 로그인 화면으로 이동
+
 		if(isLogOn==null || isLogOn==false){
 			session.setAttribute("orderInfo", _orderVO);
 			session.setAttribute("action", "/order/orderEachGoods.do");
@@ -110,8 +110,16 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	@RequestMapping(value="/payToOrderGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView payToOrderGoods(@RequestParam Map<String, String> receiverMap,
 			                       HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		
+		System.out.println("데이터 확인 = " + receiverMap.toString());
+		//
+		//
+		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		Map<String,String> resultMap = paymentService.keyin(receiverMap);
+		mav.addObject("cardResult",resultMap);
 		
 		HttpSession session=request.getSession();
 		MemberVO memberVO=(MemberVO)session.getAttribute("orderer");
@@ -142,11 +150,11 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 			orderVO.setCard_pay_month(receiverMap.get("card_pay_month"));
 			orderVO.setPay_orderer_hp_num(receiverMap.get("pay_orderer_hp_num"));	
 			orderVO.setOrderer_hp(orderer_hp);	
-			myOrderList.set(i, orderVO); //각 orderVO에 주문자 정보를 세팅한 후 다시 myOrderList에 저장한다.
+			myOrderList.set(i, orderVO); //媛� orderVO�뿉 二쇰Ц�옄 �젙蹂대�� �꽭�똿�븳 �썑 �떎�떆 myOrderList�뿉 ���옣�븳�떎.
 		}//end for
 		
 	    orderService.addNewOrder(myOrderList);
-		mav.addObject("myOrderInfo",receiverMap);//OrderVO로 주문결과 페이지에  주문자 정보를 표시한다.
+		mav.addObject("myOrderInfo",receiverMap);//OrderVO濡� 二쇰Ц寃곌낵 �럹�씠吏��뿉  二쇰Ц�옄 �젙蹂대�� �몴�떆�븳�떎.
 		mav.addObject("myOrderList", myOrderList);
 		return mav;
 	}

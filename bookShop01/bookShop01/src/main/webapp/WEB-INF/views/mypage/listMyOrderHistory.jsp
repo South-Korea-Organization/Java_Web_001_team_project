@@ -142,9 +142,9 @@ function fn_cancel_order(order_id){
 	</div>
 </form>	
 <div class="clear"></div>
-<table class="list_view">
+<table class="list_view table table-hover table-bordered">
 		<tbody align=center >
-			<tr style="background:#33ff00" >
+			<tr style="background:lightgray" >
 				<td class="fixed" >주문번호</td>
 				<td class="fixed">주문일자</td>
 				<td>주문내역</td>

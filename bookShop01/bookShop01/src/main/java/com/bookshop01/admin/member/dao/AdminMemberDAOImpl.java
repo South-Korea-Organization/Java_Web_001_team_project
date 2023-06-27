@@ -23,7 +23,7 @@ public class AdminMemberDAOImpl  implements AdminMemberDAO{
 	
 	public ArrayList<MemberVO> listMember(HashMap condMap) throws DataAccessException{
 		ArrayList<MemberVO>  memberList=(ArrayList)sqlSession.selectList("mapper.admin.member.listMember",condMap);
-		logger.info("adminListMember:" + memberList.toString());
+
 		return memberList;
 	}
 	

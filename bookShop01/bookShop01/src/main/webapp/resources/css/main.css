@@ -1,6 +1,6 @@
 @font-face {
 	font-family: NanumGothic;
-	src: local("?"), url(../imgs/nanum.woff) format("woff"), url(../imgs/nanum.ttf) format("truetype");
+	src: local("?"), url(../image/NanumGothic.woff) format("woff"), url(../image/NanumGothic.ttf) format("truetype");
 }
 * {
 	margin: 0px; padding: 0px; vertical-align: middle;
@@ -15,7 +15,7 @@ a {
 	color: rgb(102, 102, 102); text-decoration: none;
 }
 a:hover {
-	color: rgb(255, 102, 0); text-decoration: none;
+	color: rgb(0,128,0); text-decoration: none; text-weight : 5
 }
 .clear {
 	clear: both;
@@ -30,10 +30,10 @@ header {
 	margin-top: 20px;
 }
 header #logo {
-	margin-left: 10px; float: left;
+	margin-left: 410px; float: left;
 }
 header #head_link {
-	font-size: 0.75em; margin-right: 10px; float: right;
+	font-size: 0.75em; margin-right: 10px;  float: right; 
 }
 header #head_link ul {
 	list-style: none;
@@ -45,19 +45,19 @@ header #head_link li {
 	border-right-color: currentColor; border-right-width: medium; border-right-style: none;
 }
 header #search {
-	margin: 20px 10px 0px 0px; padding: 0px; float: right;
-}
+	margin: 20px 10px 0px 0px; padding: 0px;  float: right; 
+}	
 header #search .main_input {
-	padding: 0px 5px; border: 3px solid rgb(51, 102, 153); border-image: none; width: 260px; height: 22px;
+	padding: 0px 5px; border-radius:5px; border: 3px solid rgb(0, 150, 0); border-image: none; width: 80px; height: 22px;
 }
-header #search .btn1 {
-	border: 1px solid rgb(51, 102, 153); border-image: none; width: 55px; height: 28px; color: rgb(255, 255, 255); margin-left: 2px; background-color: rgb(51, 102, 153);
+header #search .btn1 {	
+	border: 1px solid rgb(0, 150, 0); border-image: none; width: 40px; height: 28px; color: rgb(255, 255, 255); /* margin-left: 0px; */ background-color: rgb(0, 150, 0); border-radius:5px;
 }
 aside {
-	width: 205px; float: left;
+	width: 1000px;
 }
 nav {
-	margin: 25px 0px 0px 10px; font-family: "NanumGothic", Serif; font-size: 0.8em;
+	margin: 10px 0px 0px 10px; font-family: "NanumGothic", Serif; font-size: 0.8em;
 }
 nav ul {
 	list-style: none;
@@ -84,7 +84,7 @@ aside #banner {
 	margin: 20px 0px 15px 15px; font-size: 0.75em;
 }
 #notice h2 {
-	background-position: left; padding: 2px 0px 5px 10px; color: rgb(51, 102, 153); font-family: "NanumGothic"; font-size: 1.2em; border-bottom-color: rgb(51, 102, 153); border-bottom-width: 1px; border-bottom-style: solid; background-image: url("../imgs/notice_h2.gif"); background-repeat: no-repeat;
+	background-position: left; padding: 2px 0px 5px 10px; color: rgb(0,0,0); font-family: "NanumGothic"; font-size: 1.2em; border-bottom-color: rgb(51, 102, 153); border-bottom-width: 1px; border-bottom-style: solid; background-image: url("../imgs/notice_h2.gif"); background-repeat: no-repeat;
 }
 #notice ul {
 	list-style: none; margin: 10px 0px 0px;
@@ -93,11 +93,11 @@ aside #banner {
 	background-position: left; padding: 0px 0px 0px 7px; line-height: 1.5em; background-image: url("../imgs/notice_li.gif"); background-repeat: no-repeat;
 }
 article {
-	margin: 20px 0px 0px 15px; width: 775px; float: right;
+	margin: 20px 0px 0px 15px; width: 980px; float: left;
 }
 
-.link {
-	width: 188px; height: 230px; display: block; position: absolute; z-index: 2;
+.link { 
+	width: 188px; height: 230px; display: block; position: absolute; z-index: 2 padding-left: 50px;
 }
 
 article #ad_main_banner {
@@ -185,7 +185,9 @@ article table#list_view {
 	width: 100%; color: rgb(51, 51, 51); font-size: 0.75em; margin-top: 20px; border-top-color: rgb(51, 51, 51); border-top-width: 2px; border-top-style: solid; border-collapse: collapse;
 }
 
-
+.list_view tr td input {
+	border-radius: 5px;
+}
 article table#list_view td {
 	margin: 0px; padding: 10px 0px; border-bottom-color: rgb(153, 153, 153); border-bottom-width: 1px; border-bottom-style: dotted;
 }
@@ -259,7 +261,7 @@ article h4 {
 	margin: 5px 0px;
 }
 article h3 {
-	color: rgb(0, 153, 255); font-size: 1em;
+	color: rgb(0,0,0) font-size: 1em;
 }
 article h4 {
 	font-size: 0.8em; font-weight: normal;
@@ -280,20 +282,20 @@ article h4 {
 	border: 1px solid rgb(255, 255, 255); border-image: none; width: 150px; height: auto; box-shadow: 2px 2px 25px #666;
 }
 #detail_table {
-	width: 590px; font-size: 0.75em; float: left;
+	width: 1000px; font-size: 0.75em; float: left;
 }
 #detail_table table {
 	width: 95%; border-top-color: rgb(51, 51, 51); border-bottom-color: rgb(51, 51, 51); border-top-width: 2px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-collapse: collapse;
 }
 #detail_table table td {
-	padding: 7px 0px 7px 10px;
+	padding: 20px 10px 10px 20px;
 }
 #detail_table table tr.dot_line {
-	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 1px; border-bottom-style: dotted;
+	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 2px; border-bottom-style: dotted;
 }
 
 #detail_table table tr.solid_line {
-	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 1px; border-bottom-style: solid;
+	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 2px; border-bottom-style: solid;
 }
 #detail_table table td span {
 	font-family: "NanumGothic", Serif; font-size: 1.2em; font-weight: bold;
@@ -303,19 +305,19 @@ article h4 {
 }
 
 #detail_table table td.fixed_join {
-	width: 110px; font-weight: bold; color: #0000cc;background:  #e1e1ff;
+	width: 110px; color: black; background: lightgray; text-align:center; font-family: "NanumGothic";
 }
 
 #detail_table ul {
 	list-style: none; margin: 20px 0px 0px;
 }
 #detail_table ul li {
-	padding: 0px 10px; float: left;
+	padding: 0px 20px; float: left;
 }
 #detail_table ul li a {
 	border-radius: 5px; border: 2px solid rgb(153, 153, 153); border-image: none; width: 150px; height: 25px; text-align: center; padding-top: 7px; font-family: "NanumGothic", Serif; font-size: 1.2em; font-weight: bold; display: block;
 }
-#detail_table ul li a.buy {
+/*#detail_table ul li a.buy {
 	background-position: 15px; background-repeat: no-repeat;
 }
 #detail_table ul li a.cart {
@@ -323,24 +325,24 @@ article h4 {
 }
 #detail_table ul li a.wish {
 	background-position: 15px; background-repeat: no-repeat;
-}
-#detail_table ul li a.buy {
+}*/
+/*#detail_table ul li a.buy {
 	border-color: rgb(255, 0, 0); color: rgb(255, 0, 0); background-image: url("../imgs/check.png");
-}
-#detail_table ul li a.cart {
+}*/
+/*#detail_table ul li a.cart {
 	background-image: url("../imgs/cart.png");
 }
 #detail_table ul li a.wish {
 	background-image: url("../imgs/wish.png");
-}
+}*/
 #detail_table ul li a.buy:hover {
-	color: rgb(0, 0, 0); background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0); background-color: rgb(51, 255, 51);
 }
 #detail_table ul li a.cart:hover {
-	color: rgb(0, 0, 0); background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0); background-color: rgb(51, 255, 51);
 }
 #detail_table ul li a.wish:hover {
-	color: rgb(0, 0, 0); background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0); background-color: rgb(51, 255, 51);
 }
 #container {
 	margin: 40px auto; width: 100%;
@@ -399,30 +401,29 @@ footer ul li a {
 footer img {
 	margin: 10px 0px 0px 40px; width: 150px; float: left;
 }
-#sticky {
+.sticky {
 	/* padding: 10px 5px; border-radius: 10px; top: 115px; width: 82px; font-size: 0.75em; float: right; position: relative; background-color: rgb(153, 153, 153); */
-	padding: 10px 5px; border-radius: 10px; top: 115px; width: 82px; font-size: 0.75em; float: right; position: relative; background-color:#66cc00;
-	
+	padding: 10px 5px; border-radius: 20px; width: 100px; float: right; position: sticky; top: 180px; background-color: rgb(0,180,0);
 }
-#sticky ul {
+.sticky ul {
 	list-style: none;
 }
-#sticky ul li {
+.sticky ul li {
 	background-position: bottom; background-image: url("../imgs/sticky_line.gif"); background-repeat: repeat-x;
 }
-#sticky ul li a {
+.sticky ul li a {
 	padding: 3px 0px; height: 27px; color: rgb(255, 255, 255); display: block;
 }
-#sticky .recent {
+.sticky .recent {
 	background: rgb(255, 255, 255); margin: 7px 0px; padding: 5px 0px; border-radius: 5px; text-align: center;
 }
-#sticky .recent h3 {
-	margin: 0px 0px 5px; color: rgb(0, 0, 0); font-size: 1em;
+.sticky .recent h3 {
+	margin: 0px 0px 5px; color: rgb(0, 0, 0); font-size: 0.75em;
 }
-#sticky .recent ul {
+.sticky .recent ul {
 	list-style: none; margin: 0px; padding: 0px;
 }
-#sticky .recent ul li {
+.sticky .recent ul li {
 	padding: 5px 0px; background-image: none;
 }
 
@@ -479,17 +480,23 @@ footer img {
 }
 
 .detail_table {
-	margin: 20px 0px 0px;
+	margin: 20px 0px 0px; width: 590px; font-size: 0.75em; float: left;
 }
 
-.detail_table {
-	width: 590px; font-size: 0.75em; float: left;
-}
 .detail_table table {
 	width: 95%; border-top-color: rgb(51, 51, 51); border-bottom-color: rgb(51, 51, 51); border-top-width: 2px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-collapse: collapse;
 }
 .detail_table table td {
 	padding: 7px 0px 7px 10px;
+}
+.detail_table table td input{
+	border-radius: 5px;
+}
+table td input {
+	border-radius: 5px;
+}
+.detail_table table td select{
+	border-radius: 5px;
 }
 .detail_table table tr.dot_line {
 	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 1px; border-bottom-style: dotted;
@@ -498,18 +505,26 @@ footer img {
 .detail_table table tr.solid_line {
 	border-bottom-color: rgb(102, 102, 102); border-bottom-width: 1px; border-bottom-style: solid;
 }
+.discount tr {
+	width: 120px;
+	background:  #e0e0e0; text-align:center;
+}
+table {
+	border-radius: 3px;
+}
 .detail_table table td span {
 	font-family: "NanumGothic", Serif; font-size: 1.2em; font-weight: bold;
 }
 
 .detail_table table td.fixed {
-	width: 110px; font-weight: bold;
+	width: 120px; font-weight: bold; background: #e0e0e0;
 }
 
-
-
 .detail_table table td.fixed_join {
-	width: 110px; font-weight: bold; color: #0000cc;background:  #e1e1ff;
+	width: 120px; font-weight: bold; color: black; background:  #e0e0e0; text-align:center;
+}
+.detail_table table th.fixed_join {
+	width: 120px; font-weight: bold; color: black; background:  #e0e0e0; text-align:center;
 }
 
 .detail_table ul {
@@ -522,15 +537,15 @@ footer img {
 	border-radius: 5px; border: 2px solid rgb(153, 153, 153); border-image: none; width: 150px; height: 25px; text-align: center; padding-top: 7px; font-family: "NanumGothic", Serif; font-size: 1.2em; font-weight: bold; display: block;
 }
 .detail_table ul li a.buy {
-	background-position: 15px; background-repeat: no-repeat;
+
 }
 .detail_table ul li a.cart {
-	background-position: 15px; background-repeat: no-repeat;
+
 }
 .detail_table ul li a.wish {
-	background-position: 15px; background-repeat: no-repeat;
+
 }
-.detail_table ul li a.buy {
+/*.detail_table ul li a.buy {
 	border-color: rgb(255, 0, 0); color: rgb(255, 0, 0); background-image: url("../imgs/check.png");
 }
 .detail_table ul li a.cart {
@@ -538,15 +553,15 @@ footer img {
 }
 .detail_table ul li a.wish {
 	background-image: url("../imgs/wish.png");
-}
+}*/
 .detail_table ul li a.buy:hover {
-	color: rgb(0, 0, 0); background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0); background-color: rgb(0, 130, 0);
 }
 .detail_table ul li a.cart:hover {
-	color: rgb(0, 0, 0); background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0); background-color: rgb(0, 130, 0);
 }
 #detail_table ul li a.wish:hover {
-	color: rgb(0, 0, 0); background-color: rgb(255, 204, 0);
+	color: rgb(0, 0, 0); background-color: rgb(0, 130, 0);
 }
 
 article h1_TITLE {
@@ -557,18 +572,18 @@ article h1_TITLE {
 .main_book {
 	width: auto; padding-top: 7px; font-size: 0.75em;
 }
-.main_book h3 {
-	margin: 0px 0px 5px; padding: 0px 0px 5px; color: rgb(51, 102, 153); text-transform: uppercase; font-family: "NanumGothic", Serif; font-size: 1.2em; border-bottom-color: rgb(51, 102, 153); border-bottom-width: 1px; border-bottom-style: solid;
+.main_book h4 {
+	margin: 0px 0px 10px; padding: 0px 0px 10px; color: rgb(0, 0, 0); text-transform: uppercase; font-family: "NanumGothic", Serif; font-size: 1.4em; border-bottom-color: rgb(0, 0, 0); border-bottom-width: 2px; border-bottom-style: solid;
 }
 
 .main_book .book {
-	background-position: right; border: 2px solid rgb(255, 255, 255); border-image: none; width: 188px; height: 250px; text-align: center; float: left; background-image: url("../imgs/vline_grey.gif"); background-repeat: repeat-y;
+	background-position: right; border: 2px solid rgb(255, 255, 255); border-image: none; width: 320px; height: 250px; text-align: center; float: left; background-image: url("../imgs/vline_grey.gif"); background-repeat: repeat-y;
 }
 .main_book .book img {
 	margin: 5px 0px 0px;
 }
 .main_book .book:hover {
-	border: 2px solid rgb(255, 0, 0); border-image: none; background-image: none;
+	border: 2px solid rgb(0,150, 0); border-image: none; background-image: none;
 }
 .main_book .no_back.book {
 	background-image: none;
