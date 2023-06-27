@@ -393,7 +393,6 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
 		mav.addObject("member_list", member_list);
 		
-		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
 		mav.addObject("beginYear",beginDate1[0]);
