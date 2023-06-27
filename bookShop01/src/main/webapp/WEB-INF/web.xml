@@ -23,6 +23,25 @@
 		<param-value>/WEB-INF/spring/mybatis-context.xml</param-value>
 	</context-param>
 	
+	
+	
+	<!-- filter mapping 기능 추가 : 복잡해 질 수 있음 -->
+	<filter-mapping>
+	  <filter-name>WebFilter</filter-name>
+	  <url-pattern>/order/*</url-pattern>
+	  <url-pattern>/goods/*</url-pattern>
+	</filter-mapping>
+	<!-- 필터 -->
+	<filter>
+	  <!-- 필터명을 설정 - WebFilter -->
+	  <filter-name>WebFilter</filter-name>
+	  <!-- 호출할 클래스 이름을 설정 (package 포함) -->
+	  <filter-class>com.bookshop01.filter.login.LoginFilter</filter-class>
+	</filter>
+	<!-- filter mapping 기능 추가 -->
+	
+	
+	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

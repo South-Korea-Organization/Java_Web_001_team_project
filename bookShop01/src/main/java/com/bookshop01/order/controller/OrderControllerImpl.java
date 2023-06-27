@@ -22,6 +22,7 @@ import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.member.vo.MemberVO;
 import com.bookshop01.order.service.OrderService;
 import com.bookshop01.order.vo.OrderVO;
+import com.bookshop01.payment.service.PaymentService ;
 
 @Controller("orderController")
 @RequestMapping(value="/order")
@@ -30,6 +31,8 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	private OrderService orderService;
 	@Autowired
 	private OrderVO orderVO;
+	@Autowired
+	private PaymentService paymentService;
 	
 	@RequestMapping(value="/orderEachGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView orderEachGoods(@ModelAttribute("orderVO") OrderVO _orderVO,
@@ -110,8 +113,22 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	@RequestMapping(value="/payToOrderGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView payToOrderGoods(@RequestParam Map<String, String> receiverMap,
 			                       HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		
+		// 결재 : 데이터 확인하기
+		System.out.println("데이터 확인 = " + receiverMap.toString());
+		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		// 결재 : map 추가
+		Map < String, String > resultMap = paymentService.keyin( receiverMap );
+		mav.addObject( "cardResult", resultMap );
+		System.out.println( "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + resultMap.toString( ) ) ;
+		//
+		
+		//성공페이지
+		
+		//실패페이지 이렇게 나누어서 만드는게 워래 맞음
 		
 		HttpSession session=request.getSession();
 		MemberVO memberVO=(MemberVO)session.getAttribute("orderer");

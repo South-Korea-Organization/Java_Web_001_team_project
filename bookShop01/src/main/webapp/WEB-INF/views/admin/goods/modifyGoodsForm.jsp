@@ -179,6 +179,27 @@ function fn_modify_goods(goods_id, attribute){
     		}
     	}); //end ajax	
   }
+  
+//상품 삭제 기능 추가
+  function fn_delete_goods(goods_id, goods_del_yn){
+  	var frm_mod_goods=document.frm_mod_goods;
+  	var i_goods_id = document.createElement("input");
+  	var i_goods_del_yn = document.createElement("input");
+      
+  	
+      i_goods_id.name="goods_id";
+      i_goods_del_yn.name="goods_del_yn";
+      i_goods_id.value=goods_id;
+      i_goods_del_yn.value=goods_del_yn;
+      
+      frm_mod_goods.appendChild(i_goods_id);
+      frm_mod_goods.appendChild(i_goods_del_yn);
+      frm_mod_goods.method="post";
+      frm_mod_goods.action="${contextPath}/admin/goods/deleteGoods.do";
+      frm_mod_goods.submit();
+  }
+  
+  
 </script>
 
 </HEAD>
@@ -504,5 +525,23 @@ function fn_modify_goods(goods_id, attribute){
 	</form>
 	</DIV>
 	<DIV class="clear"></DIV>
-					
-</form>	
+
+
+<H3>상품삭제하기</H3>
+<DIV id="search">
+<!-- 상품삭제 버튼 추가 -->
+				<td>
+					<input type="hidden" name="command"  value="modify_goods_info" /> 
+					<c:choose>
+					  <c:when test="${goods.goods_del_yn=='N' }">
+					    <input  type="button"  value="상품삭제" onClick="fn_delete_goods('${goods.goods_id }','Y')">   
+					  </c:when>
+					  <c:when  test="${goods.goods_del_yn=='Y' }">
+					    <input  type="button"  value="상품복원" onClick="fn_delete_goods('${goods.goods_id }','N')">
+					  </c:when>
+					  
+					</c:choose>
+				</td>
+</DIV>
+</body>
+</html>

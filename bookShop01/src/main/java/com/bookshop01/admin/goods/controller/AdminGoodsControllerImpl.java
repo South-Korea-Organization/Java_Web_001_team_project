@@ -36,7 +36,7 @@ import com.bookshop01.order.vo.OrderVO ;
 @Controller("adminGoodsController")
 @RequestMapping(value="/admin/goods")
 public class AdminGoodsControllerImpl extends BaseController  implements AdminGoodsController{
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "E:\\new_start\\WORKSPACE\\spring-workspace\\shopping\\file_repo";
 	@Autowired
 	private AdminGoodsService adminGoodsService;
 	
@@ -80,6 +80,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		condMap.put("pageNum",pageNum);
 		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
+		
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
 		mav.addObject("newGoodsList", newGoodsList);
 		
@@ -94,6 +95,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		
 		mav.addObject("section", section);
 		mav.addObject("pageNum", pageNum);
+		
 		return mav;
 		
 	}
@@ -196,7 +198,22 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		return resEntity;
 	}
 	
-
+	
+	@RequestMapping(value="/deleteGoods.do" ,method={RequestMethod.POST})
+	public ModelAndView deleteGoods(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Map<String,String> goodsMap=new HashMap<String,String>();
+		String goods_id=request.getParameter("goods_id");
+		String goods_del_yn=request.getParameter("goods_del_yn");
+		goodsMap.put("goods_del_yn", goods_del_yn);
+		goodsMap.put("goods_id", goods_id);
+		
+		adminGoodsService.modifyGoodsInfo(goodsMap);
+		mav.setViewName("redirect:/admin/goods/adminGoodsMain.do");
+		return mav;
+		
+	}
+	
 	@RequestMapping(value="/modifyGoodsImageInfo.do" ,method={RequestMethod.POST})
 	public void modifyGoodsImageInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
 		System.out.println("modifyGoodsImageInfo");
@@ -375,6 +392,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		// member에서 따옴
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
 		mav.addObject("member_list", member_list);
+		
 		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
