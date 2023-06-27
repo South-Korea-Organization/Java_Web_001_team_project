@@ -2,6 +2,7 @@ package com.bookshop01.admin.goods.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList ;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +25,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookshop01.admin.goods.service.AdminGoodsService;
+import com.bookshop01.admin.member.service.AdminMemberService ;
+import com.bookshop01.admin.order.service.AdminOrderService ;
 import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.goods.vo.ImageFileVO;
 import com.bookshop01.member.vo.MemberVO;
+import com.bookshop01.order.vo.OrderVO ;
 
 @Controller("adminGoodsController")
 @RequestMapping(value="/admin/goods")
@@ -35,6 +39,14 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
 	@Autowired
 	private AdminGoodsService adminGoodsService;
+	
+	// order에서 따옴
+	@Autowired
+	private AdminOrderService adminOrderService;
+	
+	// member에서 따옴
+	//@Autowired
+	//private AdminMemberService adminMemberService;
 	
 	@RequestMapping(value="/adminGoodsMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
@@ -314,9 +326,11 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			                           HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		//마이페이지 사이드 메뉴로 설정한다.
 		HttpSession session=request.getSession();
 		session=request.getSession();
-		session.setAttribute("side_menu", "admin_mode"); //마이페이지 사이드 메뉴로 설정한다.
+		session.setAttribute("side_menu", "admin_mode"); 
 		
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 		String section = dateMap.get("section");
@@ -342,6 +356,13 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		condMap.put("endDate", endDate);
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
 		mav.addObject("newGoodsList", newGoodsList);
+		
+		// order에서 따옴
+		List<OrderVO> newOrderList=adminOrderService.listNewOrder(condMap);
+		mav.addObject("newOrderList",newOrderList);
+		// member에서 따옴
+		//List<MemberVO> member_list=adminMemberService.listMember(condMap);
+		//mav.addObject("member_list", member_list);
 		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
