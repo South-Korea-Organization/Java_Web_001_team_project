@@ -47,6 +47,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 	// member에서 따옴
 	@Autowired
 	private AdminMemberService adminMemberService;
+
 	
 	@RequestMapping(value="/adminGoodsMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
@@ -371,11 +372,12 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		// order에서 따옴
 		List<OrderVO> newOrderList=adminOrderService.listNewOrder(condMap);
 		mav.addObject("newOrderList",newOrderList);
+
 		
 		// member에서 따옴
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
 		mav.addObject("member_list", member_list);
-		
+
 		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
