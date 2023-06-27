@@ -36,15 +36,15 @@ import com.bookshop01.order.vo.OrderVO ;
 @Controller("adminGoodsController")
 @RequestMapping(value="/admin/goods")
 public class AdminGoodsControllerImpl extends BaseController  implements AdminGoodsController{
-	private static final String CURR_IMAGE_REPO_PATH = "E:\\new_start\\WORKSPACE\\spring-workspace\\shopping\\file_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
 	@Autowired
 	private AdminGoodsService adminGoodsService;
 	
-	// order에서 따옴
+	// order�뿉�꽌 �뵲�샂
 	@Autowired
 	private AdminOrderService adminOrderService;
 	
-	// member에서 따옴
+	// member�뿉�꽌 �뵲�샂
 	@Autowired
 	private AdminMemberService adminMemberService;
 	
@@ -55,7 +55,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session=request.getSession();
 		session=request.getSession();
-		session.setAttribute("side_menu", "admin_mode"); //마이페이지 사이드 메뉴로 설정한다.
+		session.setAttribute("side_menu", "admin_mode"); //留덉씠�럹�씠吏� �궗�씠�뱶 硫붾돱濡� �꽕�젙�븳�떎.
 		
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 		String section = dateMap.get("section");
@@ -144,7 +144,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 				}
 			}
 			message= "<script>";
-			message += " alert('새상품을 추가했습니다.');";
+			message += " alert('�깉�긽�뭹�쓣 異붽��뻽�뒿�땲�떎.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 		}catch(Exception e) {
@@ -157,7 +157,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			}
 			
 			message= "<script>";
-			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
+			message += " alert('�삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎. �떎�떆 �떆�룄�빐 二쇱꽭�슂');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 			e.printStackTrace();
@@ -337,7 +337,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		}
 	}
 	
-	// 관리자 게시판 관리기능 임시로 추가
+	// 愿�由ъ옄 寃뚯떆�뙋 愿�由ш린�뒫 �엫�떆濡� 異붽�
 	
 	@RequestMapping(value="/adminBoardMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminBoardMain(@RequestParam Map<String, String> dateMap,
@@ -345,7 +345,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-		//마이페이지 사이드 메뉴로 설정한다.
+		//留덉씠�럹�씠吏� �궗�씠�뱶 硫붾돱濡� �꽕�젙�븳�떎.
 		HttpSession session=request.getSession();
 		session=request.getSession();
 		session.setAttribute("side_menu", "admin_mode"); 
@@ -385,11 +385,11 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
 		mav.addObject("newGoodsList", newGoodsList);
 		
-		// order에서 따옴
+		// order�뿉�꽌 �뵲�샂
 		List<OrderVO> newOrderList=adminOrderService.listNewOrder(condMap);
 		mav.addObject("newOrderList",newOrderList);
 		
-		// member에서 따옴
+		// member�뿉�꽌 �뵲�샂
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
 		mav.addObject("member_list", member_list);
 		
