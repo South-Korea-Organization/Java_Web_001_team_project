@@ -248,7 +248,212 @@ var card_com_name;
 var card_pay_month;
 var pay_orderer_hp_num;
 
+// 여기에 결재 기능 추가됨(외부강사)
 function fn_show_order_detail(){
+	
+	// 여기에 결재 기능 추가됨 여기부터 (--------------)
+	
+	//결제방식 카카오로 선택했는지 확인.
+	
+	var payType = $('input[name="pay_method"]:checked').val();
+	// payType 선택된 라디오버튼 value 값이 있음.
+	
+	alert(payType); //뭐가 선택되었는지 확인하는 알럿창
+	
+	
+	$("input[name=kakaopay_direct]").val("");
+	$("input[name=naverpay_direct]").val("");
+	$("input[name=naverpay_point_direct]").val("");
+	
+	if(payType == 'kakao'){
+		//카카오로 오면 실행하는 코드
+		
+		//ajax 실행하는 법은 다양합니다..
+		
+		$.ajax({
+			type : "post",
+			url : "${contextPath}/payment/kakao/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				$("input[name=ordr_idxx]").val(ordr_idxx);
+				$("input[name=good_name]").val(good_name);
+				$("input[name=good_mny]").val(good_mny);
+				$("input[name=buyr_name]").val(buyr_name);
+				$("input[name=site_cd]").val(site_cd);
+				$("input[name=kakaopay_direct]").val("Y");
+				
+				// 없는 것 같아서 추가
+				$("input[name=responseCode]").val(responseCode);
+				$("input[name=responseMsg]").val(responseMsg);
+				$("input[name=Ret_URL]").val(Ret_URL);
+				
+				
+				jsf__pay();
+				
+			},
+			error : function(data, textStatus) {
+				alert("orderGoodsForm(fn_show_order_detail) : 에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+				
+			}
+		}); //end ajax	
+		
+		
+		
+		return false; //아래 코드 실행 안되게
+	}else if(payType == 'naver_card'){
+		//카카오로 오면 실행하는 코드
+		
+		//ajax 실행하는 법은 다양합니다..
+		
+		$.ajax({
+			type : "post",
+			url : "${contextPath}/payment/naver/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+
+				
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				
+				// 네이버 카드 요청
+				/*
+				var authNumber = data.authNumber;
+				var cardName = data.cardName;
+				var cardNo = data.cardNo;
+				var quota = data.quota;
+				var cardCode = data.cardCode;
+				var binType01 = data.binType01;
+				var binType02 = data.binType02;
+				*/
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				
+				
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				
+				$("input[name=ordr_idxx]").val(ordr_idxx);
+				$("input[name=good_name]").val(good_name);
+				$("input[name=good_mny]").val(good_mny);
+				$("input[name=buyr_name]").val(buyr_name);
+				$("input[name=site_cd]").val(site_cd);
+				$("input[name=Ret_URL]").val(Ret_URL);
+				
+				// 없는 것 같아서 추가
+				$("input[name=responseCode]").val(responseCode);
+				$("input[name=responseMsg]").val(responseMsg);
+				$("input[name=naverpay_direct]").val("Y");
+				$("input[name=naverpay_point_direct]").val("N");
+				
+				
+				
+				//
+				
+				jsf__pay();
+				
+			},
+			error : function(data, textStatus) {
+				alert("orderGoodsForm(fn_show_order_detail) : 에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+				
+			}
+		}); //end ajax	
+		
+		
+		
+		return false; //아래 코드 실행 안되게
+	}else if(payType == 'naver_point'){
+		//카카오로 오면 실행하는 코드
+		
+		//ajax 실행하는 법은 다양합니다..
+		
+		$.ajax({
+			type : "post",
+			url : "${contextPath}/payment/naver/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				$("input[name=ordr_idxx]").val(ordr_idxx);
+				$("input[name=good_name]").val(good_name);
+				$("input[name=good_mny]").val(good_mny);
+				$("input[name=buyr_name]").val(buyr_name);
+				$("input[name=site_cd]").val(site_cd);
+				$("input[name=Ret_URL]").val(Ret_URL);
+				
+				// 없는 것 같아서 추가
+				$("input[name=responseCode]").val(responseCode);
+				$("input[name=responseMsg]").val(responseMsg);
+				$("input[name=naverpay_direct]").val("Y");
+				$("input[name=naverpay_point_direct]").val("Y");
+				//
+				
+				jsf__pay();
+				
+			},
+			error : function(data, textStatus) {
+				alert("orderGoodsForm(fn_show_order_detail) : 에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+				
+			}
+		}); //end ajax	
+		
+		
+		
+		return false; //아래 코드 실행 안되게
+	}
+	
+	// 여기까지(----------)
+	
+	
+	
+	
 	goods_id="";
 	goods_title="";
 	
@@ -359,7 +564,7 @@ function fn_show_order_detail(){
 	var i_delivery_message=document.getElementById("delivery_message");
 	var i_pay_method=document.getElementById("pay_method");
 
-//	alert("총주문 금액:"+total_order_goods_price);
+	//	alert("총주문 금액:"+total_order_goods_price);
 	order_goods_qty=h_order_goods_qty.value;
 	//order_total_price=h_order_total_price.value;
 	
@@ -490,6 +695,37 @@ function fn_process_pay_order(){
     formObj.appendChild(i_card_com_name);
     formObj.appendChild(i_card_pay_month);
     formObj.appendChild(i_pay_orderer_hp_num);
+    
+    
+    
+    //결재기능 추가하기
+    //카드번호 데이터 보내는법
+	var cardNo = document.createElement("input");
+	cardNo.name = "cardNo";
+	cardNo.value = document.getElementById("cardNo").value;
+    formObj.appendChild(cardNo);
+    
+    var expireYear = document.createElement("input");
+    expireYear.name = "expireYear";
+    expireYear.value = document.getElementById("expireYear").value;
+    formObj.appendChild(expireYear);
+    
+    var expireMonth = document.createElement("input");
+    expireMonth.name = "expireMonth";
+    expireMonth.value = document.getElementById("expireMonth").value;
+    formObj.appendChild(expireMonth);
+    
+    var birthday = document.createElement("input");
+    birthday.name = "birthday";
+    birthday.value = document.getElementById("birthday").value;
+    formObj.appendChild(birthday);
+    
+    var cardPw = document.createElement("input");
+    cardPw.name = "cardPw";
+    cardPw.value = document.getElementById("cardPw").value;
+    formObj.appendChild(cardPw);
+    // 결재기능 추가하기
+    
     
 
     document.body.appendChild(formObj); 
@@ -790,7 +1026,11 @@ function fn_process_pay_order(){
 	<div class="detail_table">
 		<table>
 			<tbody>
-				<tr >
+			
+			
+			
+			<!-- 결재기능 추가 위해 기존 내용 주석처리
+				<tr>
 					<td>
 					   <input type="radio" id="pay_method" name="pay_method" value="신용카드"   onClick="fn_pay_card()" checked>신용카드 &nbsp;&nbsp;&nbsp; 
 					   <input type="radio" id="pay_method" name="pay_method" value="제휴 신용카드"  >제휴 신용카드 &nbsp;&nbsp;&nbsp; 
@@ -811,6 +1051,29 @@ function fn_process_pay_order(){
 					   <input type="radio"  id="pay_method" name="pay_method" value="직접입금">직접입금&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
+				 -->
+				
+				
+				
+				
+				<!-- 결재기능 추가하기 -->
+				<tr >
+					<td>
+					   <input type="radio" id="pay_method" name="pay_method" value="신용카드"   onClick="fn_pay_card()" checked>신용카드 &nbsp;&nbsp;&nbsp; 
+					</td>
+				</tr>
+				<tr >
+					<td>
+					   <input type="radio" id="pay_method" name="pay_method" value="kakao">카카오페이(간편결제) &nbsp;&nbsp;&nbsp; 
+					   <input type="radio" id="pay_method" name="pay_method" value="naver_card">네이버페이(신용카드) &nbsp;&nbsp;&nbsp; 
+					   <input type="radio" id="pay_method" name="pay_method" value="naver_point">네이버페이(포인트) &nbsp;&nbsp;&nbsp; 
+					</td>
+				</tr>
+				<!-- 결재기능 추가하기 -->
+				
+				
+				
+				
 				<tr id="tr_pay_card">
 					<td>
 					  <strong>카드 선택<strong>:&nbsp;&nbsp;&nbsp;
@@ -838,6 +1101,45 @@ function fn_process_pay_order(){
 					
 					</td>
 				</tr>
+				
+				
+				
+				<!--  결재기능 추가하기 -->
+				<tr>
+					<td>
+						<strong>카드번호:<strong>
+						<input type="text" name="cardNo" id="cardNo">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>유효기간(년):<strong>
+						<input type="text" name="expireYear" id="expireYear" maxLength="2" style="width:40px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>유효기간(월):<strong>
+						<input type="text" name="expireMonth" id="expireMonth" maxLength="2" style="width:40px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>생년월일:<strong>
+						<input type="text" name="birthday" id="birthday" maxLength="6"style="width:80px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>비밀번호(2자리):<strong>
+						<input type="text" name="cardPw" id="cardPw" maxLength="2" style="width:40px">
+					</td>
+				</tr>
+				<!--  결재기능 추가하기 -->
+				
+				
+				
+				
 				<tr id="tr_pay_phone" style="visibility:hidden">
 				  <td>
 				  <strong>휴대폰 번호 입력: <strong>
@@ -989,6 +1291,145 @@ function fn_process_pay_order(){
 			</div>
 			<div class="clear"></div>	
 			<br> 
+			
+
+
+
+
+
+
+
+
+<!-- PC 결재창 호출기능 추가하기 -->
+
+
+
+<form name="order_info" method="post" accept-charset="euc-kr">
+	<input type="hidden" name="ordr_idxx" value="${ordr_idxx }">
+	<input type="hidden" name="good_name" value="${good_name }">
+	<input type="hidden" name="good_mny" value="${good_mny }">
+	<input type="hidden" name="buyr_name" value="${buyr_name }">
+	<input type="hidden" name="site_cd" value="${site_cd }">
+	
+	<!-- 고정값 -->
+	<input type="hidden" name="req_tx" value="pay">
+	<input type="hidden" name="pay_method" value="100000000000"/>
+	<input type="hidden" name="currency" value="410">
+	<input type="hidden" name="module_type" value="01"/>	
+	<input type="hidden" name="naverpay_direct" value="Y">
+	
+	<input type="hidden" name="kakaopay_direct" value="">
+	
+	<!-- 네이버페이 포인트 결제 시 사용 -->
+	<input type="hidden" name="naverpay_point_direct" value="${naverpay_point_direct}">
+	
+	<!-- 주문정보 검증 관련 정보 : 표준웹 에서 설정하는 정보입니다 -->
+	<input type="hidden" name="ordr_chk" value=""/>
+	
+	<!-- 추가파라미터(가맹점에서 별도의 값 전달시 param_opt를 사용하여 값 전달) -->
+	<input type="hidden" name="param_opt_1" value="">
+	<input type="hidden" name="param_opt_2" value="">
+	<input type="hidden" name="param_opt_3" value="">
+	
+	<!-- 
+	※ 필 수
+ 	필수 항목 : 표준웹에서 값을 설정하는 부분으로 반드시 포함되어야 합니다
+ 	값을 설정하지 마십시오
+	 -->
+	<input type="hidden" name="res_cd" value=""/>
+	<input type="hidden" name="res_msg" value=""/>
+	<input type="hidden" name="enc_info" value=""/>
+	<input type="hidden" name="enc_data" value=""/>
+	<input type="hidden" name="ret_pay_method" value=""/>
+	<input type="hidden" name="tran_cd" value=""/>
+	<input type="hidden" name="use_pay_method" value=""/>
+	<input type="hidden" name="card_pay_method" value=""/>
+</form>
+
+<script>
+function m_Completepayment(FormOrJson, closeEvent) {
+var frm = document.order_info;
+/********************************************************************/
+/* FormOrJson은 가맹점 임의 활용 금지 */
+/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다. */
+/********************************************************************/
+GetField(frm, FormOrJson);
+if (frm.res_cd.value == "0000") {
+/*
+ [가맹점 리턴값 처리 영역] 
+인증이 완료되면 frm에 인증값이 들어갑니다. 해당 데이터를 가지고
+승인요청을 진행 해주시면 됩니다.
+ 
+*/
+//인증성공 시 오는 곳.
+
+console.log("orderGoodsForm(m_Completepayment) : frm = ", frm);
+alert("인증 완료");
+
+
+
+// 결재방법 확인하기
+
+
+var payType = $('input[name="pay_method"]:checked').val();
+// payType 선택된 라디오버튼 value 값이 있음.
+
+alert("payType : ", payType); //뭐가 선택되었는지 확인하는 알럿창
+
+$("input[name=kakaopay_direct]").val("");
+$("input[name=naverpay_direct]").val("");
+$("input[name=naverpay_point_direct]").val("");
+
+
+// 폼 name = order_info  서브밋 하면 됩니다.
+
+//$("form[name=order_info]").attr("action", "/payment/kakao/pay.do");
+//$("form[name=order_info]").submit();
+
+// 그냥 강제로 네이버로 연결시키기 : 되나 안되나 실험
+//$("form[name=order_info]").attr("action", "/payment/naver/pay.do");
+//$("form[name=order_info]").submit();
+
+// 주석 : 수정해야 할 부분
+
+if(payType == 'kakao'){
+	//카카오로 오면 실행하는 코드
+	$("form[name=order_info]").attr("action", "/payment/kakao/pay.do");
+	$("form[name=order_info]").submit();
+	return false; //아래 코드 실행 안되게
+}else if(payType == 'naver_card'){
+	//네이버 카드로 오면 실행하는 코드
+	$("form[name=order_info]").attr("action", "/payment/naver/pay.do");
+	$("form[name=order_info]").submit();
+	return false; //아래 코드 실행 안되게
+}else if(payType == 'naver_point'){
+	//네이버 포인트로 오면 실행하는 코드
+	$("form[name=order_info]").attr("action", "/payment/naver/pay.do");
+	$("form[name=order_info]").submit();	
+	return false; //아래 코드 실행 안되게
+}
+
+
+
+
+
+
+} else {
+closeEvent();
+}
+}
+/* 이 함수를 실행하여 카카오결제창을 호출 합니다*/
+function jsf__pay() {
+try {
+var form = document.order_info;
+KCP_Pay_Execute(form);
+} catch{
+/* IE 에서 결제 정상종료시 throw로 스크립트 종료 */
+}
+}
+</script>
+<script type="text/javascript"
+src="https://pay.kcp.co.kr/plugin/payplus_web.jsp"></script>		
 			
 			
 			

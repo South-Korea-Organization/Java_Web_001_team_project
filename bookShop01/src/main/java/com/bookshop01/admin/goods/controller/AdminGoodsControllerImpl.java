@@ -36,7 +36,7 @@ import com.bookshop01.order.vo.OrderVO ;
 @Controller("adminGoodsController")
 @RequestMapping(value="/admin/goods")
 public class AdminGoodsControllerImpl extends BaseController  implements AdminGoodsController{
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "E:\\new_start\\WORKSPACE\\spring-workspace\\shopping\\file_repo";
 	@Autowired
 	private AdminGoodsService adminGoodsService;
 	
@@ -392,6 +392,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		// member에서 따옴
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
 		mav.addObject("member_list", member_list);
+		
 		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");
