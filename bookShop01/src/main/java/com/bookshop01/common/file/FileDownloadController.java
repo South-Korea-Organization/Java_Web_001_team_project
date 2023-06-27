@@ -17,7 +17,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class FileDownloadController {
-	private static String CURR_IMAGE_REPO_PATH = "E:\\new_start\\WORKSPACE\\spring-workspace\\shopping\\file_repo";
+	private static String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
 	
 	@RequestMapping("/download")
 	protected void download(@RequestParam("fileName") String fileName,
@@ -32,8 +32,8 @@ public class FileDownloadController {
 		FileInputStream in=new FileInputStream(image); 
 		byte[] buffer=new byte[1024*8];
 		while(true){
-			int count=in.read(buffer); //버퍼에 읽어들인 문자개수
-			if(count==-1)  //버퍼의 마지막에 도달했는지 체크
+			int count=in.read(buffer); //踰꾪띁�뿉 �씫�뼱�뱾�씤 臾몄옄媛쒖닔
+			if(count==-1)  //踰꾪띁�쓽 留덉�留됱뿉 �룄�떖�뻽�뒗吏� 泥댄겕
 				break;
 			out.write(buffer,0,count);
 		}
