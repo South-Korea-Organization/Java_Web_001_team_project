@@ -25,6 +25,7 @@
 		<result property="goods_writer_intro" column="goods_writer_intro" />
 		<result property="goods_intro" column="goods_intro" />
 		<result property="goods_contents_order" column="goods_contents_order" javaType="java.lang.String" jdbcType="CLOB"  />
+		<result property="goods_del_yn" column="goods_del_yn" />
 	</resultMap>	
 
 	<resultMap id="imageResult" type="ImageFileVO">
@@ -149,7 +150,8 @@
 			          goods_publisher,
 			          goods_sales_price,
 			          to_char(goods_creDate,'YYYY-MM-DD')  as goods_creDate,
-			          to_char(goods_published_date,'YYYY-MM-DD') as goods_published_date
+			          to_char(goods_published_date,'YYYY-MM-DD') as goods_published_date,
+			          goods_del_yn
 			       from (
 			             select  goods_id,
 			             		 goods_title,
@@ -157,7 +159,8 @@
 			             		 goods_publisher,
 			             		 goods_sales_price,
 			             		 goods_creDate,
-			             		 goods_published_date
+			             		 goods_published_date,
+			             		 goods_del_yn
 			              from t_shopping_goods 
 			                where  to_char(goods_creDate,'YYYY-MM-DD')  between #{beginDate} and #{endDate}
 			               order by goods_creDate desc
@@ -269,6 +272,9 @@
 	      <if test=" goods_contents_order!='' and goods_contents_order!=null">
 	        goods_contents_order=#{goods_contents_order:VARCHAR}
 	      </if>
+	      <if test=" goods_del_yn!='' and goods_del_yn!=null">
+			         goods_del_yn=#{goods_del_yn}
+		  </if>
 	     </set>
 	    where 
 	    goods_id=#{goods_id}

@@ -143,6 +143,12 @@
 	 	  set delivery_state='cancel_order'
 	   where order_id=#{order_id}
 	</update>
-		
+	
+	<!-- 마이페이지 회원탈퇴 -->
+	<update id="delNewMember" parameterType="String">
+	   update t_shopping_member
+	 	  set del_yn='Y'
+	   where member_id=#{member_id}
+	</update>
 		
 </mapper>

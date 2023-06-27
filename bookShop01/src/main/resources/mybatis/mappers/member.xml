@@ -39,6 +39,7 @@
 	    <![CDATA[
 			select * from t_shopping_member 
 			 where member_id=#{member_id}
+			 and del_yn='N'
 			 and member_pw=#{member_pw}			
 			 
 		]]>
