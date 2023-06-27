@@ -131,42 +131,81 @@
 	<br>
 	<H1>3.결제정보</H1>
 	<DIV class="detail_table">
+		<c:if test="${cardResult.responseCode eq '0000' }">
+	       <!-- 	 결제 성공일때 -->
+		 	<table>
+				<TBODY>
+					<TR class="dot_line">
+						<TD class="fixed_join">결제금액</TD>
+						<TD>
+						   ${cardResult.amount}
+					    </TD>
+					</TR>
+					<TR class="dot_line">
+						<TD class="fixed_join">카드사명</TD>
+						<TD>
+						   ${cardResult.cardName}
+					    </TD>
+					</TR>
+					<TR class="dot_line">
+						<TD class="fixed_join">주문번호</TD>
+						<TD>
+						   ${cardResult.orderNumber}
+					    </TD>
+					</TR>
+					
+				</TBODY>
+			</table>
+		</c:if>
+		
+		
+		<c:if test="${cardResult.responseCode ne '0000' }">
+	         <!-- 	 결제 실패일때 -->
+			<table>
+				<TBODY>
+					<TR class="dot_line">
+						<TD class="fixed_join">실패 사유</TD>
+						<TD>
+						   ${cardResult.responseMsg}
+					    </TD>
+					</TR>
+				</TBODY>
+			</table>
+		</c:if>
 	
-	<c:if test="${cardResult.responseCode eq '0000' }">     <!-- eq 는 == 와 같음 -->
-<!-- 	 결제 성공일때 -->
-	 	<table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<%-- 	<table>
 			<TBODY>
 				<TR class="dot_line">
-					<TD class="fixed_join">결제금액</TD>
+					<TD class="fixed_join">결제방법</TD>
 					<TD>
-					   ${cardResult.amount }
+					   ${myOrderInfo.pay_method }
 				    </TD>
 				</TR>
 				<TR class="dot_line">
-					<TD class="fixed_join">카드사명</TD>
+					<TD class="fixed_join">결제카드</TD>
 					<TD>
-					   ${cardResult.cardName }
+					   ${myOrderInfo.card_com_name}
+				    </TD>
+				</TR>
+				<TR class="dot_line">
+					<TD class="fixed_join">할부기간</TD>
+					<TD>
+					   ${myOrderInfo.card_pay_month }
 				    </TD>
 				</TR>
 			</TBODY>
-		</table>
-	</c:if>
-	
-	
-	<c:if test="${cardResult.responseCode ne '0000' }">
-<!-- 	 결제 실패일때 -->
-		<table>
-			<TBODY>
-				<TR class="dot_line">
-					<TD class="fixed_join">실패 사유</TD>
-					<TD>
-					   ${cardResult.responseMsg }
-				    </TD>
-				</TR>
-			</TBODY>
-		</table>
-	</c:if>
-
+		</table> --%>
 	</DIV>
 </form>
     <DIV class="clear"></DIV>

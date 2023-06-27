@@ -33,7 +33,7 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		ModelAndView mav = new ModelAndView(viewName);
 
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
-		String section = dateMap.get("section");
+		String section = dateMap.get("section");	
 		String pageNum = dateMap.get("pageNum");
 		String beginDate=null,endDate=null;
 		

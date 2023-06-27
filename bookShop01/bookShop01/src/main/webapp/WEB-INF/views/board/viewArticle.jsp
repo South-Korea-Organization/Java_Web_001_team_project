@@ -37,7 +37,6 @@
 		 document.getElementById("i_imageFileName").disabled=false;
 		 document.getElementById("tr_btn_modify").style.display="block";
 		 document.getElementById("tr_file_upload").style.display="block";
-		 document.getElementById("tr_btn").style.display="none";
 	 }
 	 
 	 function fn_modify_article(obj){
@@ -62,7 +61,7 @@
 	 
 	 function fn_reply_form(url, parentNO){
 		 var form = document.createElement("form");
-		 form.setAttribute("method", "get");
+		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var parentNOInput = document.createElement("input");
 	     parentNOInput.setAttribute("type","hidden");
@@ -86,124 +85,102 @@
  </script>
 </head>
 <body>
-  <form name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
-  <table  border=0  align="center">
-  <tr>
-   <td width=150 align="center" bgcolor=#FF9933>
-      글번호
-   </td>
-   <td >
-    <input type="text"  value="${article.articleNO }"  disabled />
-    <input type="hidden" name="articleNO" value="${article.articleNO}"  />
-   </td>
-  </tr>
-  <tr>
-    <td width="150" align="center" bgcolor="#FF9933">
-      작성자 아이디
-   </td>
-   <td >
-    <input type=text value="${article.member_id }" name="writer"  disabled />
-   </td>
-  </tr>
-  <tr>
-    <td width="150" align="center" bgcolor="#FF9933">
-      제목 
-   </td>
-   <td>
-    <input type=text value="${article.title }"  name="title"  id="i_title" disabled />
-   </td>   
-  </tr>
-  <tr>
-    <td width="150" align="center" bgcolor="#FF9933">
-      내용
-   </td>
-   <td>
-    <textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${article.content }</textarea>
-   </td>  
-  </tr>
- <%-- 
- <c:if test="${not empty imageFileList && imageFileList!='null' }">
-	  <c:forEach var="item" items="${imageFileList}" varStatus="status" >
-		    <tr>
-			    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
-			      이미지${status.count }
-			   </td>
-			   <td>
-			     <input  type= "hidden"   name="originalFileName" value="${item.imageFileName }" />
-			    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${item.imageFileName}" id="preview"  /><br>
-			   </td>   
-			  </tr>  
-			  <tr>
-			    <td>
-			       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
-			    </td>
-			 </tr>
-		</c:forEach>
- </c:if>
- 	 --%>    
- 	 
-  <c:choose> 
+
+<div style="margin: 0 auto;	max-width:700px;">
+ <form name="frmArticle" method="post"  action="${contextPath}" enctype="multipart/form-data">
+	<div class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" style="width:100px">Number</span>
+	  </div>
+	  <input type="text" value="${article.articleNO }" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+	  <input type="hidden" name="articleNO" value="${article.articleNO}">
+	</div><br>
+    <div class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" style="width:100px">Writer</span>
+	  </div>
+	  <input type="text" class="form-control" value="${article.member_id }" name="writer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled >
+	</div>
+	<br>
+	<div class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" style="width:100px">Title</span>
+	  </div>
+	  <input type="text" value="${article.title }"  name="title"  id="i_title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+	</div>
+	<br>
+	<div class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text"  style="width:100px">content</span>
+	  </div>
+	  <textarea class="form-control" aria-label="With textarea" name="content"  id="i_content" rows="10" cols="30" maxlength="800" disabled>${article.content }</textarea>
+	</div><br>
+	<div class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" style="width:100px">Date</span>
+	  </div>
+	  <input type="text" value="<fmt:formatDate value="${article.writeDate}" />" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+	</div>
+
+
+	<table style="width:700px">
+	<c:choose> 
 	  <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
 	   	<tr>
-		    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
-		      이미지
-		   </td>
 		   <td>
-		     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-		    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"  /><br>
-		   </td>   
-		  </tr>  
-		  <tr>
-		    <td ></td>
-		    <td>
-		       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
-		    </td>
-		  </tr> 
+		   	<div class="input-group mb-3">
+           	  <div class="input-group-prepend">
+           	    <span class="input-group-text" id="inputGroupFileAddon01" style="width:100px">Upload</span>
+           	  </div>
+           	  <div class="custom-file">
+           	    <input type="file" class="custom-file-input" value="${article.imageFileName }" aria-describedby="inputGroupFileAddon01" name="imageFileName " id="i_imageFileName">
+           	    <label class="custom-file-label" for="inputGroupFile01"　   disabled   onchange="readURL(this);"　>click to Choose file</label>
+
+           	   </div>
+           	</div><br>
+				<img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:300px; height:200px"><br>
+				<br>
+           	</td>
+		  </tr>
 		 </c:when>
 		 <c:otherwise>
-		    <tr  id="tr_file_upload" >
-				    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
-				      이미지
-				    </td>
-				    <td>
-				      <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-				    </td>
-			    </tr>
-			    <tr>
-				    <td ></td>
-				    <td>
-				       <img id="preview"  /><br>
-				       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
-				    </td>
-			  </tr>
+		    <tr id="tr_file_upload">
+			   <td>
+			    <div class="input-group mb-3">
+	              <div class="input-group-prepend">
+	                <span class="input-group-text" id="inputGroupFileAddon01" style="width:100px">Upload</span>
+	              </div>
+	              <div class="custom-file">
+	                <input type="file" class="custom-file-input"  value="${article.imageFileName }" aria-describedby="inputGroupFileAddon01">
+	                <label class="custom-file-label" for="inputGroupFile01"　name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"　>click to Choose file</label>
+	              </div>
+	            </div><br>
+                <div>
+                    <img id="preview" src="#"/>
+                </div><br>
+			   </td>
+		  </tr>
 		 </c:otherwise>
 	 </c:choose>
-  <tr>
-	   <td width="150" align="center" bgcolor="#FF9933">
-	      등록일자
+	  <tr id="tr_btn_modify"  align="center" class="float-right">
+	   <td colspan="2">
+	       <input class="btn btn-success" type=button value="수정반영하기" onClick="fn_modify_article(frmArticle)"  >
+           <input class="btn btn-success" type=button value="취소"  onClick="backToList(frmArticle)"><br><br>
 	   </td>
-	   <td>
-	    <input type=text value="<fmt:formatDate value="${article.writeDate}" />" disabled />
-	   </td>   
-  </tr>
-  <tr   id="tr_btn_modify"  align="center"  >
-	   <td colspan="2"   >
-	       <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
-           <input type=button value="취소"  onClick="backToList(frmArticle)">
-	   </td>   
-  </tr>
-    
-  <tr  id="tr_btn"    >
-   <td colspan="2" align="center">
-       <c:if test="${memberInfo.member_id == article.member_id }">
-	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
-	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
-	    </c:if>
-	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
-	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
-   </td>
-  </tr>
- </table>
- </form>
+	  </tr>
+	  <br>
+	  <tr>
+	   <td colspan="4" align="center">
+	       <c:if test="${memberInfo.member_id == article.member_id }">
+		      <input class="btn btn-success" type=button value="수정하기" onClick="fn_enable(this.form)">
+		      <input class="btn btn-success" type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
+		    </c:if>
+		    <input class="btn btn-success" type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
+		     <input class="btn btn-success" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+	   </td>
+	  </tr>
+	</table>
+　</form>
+</div>
 </body>
 </html>

@@ -36,43 +36,52 @@
  <title>글쓰기창</title>
 </head>
 <body>
-<h1 style="text-align:center">글쓰기</h1>
+
+<h1 style="text-align:center">고객센터</h1><br><br>
+<div style="margin: 0 auto;	max-width:700px;">
   <form name="articleForm" method="post"   action="${contextPath}/board/addNewArticle.do"   enctype="multipart/form-data">
-    <table border="0" align="center">
-      <tr>
-					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${memberInfo.member_id }" readonly/> </td>
-			</tr>
-	     <tr>
-			   <td align="right">글제목: </td>
-			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
-		 </tr>
-	 		<tr>
-				<td align="right" valign="top"><br>글내용: </td>
-				<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
-     </tr>
-     <tr>
-			  <td align="right">이미지파일 첨부:  </td>
-			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img  id="preview" src="#"   width=200 height=200/></td>
-			  
-			  
-			  <td align="right">이미지파일 첨부</td>
-				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-				
-				
-	   </tr>
-	   <tr>
-	      <td colspan="4"><div id="d_file"></div></td>
-	   </tr>
-	    <tr>
-	      <td align="right"> </td>
-	      <td colspan="2">
-	       <input type="submit" value="글쓰기" />
-	       <input type=button value="목록보기"onClick="backToList(this.form)" />
-	      </td>
-     </tr>
-    </table>
+    <div class="input-group input-group-lg text-center">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" style="width:100px">Writer</span>
+	  </div>
+	  <input type="text" class="form-control" value="${memberInfo.member_id }" 	aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly >
+	</div>
+	<br>
+	<div class="input-group input-group-lg">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" style="width:100px">Title</span>
+	  </div>
+	  <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+	</div>
+	<br>
+	<div class="input-group">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text"  style="width:100px">content</span>
+	  </div>
+	  <textarea class="form-control" aria-label="With textarea" name="content" rows="10" cols="65" maxlength="4000"></textarea>
+	</div><br><br>
+	
+	<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text" id="inputGroupFileAddon01" style="width:100px">Upload</span>
+	  </div>
+	  <div class="custom-file">
+	    <input type="file" class="custom-file-input" name="imageFileName" onchange="readURL(this);" aria-describedby="inputGroupFileAddon01">
+	    <label class="custom-file-label" for="inputGroupFile01">click to Choose file</label>
+	  </div>
+	</div><br>
+	<div>
+		<img id="preview" src="#"   width=300 height=200/>
+	</div><br>
+	
+	<div>
+	       <input class="btn btn-primary float-left" type= button value="목록보기" onClick="backToList(this.form)" />
+		   <input class="btn btn-primary float-right" type="submit" value="글 쓰기">
+	       <div id="d_file">
+	       </div>
+	</div><br><br>
+	
   </form>
+  	</div>
 </body>
 </html>

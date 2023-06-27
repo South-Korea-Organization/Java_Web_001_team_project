@@ -9,30 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookshop01.api.service.ApiService;
-
 @Service
 public class PaymentService {
-	
 	@Autowired
 	private ApiService apiService;
 	
 	public Map<String,String> keyin(Map<String,String> receiverMap){
 		
-		//ì»¨íŠ¸ë¡¤ + ì‰¬í”„íŠ¸ + O(ì˜ì–´) ì„í¬íŠ¸ ìë™ì™„ì„±
 		
-		Map<String,String> resultMap = new HashMap<String,String>();
+		//ÄÁÆ®·Ñ+½¬ÇÁÆ®+O(¿µ¾î) ÀÚµ¿¿Ï¼º
 		
-		//API ì—°ë™ ì†ŒìŠ¤ ì‘ì„± ì˜ˆì •
+		Map<String,String> resultMap = new HashMap<String, String>();
 		
+		//API ¿¬µ¿ ¼Ò½º ÀÛ¼º ¿¹Á¤
 		
-		
-		//rest API ì—°ë™ì„ í•  ì˜ˆì •
-		//ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì‚¬ìš©í•´ì„œ ì—°ë™		
-		
+		//rest api ¿¬µ¿À» ÇÒ ¿¹Á¤
+		//¶óÀÌºê·¯¸®¸¦ »ç¿ëÇØ¼­ ¿¬µ¿
 		String orderNumber = "";
 		String cardNo = "";
-		String expireMonth = "";
 		String expireYear = "";
+		String expireMonth = "";
 		String birthday = "";
 		String cardPw = "";
 		String amount = "";
@@ -43,9 +39,8 @@ public class PaymentService {
 		String timestamp = "";
 		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
 		
-		//ë³´ë‚´ì•¼ ë˜ëŠ” ê°’ ì„¸íŒ… ì˜ˆì •
-		//receiverMap.get("cardNo"); - í™”ë©´ì—ì„œ ì…ë ¥í•œ ì¹´ë“œë²ˆí˜¸
-		
+		// º¸³»¾ßµÇ´Â °ª ¼ÂÆÃ ¿¹Á¤
+		//receiverMap.get("cardNo");// È­¸é¿¡¼­ ÀÔ·ÂÇÑ Ä«µå ¹øÈ£
 		orderNumber = "TEST1234";
 		cardNo = receiverMap.get("cardNo");
 		expireMonth = receiverMap.get("expireMonth");
@@ -54,25 +49,25 @@ public class PaymentService {
 		cardPw = receiverMap.get("cardPw");
 		amount = "1000";
 		quota = "0";
-		itemName = "TESTì•„ì´í…œ";
-		userName = "í…ŒìŠ¤í„°";
+		itemName = "TEST¾ÆÀÌÅÛ";
+		userName = "Å×½ºÅÍ";
 		timestamp = "20230531010112";
+		
 		
 		try {
 			
-			//ì•”í˜¸í™”í•´ì„œ ìƒì„±í•´ì•¼í•¨
-			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
+			
+			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp); //¾ÏÈ£È­ÇØ¼­ »ı¼ºÇØ¾ßÇÔ.
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
+		//
 		//
 		
-		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
-		Map<String,String> paramMap = new HashMap<String,String>();
-		//ìš”ì²­ì£¼ì†Œ
+		//paramMapÀº ¿äÃ»°ªµéÀÌ ´ã±æ ¸Ê
+		Map<String,String> paramMap = new HashMap<String, String>();
+		//¿äÃ» ÁÖ¼Ò
 		String url = "https://api.testpayup.co.kr/v2/api/payment/himedia/keyin2";
-		
 		paramMap.put("orderNumber",orderNumber);
 		paramMap.put("cardNo",cardNo);
 		paramMap.put("expireMonth",expireMonth);
@@ -88,114 +83,105 @@ public class PaymentService {
 		
 		resultMap = apiService.restApi(paramMap, url);
 		
-		
-		
-		//ì—°ë™ ê²°ê³¼
-		System.out.println("ê²°ì œ ìŠ¹ì¸ API í†µì‹  ê²°ê³¼ = " + resultMap.toString());
+		//¿¬µ¿ °á°ú
 		
 		return resultMap;
 	}
 	
-	//ì¹´ì¹´ì˜¤ ì£¼ë¬¸ í•˜ëŠ” ê¸°ëŠ¥
 	public Map<String,String> kakaoOrder(Map<String,String> receiverMap){
 		
-		Map<String,String> resultMap = new HashMap<String,String>();
+		Map<String,String> resultMap = new HashMap<String,String> ();
 		
-		//API í†µì‹ 
-		//ì¹´ì¹´ì˜¤ 3.1 ì£¼ë¬¸ ìš”ì²­
+		//API Åë½Å Ä«Ä«¿À 3.1 ÁÖ¹®¿äÃ»
 		
 		String orderNumber = "";
 		String userAgent = "";
 		String amount = "";
+		String returnUrl = "";
 		String itemName = "";
 		String userName = "";
-		String returnUrl = "";
 		String signature = "";
 		String timestamp = "";
 		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
+
 		
 		orderNumber = "TEST_ORDER";
 		userAgent = "WP";
-		amount = "500"; //ì‹¤ì œ ê²°ì œ ê°€ëŠ¥í•˜ë‹ˆ ê¸ˆì•¡ ì„¤ì • ì¡°ì‹¬í•  ê²ƒ.
-		itemName = "ê°•ì˜í…ŒìŠ¤íŠ¸";
-		userName = "cho";
-		returnUrl = "test"; // ì•„ë¬´ê±°ë‚˜ ë„£ì–´ë„ ë¨.
-		timestamp = "20230601111111";
-
-		//ì•”í˜¸í™”í•´ì„œ ìƒì„±í•´ì•¼í•¨
+		amount = "100";
+		itemName = "°­ÀÇÅ×½ºÆ®";
+		userName = "jeong";
+		returnUrl = "test";
+		timestamp = "20230601105011";
 		try {
 			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
 		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// apiService.restApi("ìš”ì²­í•˜ëŠ” ê°’", "ì£¼ì†Œ") ì‹¤í–‰í•˜ëŠ” ì½”ë“œ ìƒì„±
 		
-		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
-		Map<String,String> paramMap = new HashMap<String,String>();
-		//ìš”ì²­ì£¼ì†Œ
+		//apiService.restApi("¿äÃ»ÇÏ´Â °ª", "ÁÖ¼Ò") ½ÇÇàÇÏ´Â ÄÚµå »ı¼º
+		
+		//paramMapÀº ¿äÃ»°ªµéÀÌ ´ã±æ ¸Ê
+		Map<String,String> paramMap = new HashMap<String, String>();
+		//¿äÃ» ÁÖ¼Ò
 		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/order";
-		
 		paramMap.put("orderNumber",orderNumber);
 		paramMap.put("userAgent",userAgent);
 		paramMap.put("amount",amount);
+		paramMap.put("returnUrl",returnUrl);
 		paramMap.put("itemName",itemName);
 		paramMap.put("userName",userName);
-		paramMap.put("returnUrl",returnUrl);
 		paramMap.put("signature",signature);
 		paramMap.put("timestamp",timestamp);
 		
 		resultMap = apiService.restApi(paramMap, url);
-		//ì—°ë™ ê²°ê³¼
-		System.out.println("ì¹´ì¹´ì˜¤ ì£¼ë¬¸ API í†µì‹  ê²°ê³¼ = " + resultMap.toString());
 		
-		
+		System.out.println("Ä«Ä«¿À ÁÖ¹® API Åë½Å °á°ú = " + resultMap.toString());
 		
 		return resultMap;
 	}
 	
-	//ì¹´ì¹´ì˜¤ ìŠ¹ì¸ ìš”ì²­
-	public Map<String,String> kakaoPay(Map<String,String> receiverMap) {
-		
-		Map<String,String> resultMap = new HashMap<String,String>();
-		
-		//ì†ŒìŠ¤..
-		String res_cd = "";
-		String enc_info = "";
-		String enc_data = "";
-		String tran_cd = "";
-		String card_pay_method = "";
-		String ordr_idxx = "";
+	//Ä«Ä«¿À ½ÂÀÎ ¿äÃ»
+		public Map<String,String> kakaoPay(Map<String,String> receiverMap){
+			
+			Map<String,String> resultMap = new HashMap<String, String>();
 
-		
+			//¼Ò½º....
 
-		
-		res_cd = receiverMap.get("res_cd");
-		enc_info = receiverMap.get("enc_info");
-		enc_data = receiverMap.get("enc_data");
-		tran_cd = receiverMap.get("tran_cd");
-		card_pay_method = receiverMap.get("card_pay_method");
-		ordr_idxx = receiverMap.get("ordr_idxx");
+			String res_cd = "";
+			String enc_info = "";
+			String enc_data = "";
+			String tran_cd = "";
+			String card_pay_method = "";
+			String ordr_idxx = "";
+			
+			//apiService.restApi("¿äÃ»ÇÏ´Â °ª", "ÁÖ¼Ò") ½ÇÇàÇÏ´Â ÄÚµå »ı¼º
+			
+			res_cd = receiverMap.get("res_cd");
+			enc_info = receiverMap.get("enc_info");
+			enc_data = receiverMap.get("enc_data");
+			tran_cd = receiverMap.get("tran_cd");
+			card_pay_method = receiverMap.get("card_pay_method");
+			ordr_idxx = receiverMap.get("ordr_idxx");
+			
+			//paramMapÀº ¿äÃ»°ªµéÀÌ ´ã±æ ¸Ê
+			Map<String,String> paramMap = new HashMap<String, String>();
+			//¿äÃ» ÁÖ¼Ò
+			String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/pay";
+			paramMap.put("res_cd",res_cd);
+			paramMap.put("enc_info",enc_info);
+			paramMap.put("enc_data",enc_data);
+			paramMap.put("tran_cd",tran_cd);
+			paramMap.put("card_pay_method",card_pay_method);
+			paramMap.put("ordr_idxx",ordr_idxx);
 
-		Map<String,String> paramMap = new HashMap<String,String>();
-		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/pay";
-		
-		paramMap.put("res_cd",res_cd);
-		paramMap.put("enc_info",enc_info);
-		paramMap.put("enc_data",enc_data);
-		paramMap.put("tran_cd",tran_cd);
-		paramMap.put("card_pay_method",card_pay_method);
-		paramMap.put("ordr_idxx",ordr_idxx);
-
-		
-		resultMap = apiService.restApi(paramMap, url);
-		//ì—°ë™ ê²°ê³¼
-		System.out.println("ì¹´ì¹´ì˜¤ ìŠ¹ì¸ API í†µì‹  ê²°ê³¼ = " + resultMap.toString());
+			
+			resultMap = apiService.restApi(paramMap, url);
+			System.out.println("½ÂÀÎ°á°ú" + resultMap.toString());
+			return resultMap;
+		}
 		
 		
-		return resultMap;
-	}
-	
 	public String encrypt(String text) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(text.getBytes());

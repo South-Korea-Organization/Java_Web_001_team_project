@@ -306,5 +306,58 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			e.printStackTrace();
 		}
 	}
+	
+	// 관리자 게시판 관리기능 임시로 추가
+	
+	@RequestMapping(value="/adminBoardMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView adminBoardMain(@RequestParam Map<String, String> dateMap,
+			                           HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		session.setAttribute("side_menu", "admin_mode"); //마이페이지 사이드 메뉴로 설정한다.
+		
+		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
+		String section = dateMap.get("section");
+		String pageNum = dateMap.get("pageNum");
+		String beginDate=null,endDate=null;
+		
+		String [] tempDate=calcSearchPeriod(fixedSearchPeriod).split(",");
+		beginDate=tempDate[0];
+		endDate=tempDate[1];
+		dateMap.put("beginDate", beginDate);
+		dateMap.put("endDate", endDate);
+		
+		Map<String,Object> condMap=new HashMap<String,Object>();
+		if(section== null) {
+			section = "1";
+		}
+		condMap.put("section",section);
+		if(pageNum== null) {
+			pageNum = "1";
+		}
+		condMap.put("pageNum",pageNum);
+		condMap.put("beginDate",beginDate);
+		condMap.put("endDate", endDate);
+		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
+		mav.addObject("newGoodsList", newGoodsList);
+		
+		String beginDate1[]=beginDate.split("-");
+		String endDate2[]=endDate.split("-");
+		mav.addObject("beginYear",beginDate1[0]);
+		mav.addObject("beginMonth",beginDate1[1]);
+		mav.addObject("beginDay",beginDate1[2]);
+		mav.addObject("endYear",endDate2[0]);
+		mav.addObject("endMonth",endDate2[1]);
+		mav.addObject("endDay",endDate2[2]);
+		
+		mav.addObject("section", section);
+		mav.addObject("pageNum", pageNum);
+		return mav;
+		
+	}
+
+
 
 }
