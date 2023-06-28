@@ -25,7 +25,6 @@ public class GoodsVO {
 	private String goods_publisher_comment;
 	private String goods_recommendation;
 	private Date   goods_credate;
-	private String goods_del_yn;
 	
 	public GoodsVO() {
 	}
@@ -250,14 +249,6 @@ public class GoodsVO {
 
 	public void setGoods_credate(Date goods_credate) {
 		this.goods_credate = goods_credate;
-	}
-	
-	public String getGoods_del_yn() {
-		return goods_del_yn;
-	}
-	
-	public void setGoods_del_yn(String goods_del_yn) {
-		this.goods_del_yn = goods_del_yn;
 	}
 	
 

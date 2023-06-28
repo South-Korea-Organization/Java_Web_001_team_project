@@ -1,0 +1,10 @@
+
+
+java:S1488"dImmediately return this expression instead of assigning it to the temporary variable "articlesList".(ïÜÜìıÿÿÿÿ
+[
+java:S1854"@Remove this useless assignment to local variable "articlesList".(ïÜÜìıÿÿÿÿ
+Q	java:S125'"<This block of commented-out lines of code should be removed.(ã¥®…
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+O
+java:S1144O"9Remove this unused private "selectNewImageFileNO" method.(Ğšó

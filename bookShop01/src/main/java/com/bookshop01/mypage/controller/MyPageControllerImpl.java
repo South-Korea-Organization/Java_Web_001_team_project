@@ -177,29 +177,4 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		return resEntity;
 	}	
 	
-	// 마이페이지 추가
-	@Override
-	@RequestMapping(value="/delMember.do" ,method = RequestMethod.POST)
-	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,
-			                         HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		String member_id=memberVO.getMember_id();
-		myPageService.delMember(member_id);
-		
-		mav.addObject("member_id", member_id);
-		//mav.addObject("message", "cancel_order");
-		
-		session.removeAttribute("memberInfo");
-		
-		mav.setViewName("redirect:/main/main.do");
-		return mav;
-		
-	}
-
-	
 }

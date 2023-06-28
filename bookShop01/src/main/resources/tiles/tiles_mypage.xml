@@ -19,17 +19,6 @@
        <put-attribute name="title" value="내 정보 상세 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/myDetailInfo.jsp" />
      </definition>
-     
-     <!-- 마이페이지 !-->
-     <definition name="/mypage/myAddressPage" extends="baseLayout">
-       <put-attribute name="title" value="나의 주소록 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/mypage/myAddressPage.jsp" />
-     </definition>
-     <definition name="/mypage/myWithDrawal" extends="baseLayout">
-       <put-attribute name="title" value="회원 탈퇴 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/mypage/myWithDrawal.jsp" />
-     </definition>
-     
 </tiles-definitions>
 
 
