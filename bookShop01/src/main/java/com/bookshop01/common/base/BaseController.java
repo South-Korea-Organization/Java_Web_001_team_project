@@ -41,12 +41,12 @@ public abstract class BaseController  {
 			
 			File file = new File(CURR_IMAGE_REPO_PATH +"\\"+ fileName);
 			if(mFile.getSize()!=0){ //File Null Check
-				if(! file.exists()){ //寃쎈줈�긽�뿉 �뙆�씪�씠 議댁옱�븯吏� �븡�쓣 寃쎌슦
-					if(file.getParentFile().mkdirs()){ //寃쎈줈�뿉 �빐�떦�븯�뒗 �뵒�젆�넗由щ뱾�쓣 �깮�꽦
-							file.createNewFile(); //�씠�썑 �뙆�씪 �깮�꽦
+				if(! file.exists()){ //경로상에 파일이 존재하지 않을 경우
+					if(file.getParentFile().mkdirs()){ //경로에 해당하는 디렉토리들을 생성
+							file.createNewFile(); //이후 파일 생성
 					}
 				}
-				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH +"\\"+"temp"+ "\\"+originalFileName)); //�엫�떆濡� ���옣�맂 multipartFile�쓣 �떎�젣 �뙆�씪濡� �쟾�넚
+				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH +"\\"+"temp"+ "\\"+originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
 			}
 		}
 		return fileList;
