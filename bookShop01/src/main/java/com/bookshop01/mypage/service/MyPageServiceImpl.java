@@ -34,12 +34,6 @@ public class MyPageServiceImpl  implements MyPageService{
 		return myPageDAO.selectMyOrderHistoryList(dateMap);
 	}
 	
-	// ∏∂¿Ã∆‰¿Ã¡ˆ> √Îº“/π›«∞/±≥»Ø/»Ø∫“ Ω≈√ª π◊ ¡∂»∏(∏ﬁ¿Œ) 23.06.20 by Dean
-	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws Exception{
-		return myPageDAO.listChangeMyOrderStatus(member_id);
-	}	
-	
-			
 	public MemberVO  modifyMyInfo(Map memberMap) throws Exception{
 		 String member_id=(String)memberMap.get("member_id");
 		 myPageDAO.updateMyInfo(memberMap);
@@ -49,9 +43,11 @@ public class MyPageServiceImpl  implements MyPageService{
 	public void cancelOrder(String order_id) throws Exception{
 		myPageDAO.updateMyOrderCancel(order_id);
 	}
-	
-	
 	public MemberVO myDetailInfo(String member_id) throws Exception{
 		return myPageDAO.selectMyDetailInfo(member_id);
+	}
+	// ÎßàÏù¥ÌéòÏù¥ÏßÄ Ï∂îÍ∞Ä
+	public void delMember(String member_id) throws Exception{
+		myPageDAO.delNewMember(member_id);
 	}
 }

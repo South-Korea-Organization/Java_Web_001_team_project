@@ -1,41 +1,40 @@
 package com.bookshop01.payment.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
+import java.security.MessageDigest ;
+import java.security.NoSuchAlgorithmException ;
+import java.util.HashMap ;
+import java.util.Map ;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import javax.print.attribute.standard.JobOriginatingUserName ;
 
-import com.bookshop01.api.service.ApiService;
+import org.springframework.beans.factory.annotation.Autowired ;
+import org.springframework.stereotype.Service ;
+import org.springframework.web.bind.annotation.RequestParam ;
 
-// Ä«µå °áÁ¦ ¼­ºñ½º Ãß°¡
-//@Service ÇöÀç ÆäÀÌÁö°¡ Service ÆäÀÌÁö´Ù¶ó´Â °ÍÀ» spring¿¡°Ô ¾Ë·ÁÁà¾ß ÇÑ´Ù.
+import com.bookshop01.api.service.ApiService ;
+
 @Service
-public class PaymentService 
-{
+public class PaymentService {
+	
 	@Autowired
 	private ApiService apiService;
 	
-	
-	public Map<String,String> keyin(Map<String,String> receiverMap)
-	{
-		Map<String,String> resultMap = new HashMap<String, String>();
+	public Map<String, String> keyin(Map<String, String> receiverMap){
 		
-		//Ctl+Shipt+O ÀÚµ¿¿Ï¼º
+		//Ctrl + Shift + O(ì˜ì–´) ìë™ì™„ì„±
 		
-		//API ¿¬µ¿ ¼Ò½º ÀÛ¼º ¹ÌÁ¤
-		//rest api ¿¬µ¿À¸ ÇÒ ¿¹Á¤ 
-		//¶óÀÌºê·¯¸® »ç¿ëÇÏ¸é ¿¬µ¿
-		//OkHttp3.10 ¹öÀü ¶óÀÌºê·¯¸® »ç¿ë   ±¸±Û°Ë»ö
-	    	
-		// Ä«µå °áÁ¦ ÁÖ¹®½Ã ÇÊ¿äÇÑ ÀÎÀÚ ¼±¾ğ
-		String orderNumber = "";
-		String cardNo = "";
-		String expireMonth = "";
-		String expireYear = "";
-		String birthday = "";
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
+		//API ì—°ë™ ì†ŒìŠ¤ ì‘ì„± ì˜ˆì •
+		
+		//rest api ì—°ë™ì„ í•  ì˜ˆì •
+		//ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì‚¬ìš©í•´ì„œ ì—°ë™
+		
+		String orderNumber = ""; //ì£¼ë¬¸ë²ˆí˜¸
+		String cardNo = "";  //ì¹´ë“œë²ˆí˜¸
+		String expireMonth = "";  //ìœ íš¨ê¸°ê°„(ì›”) 2ìë¦¬
+		String expireYear = "";  //ìœ íš¨ê¸°ê°„(ë…„) 2ìë¦¬
+		String birthday = "";  //ìƒë…„ì›”ì¼
 		String cardPw = "";
 		String amount = "";
 		String quota = "";
@@ -45,34 +44,39 @@ public class PaymentService
 		String timestamp = "";
 		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
 		
-		// º¸³»¾ßµÇ´Â °ª ¼¼ÆÃ ¿¹Á¤
+		// ë³´ë‚´ì•¼ ë˜ëŠ” ê°’ ì„¸íŒ… ì˜ˆì •
+		//receiverMap.get( "cardNo" );
 		orderNumber = "TEST1234";
-		cardNo =  receiverMap.get("cardNo");
-		expireMonth = receiverMap.get("expireMonth");
-		expireYear = receiverMap.get("expireYear");
-		birthday = receiverMap.get("birthday");
-		cardPw = receiverMap.get("cardPw");
+		cardNo = receiverMap.get( "cardNo" );
+		expireMonth = receiverMap.get( "expireMonth" );
+		expireYear = receiverMap.get( "expireYear" );
+		birthday = receiverMap.get( "birthday" );
+		cardPw = receiverMap.get( "cardPw" );
 		amount = "1000";
 		quota = "0";
-		itemName = "TEST¾ÆÀÌÅÛ";
-		userName = "Å×½ºÅÍ";		
-		timestamp = "20230531121110";
+		itemName = "ì•„ì´í…œ";
+		userName = "í…ŒìŠ¤í„°";
+		timestamp = "202305311010112";
 		
+		//ì•”í˜¸í™”í•´ì„œ í–‰ì„±í•´ì•¼ í•¨
 		try {
-			// ¾ÏÈ£È­ÇØ¼­ »ı¼ºÇØ¾ß ÇÔ.
-			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);			
-		}catch(NoSuchAlgorithmException e){
-			e.printStackTrace();
+			
+			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
+			
+		} catch(NoSuchAlgorithmException e){
+			e.printStackTrace( );
+			
 		}
 		
 		
-		//paramMapÀº ¿äÃ»°ªµéÀÌ ´ã±è ¸Ê
-		Map<String,String> paramMap = new HashMap<String,String>();
-		//¿äÃ» ÁÖ¼Ò
-		// °³¹ß¿ë ÁÖ¹® api.
+		
+		//
+		
+		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
+		Map < String, String > paramMap = new HashMap < String, String >( );
+		//ìš”ì²­ ì£¼ì†Œ
 		String url = "https://api.testpayup.co.kr/v2/api/payment/himedia/keyin2";
 		
-		// º¸³»¾ßµÇ´Â °ª ¼ÂÆÃ ¿¹Á¤	
 		paramMap.put("orderNumber",orderNumber);
 		paramMap.put("cardNo",cardNo);
 		paramMap.put("expireMonth",expireMonth);
@@ -86,24 +90,25 @@ public class PaymentService
 		paramMap.put("signature",signature);
 		paramMap.put("timestamp",timestamp);
 		
-		resultMap = apiService.restApi(paramMap, url); 
+		resultMap = apiService.restApi( paramMap, url );
 		
-		//¿¬µ¿ °á°ú
-		System.out.println("°áÁ¦ ½ÂÀÎ API Åë½Å °á°ú = " + resultMap.toString() );
+		
+		//ì—°ë™ ê²°ê³¼
+		System.out.println( "paymentservice(keyin) : ê²°ì¬ ìŠ¹ì¸ API í†µì‹  ê²°ê³¼(resultMap) =" + resultMap.toString( ) ) ;
 		
 		return resultMap;
 	}
-		
-	//Ä«Ä«¿À ÁÖ¹® ÇÏ´Â ±â´É
+	
+	//ì¹´ì¹´ì˜¤ ì£¼ë¬¸ í•˜ëŠ” ê¸°ëŠ¥
 	public Map<String,String> kakaoOrder(Map<String,String> receiverMap){
 		
 		Map<String,String> resultMap = new HashMap<String, String>();
 		
 		
-		//API Åë½Å
-		//Ä«Ä«¿À 3.1 ÁÖ¹®¿äÃ»
+		//API í†µì‹ 
+		//ì¹´ì¹´ì˜¤ 3.1 ì£¼ë¬¸ìš”ì²­
 		
-		//¿äÃ» µ¥ÀÌÅÍ ¼³Á¤
+		//ìš”ì²­ ë°ì´í„° ì„¤ì •
 		String orderNumber = "";
 		String userAgent = "";
 		String amount = "";
@@ -116,21 +121,21 @@ public class PaymentService
 		
 		orderNumber = "TEST_ORDER";
 		userAgent = "WP";
-		amount = "100"; //½Ç°áÁ¦ µË´Ï´Ù... ±İ¾× Å©°ÔÇÏ¸é ¾ÈµÇ¿ä
-		itemName = "°­ÀÇÅ×½ºÆ®_Ä«Ä«¿À";
+		amount = "100"; //ì‹¤ê²°ì œ ë©ë‹ˆë‹¤... ê¸ˆì•¡ í¬ê²Œí•˜ë©´ ì•ˆë˜ìš”
+		itemName = "ê°•ì˜í…ŒìŠ¤íŠ¸";
 		userName = "choi";
-		returnUrl = "test"; //ÀÌ°Å´Â ¾Æ¹«°ªÀÌ³ª ³Ö¾îµµµË´Ï´Ù..
+		returnUrl = "test"; //ì´ê±°ëŠ” ì•„ë¬´ê°’ì´ë‚˜ ë„£ì–´ë„ë©ë‹ˆë‹¤..
 		timestamp = "20230601111111";
-		//¾ÏÈ£È­ÇØ¼­ »ı¼ºÇØ¾ßÇÔ.
+		//ì•”í˜¸í™”í•´ì„œ ìƒì„±í•´ì•¼í•¨.
 		try {
 			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//paramMapÀº ¿äÃ»°ªµéÀÌ ´ã±æ ¸Ê
+		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
 		Map<String,String> paramMap = new HashMap<String, String>();
-		//¿äÃ» ÁÖ¼Ò
+		//ìš”ì²­ ì£¼ì†Œ
 		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/order";
 		paramMap.put("orderNumber",orderNumber);
 		paramMap.put("userAgent",userAgent);
@@ -143,13 +148,250 @@ public class PaymentService
 		paramMap.put("signature",signature);
 		
 		resultMap = apiService.restApi(paramMap, url);
+		// map ë³€í™˜ëœ ê°’ = {good_mny=100, site_cd=A8QOB, Ret_URL=test, affiliaterCode=0005, buyr_name=choi, ordr_idxx=20230623110620KK0163, good_name=ê°•ì˜í…ŒìŠ¤íŠ¸, responseCode=0000, responseMsg=ì„±ê³µ}
 		
 		
-		//¿¬µ¿ °á°ú
-		System.out.println("Ä«Ä«¿À ÁÖ¹® API Åë½Å °á°ú = " + resultMap.toString());
+		//ì—°ë™ ê²°ê³¼
+		System.out.println("PaymentService(kakaoOrder) : ì¹´ì¹´ì˜¤ ì£¼ë¬¸ API í†µì‹  ê²°ê³¼(resultMap) = " + resultMap.toString());
 		
 		return resultMap;
 	}
+	
+	//ì¹´ì¹´ì˜¤ ìŠ¹ì¸ ìš”ì²­
+	public Map<String,String> kakaoPay(Map<String,String> receiverMap){
+		
+		Map<String,String> resultMap = new HashMap<String, String>();
+		
+		
+		//3.3 ìŠ¹ì¸ìš”ì²­ ì „ë¬¸ ë³´ê³  ì•„ë˜ ì†ŒìŠ¤ì½”ë“œ ì™„ì„±í•˜ê¸°
+		
+		//ì¸ì¦ ë°ì´í„° í™•ì¸ = {ordr_idxx=20230601144727KK0615, good_name=ï¿½ï¿½ï¿½ï¿½ï¿½×½ï¿½Æ®, good_mny=100, buyr_name=choi, site_cd=A8QOB, 
+		//req_tx=pay, pay_method=100000000000, currency=410, kakaopay_direct=Y, module_type=01, 
+		//ordr_chk=20230601144727KK0615|100, param_opt_1=, param_opt_2=, param_opt_3=, res_cd=0000, res_msg=ï¿½ï¿½ï¿½ï¿½, 
+		//enc_info=3tFysq4qevjd2mvWfGF8YVma3.14orker7xpxHTdFPwQgjXok2aaRpEM71p2En2vJBCXp0V1ZhzbnfKuEGHGIMFtdqFYC1y3JTwiaAhNwTsv8z26Jcmcugv40X912pEw78P-XSRXItmo1izm4vgl3-Tynav0v8Xh0aBOhMMiUrSx6dg4pokNuhjoCg1ZpicebqXIT7YaxWY__, 
+		//enc_data=40.6GONZW-itNra.KAjyMxkBs6qhpPZPPXKeqOam88tYOPGI878TpoHY0wBXDXs5Kf3l9Cd0Em8Ug19mCXFB3cfdP0GPy5gFIgmKOchFqBaGtUgiTxjD.mowJ7UZd2d5M6XWtqU0w5-ksW981CLyb0Dj5kyr-IgSHjD.E69QQiluXayQF6ZqJgqgA7P5PPJpsAxXZOxXkVIXVFaECn8nT0AAuSmmk23oFvRxQutLRdtimbx9DZbVGbfRAW5PnpG7VbP9VND4TmzosLDfX0ATe4jvCkXxWPSScNiOTV5whfXKnPXzVTaDAw9FZGjHSmQgRf2FhhitwLZSG3zChzaIJACSlmgevsPFN-.1XlgebFmv21BY-BLjieQns6f6by95Lz0DsooD66ZW.dfglbqDLTG0oFFD-DPGus4epxo6io--8NWcwbyzMCHDMN-5U3f47i0EZ632nJRNc93uqDsF2Wb4ZY.1jTL6tQWB4v7s5ryw0RYbm-9g7cMdCpfVJKTR6hPDKnV4wl3YvWYF3OstWgB-x3IwftN8KL5c074BQ7bEQIU-q.vRz.BvjGnKKdsPi62Ds2roofs7MQheOX3NlGyY-FuReMhr8HqjfE5vIfrR7pXATUVhSQ.Dlkl29c6qbs2zU.-MHfxe5JyGzJrp2jrOMZDiXh0ucb0IoMEg5Zud_, 
+		//ret_pay_method=CARD, tran_cd=00100000, use_pay_method=100000000000, card_pay_method=KAKAO_MONEY}
+		//receiverMap ì— ì¸ì¦ë°ì´í„° ìˆìŒ
+		//ìš”ì²­ ë°ì´í„° ì„¤ì •
+		
+		String res_cd = receiverMap.get( "res_cd" );
+		String enc_info = receiverMap.get( "enc_info" );
+		String enc_data = receiverMap.get( "enc_data" );
+		String card_pay_method = receiverMap.get( "card_pay_method" );
+		String ordr_idxx = receiverMap.get( "ordr_idxx" );
+		String tran_cd = receiverMap.get( "tran_cd" );
+		
+		/*
+		String returnUrl = "";
+		String signature = "";
+		String timestamp = "";
+		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
+		
+		orderNumber = "TEST_ORDER";
+		userAgent = "WP";
+		amount = "100"; //ì‹¤ê²°ì œ ë©ë‹ˆë‹¤... ê¸ˆì•¡ í¬ê²Œí•˜ë©´ ì•ˆë˜ìš”
+		itemName = "ê°•ì˜í…ŒìŠ¤íŠ¸";
+		userName = "choi";
+		returnUrl = "test"; //ì´ê±°ëŠ” ì•„ë¬´ê°’ì´ë‚˜ ë„£ì–´ë„ë©ë‹ˆë‹¤..
+		timestamp = "20230601111111";
+		
+		//ì•”í˜¸í™”í•´ì„œ ìƒì„±í•´ì•¼í•¨.
+		try {
+			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
+		Map<String,String> paramMap = new HashMap<String, String>();
+		//ìš”ì²­ ì£¼ì†Œ
+		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/pay";
+		paramMap.put("res_cd",res_cd);
+		paramMap.put("enc_info",enc_info);
+		paramMap.put("enc_data",enc_data);
+		paramMap.put("card_pay_method",card_pay_method);
+		paramMap.put("ordr_idxx",ordr_idxx);
+		paramMap.put("tran_cd",tran_cd);
+		
+		//paramMap.put("returnUrl",returnUrl);
+		//paramMap.put("amount",amount);
+		//paramMap.put("timestamp",timestamp);
+		//paramMap.put("signature",signature);
+		
+		resultMap = apiService.restApi(paramMap, url);
+		
+		//ì—°ë™ ê²°ê³¼
+		System.out.println("paymentservice(kakaoPay) : ì¹´ì¹´ì˜¤ PAY API í†µì‹  ê²°ê³¼ = " + resultMap.toString());		
+		//ì¹´ì¹´ì˜¤ PAY API í†µì‹  ê²°ê³¼ = {amount=100, orderNumber=TEST_ORDER, type=KAKAO_MONEY, authDateTime=20230601165000, 
+		//cashReceipt=100, transactionId=20230601164936KK0759, responseCode=0000, responseMsg=ì •ìƒì²˜ë¦¬}
+		
+		return resultMap;
+	}
+	
+	//ë„¤ì´ë²„ ì£¼ë¬¸ìš”ì²­ ì¶”ê°€
+	public Map<String,String> naverOrder(Map<String,String> receiverMap){
+		
+		Map<String,String> resultMap = new HashMap<String, String>();
+		
+		
+		//API í†µì‹ 
+		//ë„¤ì´ë²„ 3.1 ì£¼ë¬¸ìš”ì²­
+		
+		//ìš”ì²­ ë°ì´í„° ì„¤ì •
+		String orderNumber = "";
+		String userAgent = "";
+		
+		//ë„¤ì´ë²„ ì „ìš©
+		String payType = "";
+		
+		String amount = "";
+		String itemName = "";
+		String userName = "";
+		String returnUrl = "";
+		
+		//ë„¤ì´ë²„ ì „ìš©
+		String userEmail = "";
+		String mobileNumber = "";
+		String cashbillYn = "";
+		
+		String signature = "";
+		String timestamp = "";
+		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
+		
+		orderNumber = "TEST_ORDER";
+		userAgent = "WP";
+		// ê²°ì¬ íƒ€ì…ì´ ì—¬ëŸ¬ê°€ì´ë¯€ë¡œ ì£¼ì„ì²˜ë¦¬
+		// payType = "CARD";
+		
+		amount = "100"; //ì‹¤ê²°ì œ ë©ë‹ˆë‹¤... ê¸ˆì•¡ í¬ê²Œí•˜ë©´ ì•ˆë˜ìš”
+		itemName = "ê°•ì˜í…ŒìŠ¤íŠ¸";
+		userName = "choi";
+		returnUrl = "test"; //ì´ê±°ëŠ” ì•„ë¬´ê°’ì´ë‚˜ ë„£ì–´ë„ë©ë‹ˆë‹¤..
+		
+		userEmail = "abc@abc.com";
+		mobileNumber = "01011112222";
+		cashbillYn = "N";
+		
+		timestamp = "20230601111111";
+		//ì•”í˜¸í™”í•´ì„œ ìƒì„±í•´ì•¼í•¨.
+		try {
+			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
+		Map<String,String> paramMap = new HashMap<String, String>();
+		//ìš”ì²­ ì£¼ì†Œ
+		String url = "https://api.testpayup.co.kr/ep/api/naver/himedia/order";
+		paramMap.put("orderNumber",orderNumber);
+		paramMap.put("userAgent",userAgent);
+		
+		//ë„¤ì´ë²„ ì „ìš©
+		paramMap.put("payType",payType);
+		
+		paramMap.put("amount",amount);
+		paramMap.put("itemName",itemName);
+		paramMap.put("userName",userName);
+		paramMap.put("returnUrl",returnUrl);
+		
+		//ë„¤ì´ë²„ ì „ìš©
+		paramMap.put("userEmail",userEmail);
+		paramMap.put("mobileNumber",mobileNumber);
+		paramMap.put("cashbillYn",cashbillYn);
+				
+		paramMap.put("timestamp",timestamp);
+		paramMap.put("signature",signature);
+		
+		resultMap = apiService.restApi(paramMap, url);
+		
+		
+		//ì—°ë™ ê²°ê³¼
+		System.out.println("paymentservice(naverOrder) : ë„¤ì´ë²„ ì£¼ë¬¸ API í†µì‹  ê²°ê³¼ = " + resultMap.toString());
+		
+		return resultMap;
+	}
+	
+	//ë„¤ì´ë²„ ìŠ¹ì¸ ìš”ì²­
+	public Map<String,String> naverPay(Map<String,String> receiverMap){
+		
+		Map<String,String> resultMap = new HashMap<String, String>();
+		
+		
+		//3.3 ìŠ¹ì¸ìš”ì²­ ì „ë¬¸ ë³´ê³  ì•„ë˜ ì†ŒìŠ¤ì½”ë“œ ì™„ì„±í•˜ê¸°
+		
+
+		//receiverMap ì— ì¸ì¦ë°ì´í„° ìˆìŒ
+		//ìš”ì²­ ë°ì´í„° ì„¤ì •
+		
+		/*
+		String res_cd = receiverMap.get( "res_cd" );
+		String enc_info = receiverMap.get( "enc_info" );
+		String enc_data = receiverMap.get( "enc_data" );
+		String ordr_idxx = receiverMap.get( "ordr_idxx" );
+		String tran_cd = receiverMap.get( "tran_cd" );
+		*/
+		
+		/*
+		String card_pay_method = receiverMap.get( "card_pay_method" );
+		String res_msg = receiverMap.get( "res_msg" );
+		String good_mny = receiverMap.get( "good_mny" );
+		String good_name = receiverMap.get( "good_name" );
+		String site_cd = receiverMap.get( "site_cd" );
+		String buyr_name = receiverMap.get( "buyr_name" );
+		String naverpay_direct = receiverMap.get( "naverpay_direct" );
+		String naverpay_point_direct = receiverMap.get( "naverpay_point_direct" );
+		String ret_pay_method = receiverMap.get( "ret_pay_method" );
+		*/
+		
+		
+		/*
+		String returnUrl = "";
+		String signature = "";
+		String timestamp = "";
+		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
+		
+		orderNumber = "TEST_ORDER";
+		userAgent = "WP";
+		amount = "100"; //ì‹¤ê²°ì œ ë©ë‹ˆë‹¤... ê¸ˆì•¡ í¬ê²Œí•˜ë©´ ì•ˆë˜ìš”
+		itemName = "ê°•ì˜í…ŒìŠ¤íŠ¸";
+		userName = "choi";
+		returnUrl = "test"; //ì´ê±°ëŠ” ì•„ë¬´ê°’ì´ë‚˜ ë„£ì–´ë„ë©ë‹ˆë‹¤..
+		timestamp = "20230601111111";
+		
+		//ì•”í˜¸í™”í•´ì„œ ìƒì„±í•´ì•¼í•¨.
+		try {
+			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		//paramMapì€ ìš”ì²­ê°’ë“¤ì´ ë‹´ê¸¸ ë§µ
+		//Map<String,String> paramMap = new HashMap<String, String>();
+		//ìš”ì²­ ì£¼ì†Œ
+		
+		/*
+		paramMap.put("res_cd",res_cd);
+		paramMap.put("enc_info",enc_info);
+		paramMap.put("enc_data",enc_data);
+		paramMap.put("ordr_idxx",ordr_idxx);
+		paramMap.put("tran_cd",tran_cd);
+		*/
+		
+		String url = "https://api.testpayup.co.kr/ep/api/naver/himedia/pay";
+		//resultMap = apiService.restApi(paramMap, url);
+		resultMap = apiService.restApi(receiverMap, url);
+
+		
+		//ì—°ë™ ê²°ê³¼
+		System.out.println("paymentservice(naverPay) : ë„¤ì´ë²„ PAY API í†µì‹  ê²°ê³¼ = " + resultMap.toString());		
+		
+		return resultMap;
+	}	
 	
 	
 	public String encrypt(String text) throws NoSuchAlgorithmException {
@@ -158,135 +400,12 @@ public class PaymentService
         return bytesToHex(md.digest());
     }
 	
-    private String bytesToHex(byte[] bytes) 
-    {
+    private String bytesToHex(byte[] bytes) {
         StringBuilder builder = new StringBuilder();
         for (byte b : bytes) {
             builder.append(String.format("%02x", b));
         }
         return builder.toString();
     }
-    
-    //Ä«Ä«¿À ½ÂÀÎ ¿äÃ»
-	public Map<String,String> kakaoPay(Map<String,String> receiverMap){
-		
-		Map<String,String> resultMap = new HashMap<String, String>();			
-			
-		//3.3 ½ÂÀÎ¿äÃ» Àü¹® º¸°í ¾Æ·¡¼Ò½º ¿Ï¼º
-	   /*
-		//¿äÃ» µ¥ÀÌÅÍ ¼³Á¤
-		String res_cd = "";		
-		String enc_info = "";			
-		String enc_data = "";				
-		String tran_cd = "";			
-		String card_pay_method = "";			
-		String ordr_idxx = "";
-		
-		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/pay";
-		
-		resultMap.put("res_cd", receiverMap.get("res_cd"));
-		resultMap.put("enc_info",receiverMap.get("enc_info"));
-		resultMap.put("enc_data",receiverMap.get("enc_data"));
-		resultMap.put("tran_cd",receiverMap.get("tran_cd"));
-		resultMap.put("card_pay_method",receiverMap.get("card_pay_method"));
-		resultMap.put("ordr_idxx",receiverMap.get("ordr_idxx"));
-	*/
-		
-		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/pay";
-		resultMap = apiService.restApi(receiverMap, url);
-						
-		return resultMap;
-	}
-
-
-	//³×ÀÌ¹ö ÁÖ¹® ÇÏ´Â ±â´É <¼öÁ¤Àü>
-	// payType = 'CARD',  POINT ±¸ºĞÀÚ°¡ ³Ñ¾î¿Í¾ß ÇÑ´Ù
-	public Map<String,String> naverOrder(Map<String,String> receiverMap){
-		
-		Map<String,String> resultMap = new HashMap<String, String>();
-		
-		
-		//API Åë½Å
-		//Ä«Ä«¿À 3.1 ÁÖ¹®¿äÃ»
-		
-		//¿äÃ» µ¥ÀÌÅÍ ¼³Á¤
-		String orderNumber = "";
-		String userAgent = "";
-		String amount = "";
-		String itemName = "";
-		String userName = "";
-		String returnUrl = "";
-		String signature = "";
-		String timestamp = "";
-		String certKey = "ac805b30517f4fd08e3e80490e559f8e";
-		
-		orderNumber = "TEST_ORDER";
-		userAgent = "WP";
-		amount = "100"; //½Ç°áÁ¦ µË´Ï´Ù... ±İ¾× Å©°ÔÇÏ¸é ¾ÈµÇ¿ä
-		itemName = "°­ÀÇÅ×½ºÆ®_³×ÀÌ¹ö";
-		userName = "choi";
-		returnUrl = "test"; //ÀÌ°Å´Â ¾Æ¹«°ªÀÌ³ª ³Ö¾îµµµË´Ï´Ù..
-		timestamp = "20230601111111";
-		//¾ÏÈ£È­ÇØ¼­ »ı¼ºÇØ¾ßÇÔ.
-		try {
-			signature = encrypt("himedia|"+orderNumber+"|"+amount+"|"+certKey+"|"+timestamp);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//paramMapÀº ¿äÃ»°ªµéÀÌ ´ã±æ ¸Ê
-		Map<String,String> paramMap = new HashMap<String, String>();
-		//¿äÃ» ÁÖ¼Ò
-		String url = "https://api.testpayup.co.kr/ep/api/naver/himedia/order";
-		paramMap.put("orderNumber",orderNumber);
-		paramMap.put("userAgent",userAgent);
-		paramMap.put("amount",amount);
-		paramMap.put("itemName",itemName);
-		paramMap.put("userName",userName);
-		paramMap.put("returnUrl",returnUrl);
-		paramMap.put("amount",amount);
-		paramMap.put("timestamp",timestamp);
-		paramMap.put("signature",signature);
-		paramMap.put("payType", receiverMap.get("payType"));  //³×ÀÌ¹ö Ä«µå(CARD)/Æ÷ÀÎÅÍ(POINT) ±¸ºĞ°ª
-		
-		resultMap = apiService.restApi(paramMap, url);
-		
-		
-		//¿¬µ¿ °á°ú
-		System.out.println("³×ÀÌ¹ö ÁÖ¹® API Åë½Å °á°ú = " + resultMap.toString());
-		
-		return resultMap;
-	}  
-
-	//³×ÀÌ¹ö ½ÂÀÎ ¿äÃ»
-	public Map<String,String> naverPay(Map<String,String> receiverMap){
-		
-		Map<String,String> resultMap = new HashMap<String, String>();			
-			
-		//3.3 ½ÂÀÎ¿äÃ» Àü¹® º¸°í ¾Æ·¡¼Ò½º ¿Ï¼º
-	   /*
-		//¿äÃ» µ¥ÀÌÅÍ ¼³Á¤
-		String res_cd = "";		
-		String enc_info = "";			
-		String enc_data = "";				
-		String tran_cd = "";			
-		String card_pay_method = "";			
-		String ordr_idxx = "";
-		
-		String url = "https://api.testpayup.co.kr/ep/api/kakao/himedia/pay";
-		
-		resultMap.put("res_cd", receiverMap.get("res_cd"));
-		resultMap.put("enc_info",receiverMap.get("enc_info"));
-		resultMap.put("enc_data",receiverMap.get("enc_data"));
-		resultMap.put("tran_cd",receiverMap.get("tran_cd"));
-		resultMap.put("card_pay_method",receiverMap.get("card_pay_method"));
-		resultMap.put("ordr_idxx",receiverMap.get("ordr_idxx"));
-	*/
-		
-		String url = "https://api.testpayup.co.kr/ep/api/naver/himedia/pay";
-		resultMap = apiService.restApi(receiverMap, url);
-						
-		return resultMap;
-	}
-
+	
 }

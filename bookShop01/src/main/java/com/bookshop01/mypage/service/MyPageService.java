@@ -14,7 +14,10 @@ public interface MyPageService{
 	public MemberVO  modifyMyInfo(Map memberMap) throws Exception;
 	public void cancelOrder(String order_id) throws Exception;
 	public MemberVO myDetailInfo(String member_id) throws Exception;
-	// Ãë¼Ò/¹İÇ°/±³È¯/È¯ºÒ ½ÅÃ» ¹× Á¶È¸( 2023.06.19 by Dean )
-	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws Exception; 
+
+	// ë§ˆì´í˜ì´ì§€ ì¶”ê°€
+	public void delMember(String member_id) throws Exception;
+	
+	
 
 }

@@ -183,7 +183,6 @@ function fn_order_all_cart_goods(){
 </script>
 </head>
 <body>
-	<form name="frm_order_all_cart">
 	<table class="list_view">
 		<tbody align=center >
 			<tr style="background:#33ff00" >
@@ -205,12 +204,11 @@ function fn_order_all_cart_goods(){
 				     </tr>
 				    </c:when>
 			        <c:otherwise>
-			    
-               
+			 <tr>       
+               <form name="frm_order_all_cart">
 				      <c:forEach var="item" items="${myGoodsList }" varStatus="cnt">
 				       <c:set var="cart_goods_qty" value="${myCartList[cnt.count-1].cart_goods_qty}" />
 				       <c:set var="cart_id" value="${myCartList[cnt.count-1].cart_id}" />
-                    <tr>       
 					<td><input type="checkbox" name="checked_goods"  checked  value="${item.goods_id }"  onClick="calcGoodsPrice(${item.goods_sales_price },this)"></td>
 					<td class="goods_image">
 					<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
@@ -261,10 +259,13 @@ function fn_order_all_cart_goods(){
 				<c:set  var="totalGoodsPrice" value="${totalGoodsPrice+item.goods_sales_price*0.9*cart_goods_qty }" />
 				<c:set  var="totalGoodsNum" value="${totalGoodsNum+1 }" />
 			   </c:forEach>
-		     </c:otherwise>
-	    </c:choose> 
+		    
 		</tbody>
-	</table>    		
+	</table>
+     	
+	<div class="clear"></div>
+	 </c:otherwise>
+	</c:choose> 
 	<br>
 	<br>
 	

@@ -1,5 +1,4 @@
 package com.bookshop01.filter.login;
-
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -9,9 +8,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession ;
 
-public class LoginFilter implements Filter {	
+public class LoginFilter implements Filter {
+	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
@@ -27,8 +27,10 @@ public class LoginFilter implements Filter {
 		
 		HttpSession session = httpRequest.getSession(false);
 		
-		System.out.println("üũ : �ּ� = " + requestURI);
+		System.out.println("체크 : 주소 = " + requestURI);
 		
+		//if(session.getAttribute("memberInfo") == null || session == null) {
+		//널체크를 먼저 하지 않으면 null.getAtrribute가 될 수도 있다.
 		if(session == null || session.getAttribute("memberInfo") == null) {
 			httpResponse.sendRedirect("/main/main.do");
 		}else {
@@ -36,10 +38,12 @@ public class LoginFilter implements Filter {
 		}
 	}
 	
+
+
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
 }
-

@@ -5,13 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.bookshop01.common.log.LoggingAdvice;
 import com.bookshop01.member.vo.MemberVO;
 import com.bookshop01.order.vo.OrderVO;
 
@@ -20,29 +17,13 @@ public class MyPageDAOImpl implements MyPageDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// ø¿∑˘ √‚∑¬¿ª ¿ß«ÿ √ﬂ∞°
-	private static final Logger logger = LoggerFactory.getLogger(LoggingAdvice.class);
-		
-		
 	public List<OrderVO> selectMyOrderGoodsList(String member_id) throws DataAccessException{
 		List<OrderVO> orderGoodsList=(List)sqlSession.selectList("mapper.mypage.selectMyOrderGoodsList",member_id);
 		return orderGoodsList;
 	}
-
-	// ∏∂¿Ã∆‰¿Ã¡ˆ>√Îº“/π›«∞/±≥»Ø/»Ø∫“ Ω≈√ª π◊ ¡∂»∏(2023.06.19 by Dean)
-	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws DataAccessException{
-		List<OrderVO> orderGoodsList=(List)sqlSession.selectList("mapper.mypage.listChangeMyOrderStatus",member_id);
-		return orderGoodsList;
-	}
 	
-	// ±≥»Ø/»Ø∫“√≥∏Æ (±‚¡∏º“Ω∫)
 	public List selectMyOrderInfo(String order_id) throws DataAccessException{
-		
-		String sql = "select * from t_shopping_order where order_id=" + order_id;
-		logger.info("SQL :" + sql);
 		List myOrderList=(List)sqlSession.selectList("mapper.mypage.selectMyOrderInfo",order_id);
-		
-		logger.info("myOrderList :" + myOrderList.toString());
 		return myOrderList;
 	}	
 
@@ -63,6 +44,10 @@ public class MyPageDAOImpl implements MyPageDAO{
 	
 	public void updateMyOrderCancel(String order_id) throws DataAccessException{
 		sqlSession.update("mapper.mypage.updateMyOrderCancel",order_id);
-	}	
-
+	}
+	
+	// ÎßàÏù¥ÌéòÏù¥ÏßÄ Ï∂îÍ∞Ä
+	public void delNewMember(String member_id) throws DataAccessException{
+		sqlSession.update("mapper.mypage.delNewMember",member_id);
+	}
 }
