@@ -53,63 +53,7 @@ public class BoardControllerImpl  implements BoardController{
 		
 	}
 	
-	
-	
-	@RequestMapping(value="/board/addReply.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest, 
-			HttpServletResponse response) throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String,Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu=multipartRequest.getParameterNames();
-		while(enu.hasMoreElements()){
-			String name=(String)enu.nextElement();
-			String value=multipartRequest.getParameter(name);
-			articleMap.put(name,value);
-		}
-		String imageFileName= upload(multipartRequest);
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		String member_id = memberVO.getMember_id();
-		articleMap.put("parentNO", 0);
-		articleMap.put("member_id", member_id);
-		articleMap.put("imageFileName", imageFileName);
-		
-		String message;
-		ResponseEntity resEnt=null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			int articleNO = boardService.addNewArticle(articleMap);
-			if(imageFileName!=null && imageFileName.length()!=0) {
-				File srcFile = new 
-				File(ARTICLE_IMAGE_REPO+ "\\" + "temp"+ "\\" + imageFileName);
-				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
-				FileUtils.moveFileToDirectory(srcFile, destDir,true);
-			}
-	
-			message = "<script>";
-			message += " alert('새 답글을 추가함');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do'; ";
-			message +=" </script>";
-		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		}catch(Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-			srcFile.delete();
-			
-			message = " <script>";
-			message +=" alert('오류가 발생했다. 다시 시도해라');');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/board/articleForm.do'; ";
-			message +=" </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-		
-		
-	}
-	
-	
+
 	@Override
 	@RequestMapping(value="/board/addNewArticle.do" ,method = RequestMethod.POST)
 	@ResponseBody
@@ -225,6 +169,60 @@ public class BoardControllerImpl  implements BoardController{
     }
     return resEnt;
   }
+
+
+	@RequestMapping(value="/board/addReply.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest,
+								   HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String,Object> replyMap = new HashMap<String, Object>();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			replyMap.put(name,value);
+		}
+		String imageFileName= upload(multipartRequest);
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		replyMap.put("parentNO", 0);
+		replyMap.put("member_id", member_id);
+
+		String message;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.addReply(replyMap);
+			/*if(imageFileName!=null && imageFileName.length()!=0) {
+				File srcFile = new
+				File(ARTICLE_IMAGE_REPO+ "\\" + "temp"+ "\\" + imageFileName);
+				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
+				FileUtils.moveFileToDirectory(srcFile, destDir,true);
+			}*/
+
+			message = "<script>";
+			message += " alert('새 답글을 추가함');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
+			srcFile.delete();
+
+			message = " <script>";
+			message +=" alert('오류가 발생했다. 다시 시도해라');');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/board/articleForm.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+
+
+	}
 
   @Override
   @RequestMapping(value="/board/removeArticle.do" ,method = RequestMethod.POST)

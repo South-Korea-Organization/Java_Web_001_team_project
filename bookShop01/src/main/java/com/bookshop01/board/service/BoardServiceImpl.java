@@ -1,6 +1,5 @@
 package com.bookshop01.board.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bookshop01.board.dao.BoardDAO;
 import com.bookshop01.board.vo.ArticleVO;
-import com.bookshop01.board.vo.ImageVO;
 
 
 @Service("boardService")
@@ -31,30 +29,12 @@ public class BoardServiceImpl  implements BoardService{
 	public int addNewArticle(Map articleMap) throws Exception{
 		return boardDAO.insertNewArticle(articleMap);
 	}
-	
-	 //다중 이미지 추가하기
-	/*
+
 	@Override
-	public int addNewArticle(Map articleMap) throws Exception{
-		int articleNO = boardDAO.insertNewArticle(articleMap);
-		articleMap.put("articleNO", articleNO);
-		boardDAO.insertNewImage(articleMap);
-		return articleNO;
+	public void addReply(Map replyMap) throws Exception {
+		boardDAO.insertNewReply(replyMap);
 	}
-	*/
-	/*
-	//다중 파일 보이기
-	@Override
-	public Map viewArticle(int articleNO) throws Exception {
-		Map articleMap = new HashMap();
-		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
-		List<ImageVO> imageFileList = boardDAO.selectImageFileList(articleNO);
-		articleMap.put("article", articleVO);
-		articleMap.put("imageFileList", imageFileList);
-		return articleMap;
-	}
-   */
-	
+
 	
 	 //단일 파일 보이기
 	@Override
@@ -73,7 +53,8 @@ public class BoardServiceImpl  implements BoardService{
 	public void removeArticle(int articleNO) throws Exception {
 		boardDAO.deleteArticle(articleNO);
 	}
-	
 
-	
+
+
+
 }
