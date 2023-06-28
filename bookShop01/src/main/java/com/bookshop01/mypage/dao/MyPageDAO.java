@@ -17,4 +17,6 @@ public interface MyPageDAO {
 	public void updateMyOrderCancel(String order_id) throws DataAccessException;
 	// 마이페이지 추가
 	public void delNewMember(String member_id) throws DataAccessException;
+	// Dean
+	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws DataAccessException;	
 }
