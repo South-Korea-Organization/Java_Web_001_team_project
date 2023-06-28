@@ -24,7 +24,21 @@
      }
    
    </style>
-   <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
+   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+   
+    
+   <script>
+	function fn_articleForm(isLogOn,articleForm,loginForm){
+	  if(isLogOn != '' && isLogOn != 'false'){
+	    location.href=articleForm;
+	  }else{
+	    alert("로그인 후 글쓰기가 가능합니다.")
+	    location.href=loginForm+'?action=/board/articleForm.do';
+	  }
+	}
+	</script>
+
+
    <script type="text/javascript" >
      function backToList(obj){
 	    obj.action="${contextPath}/board/listArticles.do";
@@ -176,7 +190,8 @@
 		      <input class="btn btn-success" type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
 		    </c:if>
 		    <input class="btn btn-success" type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
-		     <input class="btn btn-success" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+		    <input class="btn btn-success" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+		     
 	   </td>
 	  </tr>
 	</table>

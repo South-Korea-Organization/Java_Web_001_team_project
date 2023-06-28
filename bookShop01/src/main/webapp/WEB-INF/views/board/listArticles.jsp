@@ -3,7 +3,6 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="${contextPath}/resources/css/subPage.css" rel="stylesheet" type="text/css" media="screen">
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
@@ -11,6 +10,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <style>
+   .cls1 {text-decoration:none;}
+   .cls2{text-align:center; font-size:30px;}
+  </style>
   <meta charset="UTF-8">
   <title>글목록</title>
 </head>
@@ -59,10 +62,10 @@
 	              <span style="padding-left:20px"></span>
 	         </c:forEach>
 	         <span style="font-size:12px;">[답변]</span>
-                   <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
+                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
 	          </c:when>
 	          <c:otherwise>
-	            <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
+	            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
 	          </c:otherwise>
 	        </c:choose>
 	  </td>
@@ -73,7 +76,7 @@
     </c:choose>
 </table>
 
-<a  class="btn btn-success float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
+<a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', 
                                                     '${contextPath}/member/loginForm.do')">글 게시</a>
 </body>
 </html>
