@@ -50,4 +50,9 @@ public class MyPageServiceImpl  implements MyPageService{
 	public void delMember(String member_id) throws Exception{
 		myPageDAO.delNewMember(member_id);
 	}
+	
+	//23.06.20 by Dean
+	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws Exception{
+		return myPageDAO.listChangeMyOrderStatus(member_id);
+	}	
 }
