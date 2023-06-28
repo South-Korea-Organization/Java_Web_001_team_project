@@ -38,7 +38,11 @@
 		  select * from (
 			    select rowNum as recNum,t.*
 			       from (
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/resources/mybatis/mappers/admin_member.xml
 			              select  *  from t_shopping_member 
+=======
+			              select  *  from t_shoping_member 
+>>>>>>> Stashed changes:bookShop01/src/main/resources/mybatis/mappers/admin_member.xml
 			              where to_char(joinDate,'yyyy-mm-dd')  between #{beginDate} and #{endDate}
 			                <if test="search_type=='member_id'">
 			                  AND member_id=#{search_word}
@@ -58,14 +62,14 @@
 	
     <select id="memberDetail" resultMap="memberResult"   parameterType="String"  >
 	    <![CDATA[
-		    select * from t_shopping_member
+		    select * from t_shoping_member
             where member_id=#{member_id}
     	]]>
 	</select>	
 	
 
 	<update id="modifyMemberInfo" parameterType="java.util.HashMap">
-	   update t_shopping_member
+	   update t_shoping_member
 			   <set>
 			      <if test=" member_pw!='' and member_pw!=null">
 			        member_pw=#{member_pw},

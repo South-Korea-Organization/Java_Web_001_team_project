@@ -45,4 +45,12 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public void updateMyOrderCancel(String order_id) throws DataAccessException{
 		sqlSession.update("mapper.mypage.updateMyOrderCancel",order_id);
 	}
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/mypage/dao/MyPageDAOImpl.java
+=======
+	
+	
+	public void delNewMember(String member_id) throws DataAccessException{
+		sqlSession.update("mapper.mypage.delNewMember",member_id);
+	}
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/mypage/dao/MyPageDAOImpl.java
 }

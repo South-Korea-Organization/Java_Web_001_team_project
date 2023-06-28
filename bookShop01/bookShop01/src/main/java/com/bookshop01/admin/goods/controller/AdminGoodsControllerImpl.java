@@ -57,7 +57,6 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		dateMap.put("endDate", endDate);
 		
 		Map<String,Object> condMap=new HashMap<String,Object>();
-		
 		if(section== null) {
 			section = "1";
 		}

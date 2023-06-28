@@ -1,14 +1,10 @@
 package com.bookshop01.order.controller;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.member.vo.MemberVO;
 import com.bookshop01.order.service.OrderService;
 import com.bookshop01.order.vo.OrderVO;
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/order/controller/OrderControllerImpl.java
 
+=======
+import com.bookshop01.payment.service.PaymentService;
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/order/controller/OrderControllerImpl.java
 @Controller("orderController")
 @RequestMapping(value="/order")
 public class OrderControllerImpl extends BaseController implements OrderController {
@@ -41,9 +40,6 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		Boolean isLogOn=(Boolean)session.getAttribute("isLogOn");
 		String action=(String)session.getAttribute("action");
-		//로그인 여부 체크
-		//이전에 로그인 상태인 경우는 주문과정 진행
-		//로그아웃 상태인 경우 로그인 화면으로 이동
 		if(isLogOn==null || isLogOn==false){
 			session.setAttribute("orderInfo", _orderVO);
 			session.setAttribute("action", "/order/orderEachGoods.do");
@@ -62,7 +58,6 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 		
 		List myOrderList=new ArrayList<OrderVO>();
 		myOrderList.add(orderVO);
-
 		MemberVO memberInfo=(MemberVO)session.getAttribute("memberInfo");
 		
 		session.setAttribute("myOrderList", myOrderList);
@@ -110,9 +105,23 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 	@RequestMapping(value="/payToOrderGoods.do" ,method = RequestMethod.POST)
 	public ModelAndView payToOrderGoods(@RequestParam Map<String, String> receiverMap,
 			                       HttpServletRequest request, HttpServletResponse response)  throws Exception{
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/order/controller/OrderControllerImpl.java
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
+=======
+		
+		System.out.println("데이터 확인 = " + receiverMap.toString());
+		//
+		//
+		
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		Map<String,String> resultMap = paymentService.keyin(receiverMap);
+		mav.addObject("cardResult",resultMap);
+		
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/order/controller/OrderControllerImpl.java
 		HttpSession session=request.getSession();
 		MemberVO memberVO=(MemberVO)session.getAttribute("orderer");
 		String member_id=memberVO.getMember_id();
@@ -142,14 +151,13 @@ public class OrderControllerImpl extends BaseController implements OrderControll
 			orderVO.setCard_pay_month(receiverMap.get("card_pay_month"));
 			orderVO.setPay_orderer_hp_num(receiverMap.get("pay_orderer_hp_num"));	
 			orderVO.setOrderer_hp(orderer_hp);	
-			myOrderList.set(i, orderVO); //각 orderVO에 주문자 정보를 세팅한 후 다시 myOrderList에 저장한다.
+			myOrderList.set(i, orderVO); //媛� orderVO�뿉 二쇰Ц�옄 �젙蹂대�� �꽭�똿�븳 �썑 �떎�떆 myOrderList�뿉 ���옣�븳�떎.
 		}//end for
 		
 	    orderService.addNewOrder(myOrderList);
-		mav.addObject("myOrderInfo",receiverMap);//OrderVO로 주문결과 페이지에  주문자 정보를 표시한다.
+		mav.addObject("myOrderInfo",receiverMap);//OrderVO濡� 二쇰Ц寃곌낵 �럹�씠吏��뿉  二쇰Ц�옄 �젙蹂대�� �몴�떆�븳�떎.
 		mav.addObject("myOrderList", myOrderList);
 		return mav;
 	}
 	
-
 }

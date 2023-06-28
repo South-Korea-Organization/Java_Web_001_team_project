@@ -1,5 +1,6 @@
 package com.bookshop01.member.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,10 +71,23 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		return mav;
 	}
 	
+
+	
+	@Override
+	@RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)
+	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, 
+			HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberService.overlapped(id);
+		resEntity =new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
+	}
+	
 	@Override
 	@RequestMapping(value="/addMember.do" ,method = RequestMethod.POST)
 	public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO,
-			                HttpServletRequest request, HttpServletResponse response) throws Exception {
+			                HttpServletRequest request, HttpServletResponse response) 
+			                		throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		String message = null;
@@ -98,12 +112,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		return resEntity;
 	}
 	
-	@Override
-	@RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)
-	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ResponseEntity resEntity = null;
-		String result = memberService.overlapped(id);
-		resEntity =new ResponseEntity(result, HttpStatus.OK);
-		return resEntity;
-	}
+
+		
+	
 }

@@ -91,8 +91,11 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		return mav;
 		
 	}
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/admin/member/controller/AdminMemberControllerImpl.java
 	
 	
+=======
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/admin/member/controller/AdminMemberControllerImpl.java
 	@RequestMapping(value="/memberDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		String viewName=(String)request.getAttribute("viewName");

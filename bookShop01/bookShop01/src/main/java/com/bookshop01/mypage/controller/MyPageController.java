@@ -19,4 +19,8 @@ public interface MyPageController {
 					            @RequestParam("value")  String value,
 					            HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/mypage/controller/MyPageController.java
+=======
+	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,HttpServletRequest request, HttpServletResponse response)  throws Exception ;
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/mypage/controller/MyPageController.java
 }

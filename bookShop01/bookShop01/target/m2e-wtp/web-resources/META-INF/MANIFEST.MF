@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< Updated upstream:bookShop01/bookShop01/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 Built-By: 505-20
+=======
+Built-By: psb20
+>>>>>>> Stashed changes:bookShop01/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 Build-Jdk: 11.0.17
 Created-By: Maven Integration for Eclipse
 

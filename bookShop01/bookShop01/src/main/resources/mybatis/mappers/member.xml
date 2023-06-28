@@ -39,7 +39,12 @@
 	    <![CDATA[
 			select * from t_shopping_member 
 			 where member_id=#{member_id}
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/resources/mybatis/mappers/member.xml
 			 and member_pw=#{member_pw}			
+=======
+			 and del_yn='N'
+			 and member_pw=#{member_pw}	 	
+>>>>>>> Stashed changes:bookShop01/src/main/resources/mybatis/mappers/member.xml
 			 
 		]]>
 	</select>
@@ -100,4 +105,5 @@
                                       
    ]]>      
   </insert>
+
 </mapper>

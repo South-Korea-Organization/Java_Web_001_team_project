@@ -17,7 +17,11 @@ public class AdminMemberDAOImpl  implements AdminMemberDAO{
 	
 	
 	public ArrayList<MemberVO> listMember(HashMap condMap) throws DataAccessException{
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/admin/member/dao/AdminMemberDAOImpl.java
 		ArrayList<MemberVO>  memberList = (ArrayList)sqlSession.selectList("mapper.admin.member.listMember",condMap);
+=======
+		ArrayList<MemberVO>  memberList=(ArrayList)sqlSession.selectList("mapper.admin.member.listMember",condMap);
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/admin/member/dao/AdminMemberDAOImpl.java
 		return memberList;
 	}
 	

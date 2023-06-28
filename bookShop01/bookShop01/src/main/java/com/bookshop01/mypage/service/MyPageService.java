@@ -14,5 +14,9 @@ public interface MyPageService{
 	public MemberVO  modifyMyInfo(Map memberMap) throws Exception;
 	public void cancelOrder(String order_id) throws Exception;
 	public MemberVO myDetailInfo(String member_id) throws Exception;
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/mypage/service/MyPageService.java
+=======
+	public void delMember(String member_id) throws Exception;
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/mypage/service/MyPageService.java
 
 }

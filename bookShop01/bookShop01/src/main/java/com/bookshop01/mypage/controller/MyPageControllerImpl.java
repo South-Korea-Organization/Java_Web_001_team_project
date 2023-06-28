@@ -56,7 +56,8 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 	
 	@Override
 	@RequestMapping(value="/myOrderDetail.do" ,method = RequestMethod.GET)
-	public ModelAndView myOrderDetail(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception {
+	public ModelAndView myOrderDetail(@RequestParam("order_id")  String order_id,HttpServletRequest request, 
+			HttpServletResponse response)  throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session=request.getSession();
@@ -68,6 +69,8 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		return mav;
 	}
 	
+
+	
 	@Override
 	@RequestMapping(value="/listMyOrderHistory.do" ,method = RequestMethod.GET)
 	public ModelAndView listMyOrderHistory(@RequestParam Map<String, String> dateMap,
@@ -76,7 +79,7 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		String  member_id=memberVO.getMember_id();
+		String member_id=memberVO.getMember_id();
 		
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 		String beginDate=null,endDate=null;
@@ -177,4 +180,32 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		return resEntity;
 	}	
 	
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/mypage/controller/MyPageControllerImpl.java
+=======
+	@Override
+	@RequestMapping(value="/delMember.do" ,method = RequestMethod.POST)
+	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,
+			                         HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		HttpSession session=request.getSession();
+		session=request.getSession();
+
+		
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		memberVO=(MemberVO)session.getAttribute("memberInfo");
+		String member_id=memberVO.getMember_id();
+		myPageService.delMember(member_id);
+		
+		mav.addObject("member_id", member_id);
+		//mav.addObject("message", "cancel_order");
+		
+
+		session.removeAttribute("memberInfo");
+		
+		mav.setViewName("redirect:/main/main.do");
+
+		return mav;
+		
+	}
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/mypage/controller/MyPageControllerImpl.java
 }

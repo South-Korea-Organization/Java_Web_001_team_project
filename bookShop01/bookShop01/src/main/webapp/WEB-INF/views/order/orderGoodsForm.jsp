@@ -249,6 +249,175 @@ var card_pay_month;
 var pay_orderer_hp_num;
 
 function fn_show_order_detail(){
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
+=======
+	
+	
+	//결제방식 카카오로 선택했는지 확인.
+	
+	var payType = $('input[name="pay_method"]:checked').val();
+	// payType 선택된 라디오버튼 value 값이 있음.
+	
+	alert(payType); //뭐가 선택되었는지 확인하는 알럿창
+	
+	
+	$("input[name=kakaopay_direct]").val("");
+	$("input[name=naverpay_direct]").val("");
+	$("input[name=naverpay_point_direct]").val("");
+	
+	if(payType == 'kakao'){
+		//카카오로 오면 실행하는 코드
+		
+		//ajax 실행하는 법은 다양합니다..
+		
+		$.ajax({
+			type : "post",
+			url : "${contextPath}/payment/kakao/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				$("input[name=ordr_idxx]").val(ordr_idxx);
+				$("input[name=good_name]").val(good_name);
+				$("input[name=good_mny]").val(good_mny);
+				$("input[name=buyr_name]").val(buyr_name);
+				$("input[name=site_cd]").val(site_cd);
+				$("input[name=kakaopay_direct]").val("Y");
+				
+				
+				jsf__pay();
+				
+			},
+			error : function(data, textStatus) {
+				alert("에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+				
+			}
+		}); //end ajax	
+		
+		
+		
+		return false; //아래 코드 실행 안되게
+	}else if(payType == 'naver_card'){
+		//카카오로 오면 실행하는 코드
+		
+		//ajax 실행하는 법은 다양합니다..
+		
+		$.ajax({
+			type : "post",
+			url : "${contextPath}/payment/kakao/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				$("input[name=ordr_idxx]").val(ordr_idxx);
+				$("input[name=good_name]").val(good_name);
+				$("input[name=good_mny]").val(good_mny);
+				$("input[name=buyr_name]").val(buyr_name);
+				$("input[name=site_cd]").val(site_cd);
+				$("input[name=naverpay_direct]").val("Y");
+				//
+				
+				jsf__pay();
+				
+			},
+			error : function(data, textStatus) {
+				alert("에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+				
+			}
+		}); //end ajax	
+		
+		
+		
+		return false; //아래 코드 실행 안되게
+	}else if(payType == 'naver_point'){
+		//카카오로 오면 실행하는 코드
+		
+		//ajax 실행하는 법은 다양합니다..
+		
+		$.ajax({
+			type : "post",
+			url : "${contextPath}/payment/kakao/order.do",
+			data : {"":""},
+			success : function(data, textStatus) {
+				alert("success");
+				console.log(data);
+
+				var responseCode = data.responseCode;
+				var responseMsg = data.responseMsg;
+				var good_mny = data.good_mny;
+				var site_cd = data.site_cd;
+				var Ret_URL = data.Ret_URL;
+				var buyr_name = data.buyr_name;
+				var ordr_idxx = data.ordr_idxx;
+				var good_name = data.good_name;
+				
+				
+				//폼에 있는 인풋박스 데이터 변경
+				
+				$("input[name=ordr_idxx]").val(ordr_idxx);
+				$("input[name=good_name]").val(good_name);
+				$("input[name=good_mny]").val(good_mny);
+				$("input[name=buyr_name]").val(buyr_name);
+				$("input[name=site_cd]").val(site_cd);
+				$("input[name=naverpay_direct]").val("Y");
+				$("input[name=naverpay_point_direct]").val("Y");
+				//
+				
+				jsf__pay();
+				
+			},
+			error : function(data, textStatus) {
+				alert("에러가 발생했습니다.");
+			},
+			complete : function(data, textStatus) {
+				//alert("작업을완료 했습니다");
+				//실패하든 성공하든 무조건 옴
+				
+			}
+		}); //end ajax	
+		
+		
+		
+		return false; //아래 코드 실행 안되게
+	}
+	
+	
+	
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 	goods_id="";
 	goods_title="";
 	
@@ -491,8 +660,38 @@ function fn_process_pay_order(){
     formObj.appendChild(i_card_pay_month);
     formObj.appendChild(i_pay_orderer_hp_num);
     
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 
     document.body.appendChild(formObj); 
+=======
+    //카드번호 데이터 보내는법
+	var cardNo = document.createElement("input");
+	cardNo.name = "cardNo";
+	cardNo.value = document.getElementById("cardNo").value;
+    formObj.appendChild(cardNo);
+    
+    var expireYear = document.createElement("input");
+    expireYear.name = "expireYear";
+    expireYear.value = document.getElementById("expireYear").value;
+    formObj.appendChild(expireYear);
+    
+    var expireMonth = document.createElement("input");
+    expireMonth.name = "expireMonth";
+    expireMonth.value = document.getElementById("expireMonth").value;
+    formObj.appendChild(expireMonth);
+    
+    var birthday = document.createElement("input");
+    birthday.name = "birthday";
+    birthday.value = document.getElementById("birthday").value;
+    formObj.appendChild(birthday);
+    
+    var cardPw = document.createElement("input");
+    cardPw.name = "cardPw";
+    cardPw.value = document.getElementById("cardPw").value;
+    formObj.appendChild(cardPw);
+    
+    document.body.appendChild(formObj);
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
     formObj.method="post";
     formObj.action="${contextPath}/order/payToOrderGoods.do";
     formObj.submit();
@@ -793,13 +992,17 @@ function fn_process_pay_order(){
 				<tr >
 					<td>
 					   <input type="radio" id="pay_method" name="pay_method" value="신용카드"   onClick="fn_pay_card()" checked>신용카드 &nbsp;&nbsp;&nbsp; 
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 					   <input type="radio" id="pay_method" name="pay_method" value="제휴 신용카드"  >제휴 신용카드 &nbsp;&nbsp;&nbsp; 
 					   <input type="radio" id="pay_method" name="pay_method" value="실시간 계좌이체">실시간 계좌이체 &nbsp;&nbsp;&nbsp;
 					   <input type="radio" id="pay_method" name="pay_method" value="무통장 입금">무통장 입금 &nbsp;&nbsp;&nbsp;
+=======
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 					</td>
 				</tr>
 				<tr >
 					<td>
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 					   <input type="radio" id="pay_method" name="pay_method" value="휴대폰결제" onClick="fn_pay_phone()">휴대폰 결제 &nbsp;&nbsp;&nbsp;
 					   <input type="radio" id="pay_method" name="pay_method" value="카카오페이(간편결제)">카카오페이(간편결제) &nbsp;&nbsp;&nbsp; 
 					   <input type="radio" id="pay_method" name="pay_method" value="페이나우(간편결제)">페이나우(간편결제) &nbsp;&nbsp;&nbsp; 
@@ -809,6 +1012,11 @@ function fn_process_pay_order(){
 				<tr >
 					<td>
 					   <input type="radio"  id="pay_method" name="pay_method" value="직접입금">직접입금&nbsp;&nbsp;&nbsp;
+=======
+					   <input type="radio" id="pay_method" name="pay_method" value="kakao">카카오페이(간편결제) &nbsp;&nbsp;&nbsp; 
+					   <input type="radio" id="pay_method" name="pay_method" value="naver_card">네이버페이(신용카드) &nbsp;&nbsp;&nbsp; 
+					   <input type="radio" id="pay_method" name="pay_method" value="naver_point">네이버페이(포인트) &nbsp;&nbsp;&nbsp; 
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 					</td>
 				</tr>
 				<tr id="tr_pay_card">
@@ -838,6 +1046,39 @@ function fn_process_pay_order(){
 					
 					</td>
 				</tr>
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
+=======
+				<tr>
+					<td>
+						<strong>카드번호:<strong>
+						<input type="text" name="cardNo" id="cardNo">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>유효기간(년):<strong>
+						<input type="text" name="expireYear" id="expireYear" maxLength="2" style="width:40px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>유효기간(월):<strong>
+						<input type="text" name="expireMonth" id="expireMonth" maxLength="2" style="width:40px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>생년월일:<strong>
+						<input type="text" name="birthday" id="birthday" maxLength="6"style="width:80px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>비밀번호(2자리):<strong>
+						<input type="text" name="cardPw" id="cardPw" maxLength="2" style="width:40px">
+					</td>
+				</tr>
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 				<tr id="tr_pay_phone" style="visibility:hidden">
 				  <td>
 				  <strong>휴대폰 번호 입력: <strong>
@@ -990,6 +1231,80 @@ function fn_process_pay_order(){
 			<div class="clear"></div>	
 			<br> 
 			
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp
 			
 			
 			
+=======
+<form name="order_info" method="post" accept-charset="euc-kr">
+	<input type="hidden" name="ordr_idxx" value="">
+	<input type="hidden" name="good_name" value="">
+	<input type="hidden" name="good_mny" value="">
+	<input type="hidden" name="buyr_name" value="">
+	<input type="hidden" name="site_cd" value="">
+	<input type="hidden" name="req_tx" value="pay">
+	<input type="hidden" name="pay_method" value="100000000000"/>
+	<input type="hidden" name="currency" value="410">
+	<input type="hidden" name="kakaopay_direct" value="">
+	<input type="hidden" name="naverpay_direct" value="">
+	<input type="hidden" name="naverpay_point_direct" value="">
+	<input type="hidden" name="module_type" value="01"/>
+	<input type="hidden" name="ordr_chk" value=""/>
+	<input type="hidden" name="param_opt_1" value="">
+	<input type="hidden" name="param_opt_2" value="">
+	<input type="hidden" name="param_opt_3" value="">
+	<input type="hidden" name="res_cd" value=""/>
+	<input type="hidden" name="res_msg" value=""/>
+	<input type="hidden" name="enc_info" value=""/>
+	<input type="hidden" name="enc_data" value=""/>
+	<input type="hidden" name="ret_pay_method" value=""/>
+	<input type="hidden" name="tran_cd" value=""/>
+	<input type="hidden" name="use_pay_method" value=""/>
+	<input type="hidden" name="card_pay_method" value=""/>
+</form>
+
+<script>
+function m_Completepayment(FormOrJson, closeEvent) {
+	var frm = document.order_info;
+		/********************************************************************/
+		/* FormOrJson은 가맹점 임의 활용 금지 */
+		/* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다. */
+		/********************************************************************/
+	GetField(frm, FormOrJson);
+	if (frm.res_cd.value == "0000") {
+	/*
+	 [가맹점 리턴값 처리 영역] 
+	인증이 완료되면 frm에 인증값이 들어갑니다. 해당 데이터를 가지고
+	승인요청을 진행 해주시면 됩니다.
+	 
+	*/
+	//인증성공 시 오는 곳.
+	
+	console.log(frm);
+	alert("인증 완료");
+	
+	
+	// 폼 name = order_info  서브밋 하면 됩니다.
+	
+	$("form[name=order_info]").attr("action", "/payment/kakao/pay.do");
+	$("form[name=order_info]").submit();
+
+
+
+} else {
+closeEvent();
+}
+}
+/* 이 함수를 실행하여 카카오결제창을 호출 합니다*/
+function jsf__pay() {
+try {
+var form = document.order_info;
+KCP_Pay_Execute(form);
+} catch{
+/* IE 에서 결제 정상종료시 throw로 스크립트 종료 */
+}
+}
+</script>
+<script type="text/javascript"
+src="https://pay.kcp.co.kr/plugin/payplus_web.jsp"></script>		
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderGoodsForm.jsp

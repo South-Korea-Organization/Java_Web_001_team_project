@@ -254,7 +254,7 @@ function  calcPeriod(search_period){
 		         <c:if test="${page ==10 }">
 		          <a href="${contextPath}/admin/goods/adminGooodsMain.do?chapter=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
 		         </c:if> 
-	      		 </c:forEach> 
+	      		</c:forEach> 
      
 		</TBODY>
 		

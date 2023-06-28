@@ -46,4 +46,11 @@ public class MyPageServiceImpl  implements MyPageService{
 	public MemberVO myDetailInfo(String member_id) throws Exception{
 		return myPageDAO.selectMyDetailInfo(member_id);
 	}
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/mypage/service/MyPageServiceImpl.java
+=======
+	
+	public void delMember(String member_id) throws Exception{
+		myPageDAO.delNewMember(member_id);
+	}
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/mypage/service/MyPageServiceImpl.java
 }

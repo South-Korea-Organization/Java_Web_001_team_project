@@ -221,7 +221,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 	<!-- 내용 들어 가는 곳 -->
 	<div id="container">
 		<ul class="tabs">
-			<li><a href="#tab1">책소개</a></li>
+			<li><a href="#tab1">책소개, test 안녕하세요</a></li>
 			<li><a href="#tab2">저자소개</a></li>
 			<li><a href="#tab3">책목차</a></li>
 			<li><a href="#tab4">출판사서평</a></li>

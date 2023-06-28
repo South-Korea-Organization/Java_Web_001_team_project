@@ -15,4 +15,8 @@ public interface MyPageDAO {
 	public void updateMyInfo(Map memberMap) throws DataAccessException;
 	public MemberVO selectMyDetailInfo(String member_id) throws DataAccessException;
 	public void updateMyOrderCancel(String order_id) throws DataAccessException;
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/java/com/bookshop01/mypage/dao/MyPageDAO.java
+=======
+	public void delNewMember(String member_id) throws DataAccessException;
+>>>>>>> Stashed changes:bookShop01/src/main/java/com/bookshop01/mypage/dao/MyPageDAO.java
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
-	isELIgnored="false"%> 
+	isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 </head>
@@ -8,7 +8,7 @@
 	<H1>1.최종 주문 내역서</H1>
 	<TABLE class="list_view">
 		<TBODY align=center>
-			<tr style="background: #33ff00">
+			<tr style="background: #33FF00">
 			     <td>주문번호 </td>
 				<td colspan=2 class="fixed">주문상품명</td>
 				<td>수량</td>
@@ -75,8 +75,6 @@
 					   ${myOrderInfo.receiver_tel1}-${myOrderInfo.receiver_tel2}-${myOrderInfo.receiver_tel3}</TD>
 					</TD>
 				</TR>
-
-
 				<TR class="dot_line">
 					<TD class="fixed_join">주소</TD>
 					<td>
@@ -131,7 +129,64 @@
 	<br>
 	<H1>3.결제정보</H1>
 	<DIV class="detail_table">
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderResult.jsp
 		<table>
+=======
+		<c:if test="${cardResult.responseCode eq '0000' }">
+	       <!-- 	 결제 성공일때 -->
+		 	<table>
+				<TBODY>
+					<TR class="dot_line">
+						<TD class="fixed_join">결제금액</TD>
+						<TD>
+						   ${cardResult.amount}
+					    </TD>
+					</TR>
+					<TR class="dot_line">
+						<TD class="fixed_join">카드사명</TD>
+						<TD>
+						   ${cardResult.cardName}
+					    </TD>
+					</TR>
+					<TR class="dot_line">
+						<TD class="fixed_join">주문번호</TD>
+						<TD>
+						   ${cardResult.orderNumber}
+					    </TD>
+					</TR>
+					
+				</TBODY>
+			</table>
+		</c:if>
+		
+		
+		<c:if test="${cardResult.responseCode ne '0000' }">
+	         <!-- 	 결제 실패일때 -->
+			<table>
+				<TBODY>
+					<TR class="dot_line">
+						<TD class="fixed_join">실패 사유</TD>
+						<TD>
+						   ${cardResult.responseMsg}
+					    </TD>
+					</TR>
+				</TBODY>
+			</table>
+		</c:if>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<%-- 	<table>
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderResult.jsp
 			<TBODY>
 				<TR class="dot_line">
 					<TD class="fixed_join">결제방법</TD>
@@ -152,7 +207,11 @@
 				    </TD>
 				</TR>
 			</TBODY>
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/webapp/WEB-INF/views/order/orderResult.jsp
 		</table>
+=======
+		</table> --%>
+>>>>>>> Stashed changes:bookShop01/src/main/webapp/WEB-INF/views/order/orderResult.jsp
 	</DIV>
 </form>
     <DIV class="clear"></DIV>
@@ -161,12 +220,8 @@
 	<br>
 	<center>
 		<br>
-		<br> 
-		<a href="${contextPath}/main/main.do"> 
+		<br>
+		<a href="${contextPath}/main/main.do">
 		   <IMG width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
 		</a>
-<DIV class="clear"></DIV>		
-	
-			
-			
-			
+<DIV class="clear"></DIV>

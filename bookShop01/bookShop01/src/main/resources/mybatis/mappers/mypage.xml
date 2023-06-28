@@ -144,5 +144,13 @@
 	   where order_id=#{order_id}
 	</update>
 		
+<<<<<<< Updated upstream:bookShop01/bookShop01/src/main/resources/mybatis/mappers/mypage.xml
 		
+=======
+	<update id="delNewMember" parameterType="String">
+	   update t_shopping_member
+	 	  set del_yn='Y'
+	   where member_id=#{member_id}
+	</update>	
+>>>>>>> Stashed changes:bookShop01/src/main/resources/mybatis/mappers/mypage.xml
 </mapper>
