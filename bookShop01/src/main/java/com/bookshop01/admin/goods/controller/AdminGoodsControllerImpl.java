@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bookshop01.admin.goods.service.AdminGoodsService;
 import com.bookshop01.admin.member.service.AdminMemberService ;
 import com.bookshop01.admin.order.service.AdminOrderService ;
+import com.bookshop01.board.service.BoardService ;
 import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.goods.vo.ImageFileVO;
@@ -47,6 +48,10 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 	// member�뿉�꽌 �뵲�샂
 	@Autowired
 	private AdminMemberService adminMemberService;
+	
+	// board에서 추가
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping(value="/adminGoodsMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
@@ -393,6 +398,9 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
 		mav.addObject("member_list", member_list);
 		
+		// board에서 추가
+		List articlesList = boardService.listArticles();
+		mav.addObject("articlesList", articlesList);
 		
 		String beginDate1[]=beginDate.split("-");
 		String endDate2[]=endDate.split("-");

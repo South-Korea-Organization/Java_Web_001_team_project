@@ -78,6 +78,8 @@
 </table>
 
 <a class="btn btn-success float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
-                                                    '${contextPath}/member/loginForm.do')">글 게시</a>
+                                                    '${contextPath}/member/loginForm.do')">글 게시
+</a>
+
 </body>
 </html>
