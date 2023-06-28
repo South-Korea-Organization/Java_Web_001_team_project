@@ -35,6 +35,9 @@
 	   <result property="fileType" column="fileType" />
 	</resultMap>
 	
+
+	
+   
       <select id="selectGoodsList" parameterType="String" resultMap="goodsResult"   >
         <![CDATA[
          select t.*

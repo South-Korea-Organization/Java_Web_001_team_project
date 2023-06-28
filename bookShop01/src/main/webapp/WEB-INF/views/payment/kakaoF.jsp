@@ -5,9 +5,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 </head>
 <BODY>
-	<H1>카카오실패</H1>
-	
-<DIV class="clear"></DIV>		
+	<H1>카카오 실패</H1>
 	
 			
 			

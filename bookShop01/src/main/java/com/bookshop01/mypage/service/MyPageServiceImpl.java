@@ -46,4 +46,13 @@ public class MyPageServiceImpl  implements MyPageService{
 	public MemberVO myDetailInfo(String member_id) throws Exception{
 		return myPageDAO.selectMyDetailInfo(member_id);
 	}
+	// 마이페이지 추가
+	public void delMember(String member_id) throws Exception{
+		myPageDAO.delNewMember(member_id);
+	}
+	
+	//23.06.20 by Dean
+	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws Exception{
+		return myPageDAO.listChangeMyOrderStatus(member_id);
+	}	
 }

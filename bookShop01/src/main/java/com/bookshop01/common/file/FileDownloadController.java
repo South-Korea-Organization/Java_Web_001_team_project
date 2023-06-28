@@ -20,18 +20,24 @@ public class FileDownloadController {
 	private static String CURR_IMAGE_REPO_PATH = "C:\\shopping\\file_repo";
 	
 	@RequestMapping("/download")
-	protected void download(@RequestParam("imageFileName") String imageFileName,
-		                 	@RequestParam("articleNO") String articleNO,
+	protected void download(@RequestParam("fileName") String fileName,
+		                 	@RequestParam("goods_id") String goods_id,
 			                 HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		String filePath=CURR_IMAGE_REPO_PATH+"\\"+articleNO+"\\"+imageFileName;
+		String filePath=CURR_IMAGE_REPO_PATH+"\\"+goods_id+"\\"+fileName;
 		File image=new File(filePath);
 
-		if (image.exists()) {
-			Thumbnails.of(image).size(300,200).outputFormat("png").toOutputStream(out);
+		response.setHeader("Cache-Control","no-cache");
+		response.addHeader("Content-disposition", "attachment; fileName="+fileName);
+		FileInputStream in=new FileInputStream(image); 
+		byte[] buffer=new byte[1024*8];
+		while(true){
+			int count=in.read(buffer); //踰꾪띁�뿉 �씫�뼱�뱾�씤 臾몄옄媛쒖닔
+			if(count==-1)  //踰꾪띁�쓽 留덉�留됱뿉 �룄�떖�뻽�뒗吏� 泥댄겕
+				break;
+			out.write(buffer,0,count);
 		}
-		byte[] buffer = new byte[1024 * 8];
-		out.write(buffer);
+		in.close();
 		out.close();
 	}
 	

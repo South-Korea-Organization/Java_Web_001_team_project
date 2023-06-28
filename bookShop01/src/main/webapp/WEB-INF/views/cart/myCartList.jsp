@@ -183,9 +183,9 @@ function fn_order_all_cart_goods(){
 </script>
 </head>
 <body>
-	<table class="list_view table table-hover">
-		<thead>
-			<tr style="background-color:#e0e0e0">
+	<table class="list_view">
+		<tbody align=center >
+			<tr style="background:#33ff00" >
 				<td class="fixed" >구분</td>
 				<td colspan=2 class="fixed">상품명</td>
 				<td>정가</td>
@@ -194,8 +194,7 @@ function fn_order_all_cart_goods(){
 				<td>합계</td>
 				<td>주문</td>
 			</tr>
-		</thead>
-		<tbody align=center >
+			
 			 <c:choose>
 				    <c:when test="${ empty myCartList }">
 				    <tr>
@@ -229,9 +228,9 @@ function fn_order_all_cart_goods(){
 				         </strong>
 					</td>
 					<td>
-					   <input style="width:30px;"type="text" id="cart_goods_qty" name="cart_goods_qty" size=3 value="${cart_goods_qty}"><br>
-						<a style="text-decoration:none; color:deepblue;" href="javascript:modify_cart_qty(${item.goods_id },${item.goods_sales_price*0.9 },${cnt.count-1 });" >
-						    <h4>수량 변경</h4>
+					   <input type="text" id="cart_goods_qty" name="cart_goods_qty" size=3 value="${cart_goods_qty}"><br>
+						<a href="javascript:modify_cart_qty(${item.goods_id },${item.goods_sales_price*0.9 },${cnt.count-1 });" >
+						    <img width=25 alt=""  src="${contextPath}/resources/image/btn_modify_qty.jpg">
 						</a>
 					</td>
 					<td>
@@ -240,11 +239,20 @@ function fn_order_all_cart_goods(){
 				         ${total_sales_price}원
 					</strong> </td>
 					<td>
-					      <a style="text-decoration: none; color:green;" href="javascript:fn_order_each_goods('${item.goods_id }','${item.goods_title }','${item.goods_sales_price}','${item.goods_fileName}');">
-					       	<p> 주문하기 </p>
+					      <a href="javascript:fn_order_each_goods('${item.goods_id }','${item.goods_title }','${item.goods_sales_price}','${item.goods_fileName}');">
+					       	<img width="75" alt=""  src="${contextPath}/resources/image/btn_order.jpg">
 							</a><br>
-						<a style="text-decoration: none; color:red;"href="javascript:delete_cart_goods('${cart_id}');"">
-						   <p> 삭제하기 </p>
+					 	<a href="#"> 
+					 	   <img width="75" alt=""
+							src="${contextPath}/resources/image/btn_order_later.jpg">
+						</a><br> 
+						<a href="#"> 
+						   <img width="75" alt=""
+							src="${contextPath}/resources/image/btn_add_list.jpg">
+						</A><br> 
+						<a href="javascript:delete_cart_goods('${cart_id}');""> 
+						   <img width="75" alt=""
+							   src="${contextPath}/resources/image/btn_delete.jpg">
 					   </a>
 					</td>
 			</tr>
@@ -261,8 +269,8 @@ function fn_order_all_cart_goods(){
 	<br>
 	<br>
 	
-	<table  width=80%   class="list_view">
-	<thead style="background:#e0e0e0">
+	<table  width=80%   class="list_view" style="background:#cacaff">
+	<tbody>
 	     <tr  align=center  class="fixed" >
 	       <td class="fixed">총 상품수 </td>
 	       <td>총 상품금액</td>
@@ -273,8 +281,6 @@ function fn_order_all_cart_goods(){
 	       <td>  </td>
 	       <td>최종 결제금액</td>
 	     </tr>
-	 </thead>
-	 <tbody>
 		<tr cellpadding=40  align=center >
 			<td id="">
 			  <p id="p_totalGoodsNum">${totalGoodsNum}개 </p>
@@ -287,13 +293,15 @@ function fn_order_all_cart_goods(){
 	          </p>
 	          <input id="h_totalGoodsPrice"type="hidden" value="${totalGoodsPrice}" />
 	       </td>
-	       <td>
+	       <td> 
+	          <img width="25" alt="" src="${contextPath}/resources/image/plus.jpg">  
 	       </td>
 	       <td>
 	         <p id="p_totalDeliveryPrice">${totalDeliveryPrice }원  </p>
 	         <input id="h_totalDeliveryPrice"type="hidden" value="${totalDeliveryPrice}" />
 	       </td>
-	       <td>
+	       <td> 
+	         <img width="25" alt="" src="${contextPath}/resources/image/minus.jpg"> 
 	       </td>
 	       <td>  
 	         <p id="p_totalSalesPrice"> 
@@ -301,7 +309,8 @@ function fn_order_all_cart_goods(){
 	         </p>
 	         <input id="h_totalSalesPrice"type="hidden" value="${totalSalesPrice}" />
 	       </td>
-	       <td>
+	       <td>  
+	         <img width="25" alt="" src="${contextPath}/resources/image/equal.jpg">
 	       </td>
 	       <td>
 	          <p id="p_final_totalPrice">
@@ -315,11 +324,11 @@ function fn_order_all_cart_goods(){
 	</table>
 	<center>
     <br><br>	
-		 <a class="btn btn-success" href="javascript:fn_order_all_cart_goods()">
-			<h4>주문하기</h4>
+		 <a href="javascript:fn_order_all_cart_goods()">
+		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_order_final.jpg">
 		 </a>
-		 <a class="btn btn-success" href="${contextPath}/main/main.do">
-		 	<h4>쇼핑 계속하기</h4>
+		 <a href="#">
+		 	<img width="75" alt="" src="${contextPath}/resources/image/btn_shoping_continue.jpg">
 		 </a>
 	<center>
 </form>	

@@ -42,14 +42,11 @@
 		<level value="info" />
 	</logger>
 
-
 	<!-- Root Logger -->
 	<root>
 		<priority value="debug" />
 		<appender-ref ref="console" />
 		<appender-ref ref="dailyFileAppender" />
 	</root>
-
-
 	
 </log4j:configuration>

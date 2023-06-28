@@ -18,5 +18,12 @@ public interface MyPageController {
 	public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
 					            @RequestParam("value")  String value,
 					            HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	// 마이페이지 추가
+	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,HttpServletRequest request, HttpServletResponse response)  throws Exception ;
 	
+	// 2023.6.19 by Dean
+	public ModelAndView listChangeMyOrderStatus(@RequestParam(required = false,value="message")  String message ,HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	// 2023.6.19 by Dean  
+	public ModelAndView exchangeMyOrder(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
+
 }

@@ -14,14 +14,6 @@ window.onload=function()
 	init();
 }
 
-<style>{
-.table:hover{
-	background-color:green;
-}
-}
-</style>
-
-
 //화면이 표시되면서  각각의 주문건에 대한 배송 상태를 표시한다.
 function init(){
 	var frm_delivery_list=document.frm_delivery_list;
@@ -274,19 +266,26 @@ function fn_detail_search(){
 }
 </script>
 </head>
+
+
 <body>
 	<H3>주문 조회</H3>
-	<form name="frm_delivery_list" action="${contextPath }/admin/admin.do" method="post">	
-		<table   >
+<!-- 데이터를 ${contextPath}/admin/admin.do URL로 제출하는 POST 방식을 사용 -->
+	<form name="frm_delivery_list" action="${contextPath }/admin/admin.do" method="post">
+		<table>
 			<tbody>
 				<tr>
 					<td>
+<!-- 간단조회 및 상세조회를 선택할 수 있는 라디오 버튼 그룹을 생성합니다. "간단조회"가 기본으로 선택되어 있습니다. 
+각 라디오 버튼에는 fn_enable_detail_search(this) 함수가 클릭 이벤트로 연결됩니다. -->					
 						<input type="radio" name="r_search_option" value="simple_search" checked onClick="fn_enable_detail_search(this)"/> 간단조회 &nbsp;&nbsp;&nbsp;
 						<input type="radio" name="r_search_option" value="detail_search"  onClick="fn_enable_detail_search(this)" /> 상세조회 &nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
 					<td>
+<!-- 주문 조회의 시작 및 종료 날짜를 선택할 수 있는 드롭다운 목록을 생성합니다. 현재 연도부터 5년 전까지의 옵션을 
+표시하며, 시작 및 종료 날짜의 기본값은 ${endYear}입니다. -->					
 					  <select name="curYear">
 					     <c:forEach   var="i" begin="0" end="5">
 					      <c:choose>
@@ -474,9 +473,9 @@ function fn_detail_search(){
 	</div>
 	
 <div class="clear"></div>
-<table class="list_view table-bordered">
+<table class="list_view">
 		<tbody align=center >
-			<tr style="background:lightgray" >
+			<tr style="background:#33ff00" >
 				<td class="fixed" >주문번호</td>
 				<td class="fixed">주문일자</td>
 				<td>주문내역</td>
@@ -497,13 +496,13 @@ function fn_detail_search(){
           <c:when test="${item.order_id != pre_order_id }">  
             <c:choose>
               <c:when test="${item.delivery_state=='delivery_prepared' }">
-                <tr  bgcolor="white">
+                <tr  bgcolor="lightgreen">    
               </c:when>
               <c:when test="${item.delivery_state=='finished_delivering' }">
-                <tr  bgcolor="#64FE2E">
+                <tr  bgcolor="lightgray">    
               </c:when>
               <c:otherwise>
-                <tr  bgcolor="#31B404">
+                <tr  bgcolor="orange">   
               </c:otherwise>
             </c:choose>   
 				 <td width=10%>
