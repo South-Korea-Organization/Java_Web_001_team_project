@@ -31,8 +31,15 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="console" />
+	</root>
 	
-	<!-- SQL Logger -->
+	
+	<!-- SQL Logger 출력 20230622 -->
 	<logger name="jdbc.sqltiming" additivity="false">
 		<level value="warn" />
 		<appender-ref ref="console"/>
@@ -55,12 +62,4 @@
 		<level value="info"/>
 		<appender-ref ref="console"/>
 	</logger>
-	<!-- SQL Logger -->
-
-	<!-- Root Logger -->
-	<root>
-		<priority value="info" />
-		<appender-ref ref="console" />
-	</root>
-	
 </log4j:configuration>

@@ -18,7 +18,9 @@ public interface MyPageController {
 	public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
 					            @RequestParam("value")  String value,
 					            HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	// ÎßàÏù¥ÌéòÏù¥ÏßÄ Ï∂îÍ∞Ä
-	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,HttpServletRequest request, HttpServletResponse response)  throws Exception ;
-
+	// ∏∂¿Ã∆‰¿Ã¡ˆ > √Îº“/π›«∞/±≥»Ø/»Ø∫“ Ω≈√ª π◊ ¡∂»∏ √ﬂ∞° 2023.6.19 by Dean
+	public ModelAndView listChangeMyOrderStatus(@RequestParam(required = false,value="message")  String message ,HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	// ∏∂¿Ã∆‰¿Ã¡ˆ > √Îº“/π›«∞/±≥»Ø/»Ø∫“ Ω≈√ª π◊ ¡∂»∏ > ±≥»ØΩ≈√ª  
+	public ModelAndView exchangeMyOrder(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
 }

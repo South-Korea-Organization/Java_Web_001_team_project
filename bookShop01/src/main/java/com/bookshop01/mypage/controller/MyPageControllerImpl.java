@@ -1,6 +1,7 @@
 package com.bookshop01.mypage.controller;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookshop01.common.base.BaseController;
+import com.bookshop01.common.log.LoggingAdvice;
 import com.bookshop01.member.vo.MemberVO;
 import com.bookshop01.mypage.service.MyPageService;
 import com.bookshop01.order.vo.OrderVO;
@@ -33,28 +37,56 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 	@Autowired
 	private MemberVO memberVO;
 	
+	// 오류 출력을 위해 추가
+	private static final Logger logger = LoggerFactory.getLogger(LoggingAdvice.class);
+	
 	@Override
 	@RequestMapping(value="/myPageMain.do" ,method = RequestMethod.GET)
-	public ModelAndView myPageMain(@RequestParam(required = false,value="message")  String message,
-			   HttpServletRequest request, HttpServletResponse response)  throws Exception {
+	public ModelAndView myPageMain(
+			   @RequestParam(required = false,value="message")  String message,  // 주문취소시 결과 메시지 받음
+			   HttpServletRequest request, HttpServletResponse response)  throws Exception 
+	{
 		HttpSession session=request.getSession();
 		session=request.getSession();
-		session.setAttribute("side_menu", "my_page"); //마이페이지 사이드 메뉴로 설정한다.
+		session.setAttribute("side_menu", "my_page"); //마이페이지 왼쪽 메뉴로 설정
 		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		memberVO=(MemberVO)session.getAttribute("memberInfo");
 		String member_id=memberVO.getMember_id();
 		
-		List<OrderVO> myOrderList=myPageService.listMyOrderGoods(member_id);
+		List<OrderVO> myOrderList=myPageService.listMyOrderGoods(member_id); // 회원ID를 이용해서 주문 상품 조회
 		
-		mav.addObject("message", message);
-		mav.addObject("myOrderList", myOrderList);
+		mav.addObject("message", message);   // 주문취소시 결과 메시지를 JSP로 전달
+		mav.addObject("myOrderList", myOrderList);  // 주문 상품 목록을 JSP로 전달
 
 		return mav;
 	}
 	
+	//취소/반품/교환/환불내역 (수정중)
 	@Override
+	@RequestMapping(value="/listChangeMyOrderStatus" ,method = RequestMethod.GET)
+	public ModelAndView listChangeMyOrderStatus(@RequestParam(required = false,value="message")  String message,
+			   HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		HttpSession session=request.getSession();
+		session=request.getSession();
+		session.setAttribute("side_menu", "my_page"); //마이페이지 왼쪽 메뉴로 설정.
+		
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		memberVO=(MemberVO)session.getAttribute("memberInfo");
+		String  member_id=memberVO.getMember_id();
+		
+		List<OrderVO> myOrderList=myPageService.listChangeMyOrderStatus(member_id);
+		
+		mav.addObject("message", message);
+		mav.addObject("member_id", member_id);
+		mav.addObject("myOrderList",myOrderList);
+		return mav;
+	}
+	
+	
+	@Override 
 	@RequestMapping(value="/myOrderDetail.do" ,method = RequestMethod.GET)
 	public ModelAndView myOrderDetail(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
@@ -89,7 +121,7 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		dateMap.put("member_id", member_id);
 		List<OrderVO> myOrderHistList=myPageService.listMyOrderHistory(dateMap);
 		
-		String beginDate1[]=beginDate.split("-"); //검색일자를 년,월,일로 분리해서 화면에 전달합니다.
+		String beginDate1[]=beginDate.split("-"); //寃��깋�씪�옄瑜� �뀈,�썡,�씪濡� 遺꾨━�빐�꽌 �솕硫댁뿉 �쟾�떖�빀�땲�떎.
 		String endDate1[]=endDate.split("-");
 		mav.addObject("beginYear",beginDate1[0]);
 		mav.addObject("beginMonth",beginDate1[1]);
@@ -111,6 +143,28 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		mav.setViewName("redirect:/mypage/myPageMain.do");
 		return mav;
 	}
+	
+    // 마이페이지 > 교환 신청 ( 23.06.22 by Dean )	
+	@Override 
+	@RequestMapping(value="/exchangeMyOrder.do" ,method = RequestMethod.POST)
+	public ModelAndView exchangeMyOrder(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		HttpSession session=request.getSession();
+		MemberVO orderer=(MemberVO)session.getAttribute("memberInfo");		
+		String  member_id=orderer.getMember_id();
+		
+		logger.info("회원ID:" + member_id);
+		logger.info("viewName:" + viewName);
+		logger.info("order_id:" + order_id);
+		List<OrderVO> myOrderList=myPageService.findMyOrderInfo(order_id);	
+		
+		mav.addObject("orderer", orderer);
+		mav.addObject("message", "exchange_order");
+		mav.addObject("myOrderList",myOrderList);
+		return mav;
+	}	
+	
 	
 	@Override
 	@RequestMapping(value="/myDetailInfo.do" ,method = RequestMethod.GET)
@@ -164,7 +218,7 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		
 		memberMap.put("member_id", member_id);
 		
-		//수정된 회원 정보를 다시 세션에 저장한다.
+		//�닔�젙�맂 �쉶�썝 �젙蹂대�� �떎�떆 �꽭�뀡�뿉 ���옣�븳�떎.
 		memberVO=(MemberVO)myPageService.modifyMyInfo(memberMap);
 		session.removeAttribute("memberInfo");
 		session.setAttribute("memberInfo", memberVO);
@@ -176,30 +230,5 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}	
-	
-	// 마이페이지 추가
-	@Override
-	@RequestMapping(value="/delMember.do" ,method = RequestMethod.POST)
-	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,
-			                         HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		String member_id=memberVO.getMember_id();
-		myPageService.delMember(member_id);
-		
-		mav.addObject("member_id", member_id);
-		//mav.addObject("message", "cancel_order");
-		
-		session.removeAttribute("memberInfo");
-		
-		mav.setViewName("redirect:/main/main.do");
-		return mav;
-		
-	}
-
 	
 }

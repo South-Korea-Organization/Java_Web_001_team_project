@@ -2,6 +2,24 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 세션 끊어졌을때 홈페이지로 이동하기 230622 관리자페이지는 따로 필터를 추가해야한다.-->
+    <filter-mapping>
+	  <filter-name>WebFilter</filter-name>
+	  <url-pattern>/goods/*</url-pattern>
+	  <url-pattern>/order/*</url-pattern>
+	  <url-pattern>/mypage/*</url-pattern> 
+	  
+	</filter-mapping>
+	<!-- 필터 -->
+	<filter>
+	  <!-- 필터명을 설정 - WebFilter -->
+	  <filter-name>WebFilter</filter-name>
+	  <!-- 호출할 클래스 이름을 설정 (package 포함) -->
+	  <filter-class>com.bookshop01.filter.login.LoginFilter</filter-class>
+	</filter>	
+   <!-- 세션 끊어졌을때 홈페이지로 이동하기 230622 관리자페이지는 따로 필터를 추가해야한다.-->
+		
    <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>
@@ -22,25 +40,6 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/mybatis-context.xml</param-value>
 	</context-param>
-	
-	
-	
-	<!-- filter mapping 기능 추가 : 복잡해 질 수 있음 -->
-	<filter-mapping>
-	  <filter-name>WebFilter</filter-name>
-	  <url-pattern>/order/*</url-pattern>
-	  <url-pattern>/goods/*</url-pattern>
-	</filter-mapping>
-	<!-- 필터 -->
-	<filter>
-	  <!-- 필터명을 설정 - WebFilter -->
-	  <filter-name>WebFilter</filter-name>
-	  <!-- 호출할 클래스 이름을 설정 (package 포함) -->
-	  <filter-class>com.bookshop01.filter.login.LoginFilter</filter-class>
-	</filter>
-	<!-- filter mapping 기능 추가 -->
-	
-	
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
@@ -63,6 +62,9 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
    
-
+    <!-- 세션시간 변경 2023.06.20 by Dean -->
+    <session-config>
+        <session-timeout>15</session-timeout> <!--분 단위, 디폴트값:30분 -->
+    </session-config>
 
 </web-app>

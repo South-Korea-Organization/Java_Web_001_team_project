@@ -14,11 +14,12 @@ import com.bookshop01.order.vo.OrderVO;
 
 @Service("orderService")
 @Transactional(propagation=Propagation.REQUIRED)
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService {	
 	@Autowired
 	private OrderDAO orderDAO;
 	
 	public List<OrderVO> listMyOrderGoods(OrderVO orderVO) throws Exception{
+		System.out.println("OrderServicel.java listMyOrderGoods()") ;
 		List<OrderVO> orderGoodsList;
 		orderGoodsList=orderDAO.listMyOrderGoods(orderVO);
 		return orderGoodsList;
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	public void addNewOrder(List<OrderVO> myOrderList) throws Exception{
 		orderDAO.insertNewOrder(myOrderList);
-		//카트에서 주문 상품 제거한다.
+		//移댄듃�뿉�꽌 二쇰Ц �긽�뭹 �젣嫄고븳�떎.
 		orderDAO.removeGoodsFromCart(myOrderList);
 	}	
 	

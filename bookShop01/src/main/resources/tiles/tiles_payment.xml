@@ -11,12 +11,23 @@
        <put-attribute name="title" value="카카오 결제 실패 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/payment/kakaoF.jsp" />
     </definition>
-    <definition name="/payment/naverS" extends="baseLayout">
-       <put-attribute name="title" value="네이버 결제 성공 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/payment/naverS.jsp" />
+    
+    <definition name="/payment/naver_cardS" extends="baseLayout">
+       <put-attribute name="title" value="네이버 결제(카드) 성공 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/payment/naver_cardS.jsp" />
     </definition>
-    <definition name="/payment/naverF" extends="baseLayout">
-       <put-attribute name="title" value="네이버 결제 실패 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/payment/naverF.jsp" />
+    <definition name="/payment/naver_cardF" extends="baseLayout">
+       <put-attribute name="title" value="네이버 결제 실패(카드) 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/payment/naver_cardF.jsp" />
     </definition>
+    
+    <definition name="/payment/naver_pointS" extends="baseLayout">
+       <put-attribute name="title" value="네이버 결제(포인트) 성공 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/payment/naver_pointS.jsp" />
+    </definition>
+    <definition name="/payment/naver_pointF" extends="baseLayout">
+       <put-attribute name="title" value="네이버 결제 실패(포인트) 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/payment/naver_pointF.jsp" />
+    </definition>      
+    
 </tiles-definitions>
