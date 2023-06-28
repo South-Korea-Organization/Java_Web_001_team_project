@@ -33,7 +33,7 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		ModelAndView mav = new ModelAndView(viewName);
 
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
-		String section = dateMap.get("section");	
+		String section = dateMap.get("section");
 		String pageNum = dateMap.get("pageNum");
 		String beginDate=null,endDate=null;
 		
@@ -45,11 +45,10 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		
 		
 		HashMap<String,Object> condMap=new HashMap<String,Object>();
-		
 		if(section== null) {
 			section = "1";
 		}
-		condMap.put("chapter",section);
+		condMap.put("section",section);
 		if(pageNum== null) {
 			pageNum = "1";
 		}
@@ -68,18 +67,16 @@ public class AdminMemberControllerImpl extends BaseController  implements AdminM
 		mav.addObject("endMonth",endDate2[1]);
 		mav.addObject("endDay",endDate2[2]);
 		
-		mav.addObject("chapter", section);
+		mav.addObject("section", section);
 		mav.addObject("pageNum", pageNum);
 		return mav;
 		
 	}
-	
 	@RequestMapping(value="/memberDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		String member_id=request.getParameter("member_id");
-		
 		MemberVO member_info=adminMemberService.memberDetail(member_id);
 		mav.addObject("member_info",member_info);
 		return mav;
