@@ -30,4 +30,10 @@ public class MemberServiceImpl implements MemberService {
 	public String overlapped(String id) throws Exception{
 		return memberDAO.selectOverlappedID(id);
 	}
+	
+	@Override
+	public String search_id(String email1) throws Exception{
+		return memberDAO.Newsearch_id(email1);
+	}
+	
 }

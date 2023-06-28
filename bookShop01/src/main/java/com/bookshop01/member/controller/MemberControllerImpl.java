@@ -106,4 +106,19 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		resEntity =new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
+	
+	@Override
+	@RequestMapping(value="/search_id.do" ,method = RequestMethod.POST)
+	public ResponseEntity search_id(@RequestParam("email1") String email1,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberService.search_id(email1);
+		
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
+		
+		System.out.println( resEntity ) ;
+
+		
+		return resEntity ;
+	}
 }

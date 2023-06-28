@@ -31,5 +31,11 @@ public class MemberDAOImpl  implements MemberDAO{
 		return result;
 	}
 	
+	@Override
+	public String Newsearch_id(String email1) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.Newsearch_id",email1);
+		return result;
+	}
+	
 	
 }

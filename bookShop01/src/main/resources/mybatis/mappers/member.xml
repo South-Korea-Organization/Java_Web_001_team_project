@@ -51,6 +51,12 @@
 	   where member_id = #{id}
 	</select>
 	
+	<select id="Newsearch_id"   resultType="String"  parameterType="String"    >
+	   select member_id
+	   from t_shopping_member
+	   where email1 = #{email1} 
+	</select>
+	
   <insert id="insertNewMember"  parameterType="memberVO">
   <![CDATA[
     	insert into t_shopping_member(member_id,

@@ -19,4 +19,7 @@ public interface MemberController {
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity   overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public ResponseEntity   search_id(@RequestParam("email1") String email1, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception;
+	
 }
