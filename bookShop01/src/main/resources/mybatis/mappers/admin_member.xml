@@ -38,8 +38,10 @@
 		  select * from (
 			    select rowNum as recNum,t.*
 			       from (
-			              select  *  from t_shoping_member 
+			              select  *  from t_shopping_member
+			                	             
 			              where to_char(joinDate,'yyyy-mm-dd')  between #{beginDate} and #{endDate}
+			             
 			                <if test="search_type=='member_id'">
 			                  AND member_id=#{search_word}
 			                </if>
@@ -49,23 +51,29 @@
 			                <if test="search_type=='member_hp_num'">
 			                   AND hp1||hp2||hp3=#{search_word} 
 			                </if>
+			               
 			              order by joinDate desc
+			             
 					    ) t
-				)							
+				)
+	 									
 			where				
-		recNum between (#{chapter}-1)*100+ (#{pageNum}-1)*10+1 and (#{chapter}-1)*100+(#{pageNum})*10				        
+		recNum between (#{chapter}-1)*100+ (#{pageNum}-1)*10+1 and (#{chapter}-1)*100+(#{pageNum})*10
+	
+		 
+					        
 	</select>
 	
     <select id="memberDetail" resultMap="memberResult"   parameterType="String"  >
 	    <![CDATA[
-		    select * from t_shoping_member
+		    select * from t_shopping_member
             where member_id=#{member_id}
     	]]>
 	</select>	
 	
 
 	<update id="modifyMemberInfo" parameterType="java.util.HashMap">
-	   update t_shoping_member
+	   update t_shopping_member
 			   <set>
 			      <if test=" member_pw!='' and member_pw!=null">
 			        member_pw=#{member_pw},

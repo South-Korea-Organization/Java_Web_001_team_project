@@ -2,8 +2,6 @@
 	pageEncoding="utf-8"
 	 isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="${contextPath}/resources/css/subPage.css" rel="stylesheet" type="text/css" media="screen">
-
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html >
 <html>
@@ -23,52 +21,30 @@ function result(){
 </c:if>
 </head>
 <body>
-<div class="pageWrap">
-                <form method="POST" action="${contextPath}/member/login.do">
-                    <input type="hidden" name="_token" value="oM00jfHYsNLRFmpJ2NirOyWTyEUIJOBRfSCoThnw">
-                    <BR>
-                    <div class="shadow p-3 mb-5 bg-white rounded text-secondary text-center display-4 font-italic">STEPLANT</div>
-					    <br><br>
-                        <div class="form-group col-md-6">
-                            <input id="userid" type="text"
-                                   class="form-control"
-                                   name="member_id" value="" required autocomplete="userid" autofocus
-                                   placeholder="아이디">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <input id="password" type="password"
-                                   class="form-control "
-                                   name="member_pw" required autocomplete="current-password"
-                                   placeholder="패스워드">
-                        </div><br>
-                        <div class="row login-options">
-                            <div class="col-6 text-left">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" name="remember" id="remember" >
-                                    <label class="custom-control-label text-dark" for="remember" >아이디 저장</label>
-                                </div>
-                            </div>
-                            <div class="col-6 text-right">
-                                <a href="#" class="text-success">아이디/비밀번호 찾기</a>
-                            </div>
-                        </div>
-                        <br>
-
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <button type="submit" class="form-control btn btn-success">로그인</button>
-                        </div>
-                        <div class="form-group col-md-3">
-                        </div>
-                        <div class="form-group col-md-3">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <a href="${contextPath}/member/memberForm.do" class="btn btn-success  active" role="button" >회원가입</a>
-					</div>
-
-
-
+	<H3>회원 로그인 창</H3>
+	<DIV id="detail_table">
+	<form action="${contextPath}/member/login.do" method="post">
+		<TABLE>
+			<TBODY>
+				<TR class="dot_line">
+					<TD class="fixed_join">아이디</TD>
+					<TD><input name="member_id" type="text" size="20" /></TD>
+				</TR>
+				<TR class="solid_line">
+					<TD class="fixed_join">비밀번호</TD>
+					<TD><input name="member_pw" type="password" size="20" /></TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+		<br><br>
+		<INPUT	type="submit" value="로그인"> 
+		<INPUT type="button" value="초기화">
+		
+		<Br><br>
+		   <a href="#">아이디 찾기</a>  | 
+		   <a href="#">비밀번호 찾기</a> | 
+		   <a href="${contextPath}/member/addMember.do">회원가입</a>    | 
+		   <a href="#">고객 센터</a>
 					   
 	</form>		
 </body>

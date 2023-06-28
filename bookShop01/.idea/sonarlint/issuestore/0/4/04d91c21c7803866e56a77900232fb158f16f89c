@@ -1,21 +1,0 @@
-
-CWeb:PageWithoutTitleCheck"Add a <title> tag to this page.(Õ¶¯M
-NWeb:TableWithoutCaptionCheckÈ" Add a description to this table.(ƒÒ‚Ûùÿÿÿÿ
-@	Web:S5256È"%Add "<th>" headers to this "<table>".(ƒÒ‚Ûùÿÿÿÿ
-NWeb:TableWithoutCaptionCheckÿ" Add a description to this table.(¿‰˜ÿÿÿÿÿ
-n Web:TableHeaderHasIdOrScopeCheck‚";Add either an 'id' or a 'scope' attribute to this <th> tag.(üï38õêŸ1
-NWeb:TableWithoutCaptionCheckô" Add a description to this table.(¿‰˜ÿÿÿÿÿ
-@	Web:S5256ô"%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
-NWeb:TableWithoutCaptionCheck“" Add a description to this table.(¿‰˜ÿÿÿÿÿ
-@	Web:S5256“"%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
-IWeb:TableWithoutCaptionCheck·" Add a description to this table.(¤¶×·
-;	Web:S5256·"%Add "<th>" headers to this "<table>".(¤¶×·
-WWeb:UnsupportedTagsInHtml5CheckÛ"&Remove this deprecated "font" element.(¦ªß¨ùÿÿÿÿ
-NWeb:TableWithoutCaptionCheckç" Add a description to this table.(¿‰˜ÿÿÿÿÿ
-@	Web:S5256ç"%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
-JWeb:AvoidCommentedOutCodeCheckì"Remove this commented out code.(†Šù¨
-OWeb:AvoidCommentedOutCodeCheckô"Remove this commented out code.(ğŸÕ¸ÿÿÿÿÿ
-TWeb:UnsupportedTagsInHtml5CheckÂ"(Remove this deprecated "center" element.(¡á€Ò
-MWeb:ImgWithoutAltCheckĞ"%Add an "alt" attribute to this image.(Ş†Ü«úÿÿÿÿ
-NWeb:TableWithoutCaptionCheckÕ" Add a description to this table.(¿‰˜ÿÿÿÿÿ
-@	Web:S5256Õ"%Add "<th>" headers to this "<table>".(¿‰˜ÿÿÿÿÿ
