@@ -23,8 +23,7 @@
 		<param-value>/WEB-INF/spring/mybatis-context.xml</param-value>
 	</context-param>
 	
-	
-	
+
 	<!-- filter mapping 기능 추가 : 복잡해 질 수 있음 -->
 	<filter-mapping>
 	  <filter-name>WebFilter</filter-name>
@@ -39,8 +38,7 @@
 	  <filter-class>com.bookshop01.filter.login.LoginFilter</filter-class>
 	</filter>
 	<!-- filter mapping 기능 추가 -->
-	
-	
+
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>

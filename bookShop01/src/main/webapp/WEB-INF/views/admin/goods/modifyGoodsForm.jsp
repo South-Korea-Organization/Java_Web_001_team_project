@@ -88,7 +88,7 @@ function fn_modify_goods(goods_id, attribute){
 			alert("에러가 발생했습니다."+data);
 		},
 		complete : function(data, textStatus) {
-			//alert("작업을완료 했습니다");
+			//alert("???????? ??????");
 			
 		}
 	}); //end ajax	
@@ -111,7 +111,7 @@ function fn_modify_goods(goods_id, attribute){
   function fn_addFile(){
 	  $("#d_file").append("<br>"+"<input  type='file' name='detail_image"+cnt+"' id='detail_image"+cnt+"'  onchange=readURL(this,'previewImage"+cnt+"') />");
 	  $("#d_file").append("<img  id='previewImage"+cnt+"'   width=200 height=200  />");
-	  $("#d_file").append("<input  type='button' value='추가'  onClick=addNewImageFile('detail_image"+cnt+"','${imageFileList[0].goods_id}','detail_image')  />");
+	  $("#d_file").append("<input  type='button' value='???'  onClick=addNewImageFile('detail_image"+cnt+"','${imageFileList[0].goods_id}','detail_image')  />");
 	  cnt++;
   }
   
@@ -174,13 +174,13 @@ function fn_modify_goods(goods_id, attribute){
     			alert("에러가 발생했습니다."+textStatus);
     		},
     		complete : function(data, textStatus) {
-    			//alert("작업을완료 했습니다");
+    			//alert("???????? ??????");
     			
     		}
     	}); //end ajax	
   }
-  
-//상품 삭제 기능 추가
+
+  //상품 삭제 기능 추가
   function fn_delete_goods(goods_id, goods_del_yn){
   	var frm_mod_goods=document.frm_mod_goods;
   	var i_goods_id = document.createElement("input");
@@ -198,8 +198,7 @@ function fn_modify_goods(goods_id, attribute){
       frm_mod_goods.action="${contextPath}/admin/goods/deleteGoods.do";
       frm_mod_goods.submit();
   }
-  
-  
+
 </script>
 
 </HEAD>
@@ -209,105 +208,105 @@ function fn_modify_goods(goods_id, attribute){
 	<!-- 내용 들어 가는 곳 -->
 	<DIV id="container">
 		<UL class="tabs">
-			<li><A href="#tab1">상품정보</A></li>
-			<li><A href="#tab2">상품목차</A></li>
-			<li><A href="#tab3">상품저자소개</A></li>
-			<li><A href="#tab4">상품소개</A></li>
-			<li><A href="#tab5">출판사 상품 평가</A></li>
-			<li><A href="#tab6">추천사</A></li>
-			<li><A href="#tab7">상품이미지</A></li>
+			<li><A href="#tab1">???????</A></li>
+			<li><A href="#tab2">???????</A></li>
+			<li><A href="#tab3">?????????</A></li>
+			<li><A href="#tab4">??????</A></li>
+			<li><A href="#tab5">????? ??? ??</A></li>
+			<li><A href="#tab6">?????</A></li>
+			<li><A href="#tab7">????????</A></li>
 		</UL>
 		<DIV class="tab_container">
 			<DIV class="tab_content" id="tab1">
 				<table >
 			<tr >
-				<td width=200 >상품분류</td>
+				<td width=200 >????з?</td>
 				<td width=500>
 				  <select name="goods_sort">
 					<c:choose>
-				      <c:when test="${goods.goods_sort=='컴퓨터와 인터넷' }">
-						<option value="컴퓨터와 인터넷" selected>컴퓨터와 인터넷 </option>
-				  	    <option value="디지털 기기">디지털 기기  </option>
+				      <c:when test="${goods.goods_sort=='?????? ?????' }">
+						<option value="?????? ?????" selected>?????? ????? </option>
+				  	    <option value="?????? ???">?????? ???  </option>
 				  	  </c:when>
-				  	  <c:when test="${goods.goods_sort=='디지털 기기' }">
-						<option value="컴퓨터와 인터넷" >컴퓨터와 인터넷 </option>
-				  	    <option value="디지털 기기" selected>디지털 기기  </option>
+				  	  <c:when test="${goods.goods_sort=='?????? ???' }">
+						<option value="?????? ?????" >?????? ????? </option>
+				  	    <option value="?????? ???" selected>?????? ???  </option>
 				  	  </c:when>
 				  	</c:choose>
 					</select>
 				</td>
 				<td >
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_sort')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_sort')"/>
 				</td>
 			</tr>
 			<tr >
-				<td >상품이름</td>
+				<td >??????</td>
 				<td><input name="goods_title" type="text" size="40"  value="${goods.goods_title }"/></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_title')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_title')"/>
 				</td>
 			</tr>
 			
 			<tr>
-				<td >저자</td>
+				<td >????</td>
 				<td><input name="goods_writer" type="text" size="40" value="${goods.goods_writer }" /></td>
 								<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_writer')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_writer')"/>
 				</td>
 				
 			</tr>
 			<tr>
-				<td >출판사</td>
+				<td >?????</td>
 				<td><input name="goods_publisher" type="text" size="40" value="${goods.goods_publisher }" /></td>
 			     <td>
-				  <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_publisher')"/>
+				  <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_publisher')"/>
 				</td>
 				
 			</tr>
 			<tr>
-				<td >상품정가</td>
+				<td >???????</td>
 				<td><input name="goods_price" type="text" size="40" value="${goods.goods_price }" /></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_price')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_price')"/>
 				</td>
 				
 			</tr>
 			
 			<tr>
-				<td >상품판매가격</td>
+				<td >?????????</td>
 				<td><input name="goods_sales_price" type="text" size="40" value="${goods.goods_sales_price }" /></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_sales_price')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_sales_price')"/>
 				</td>
 				
 			</tr>
 			
 			
 			<tr>
-				<td >상품 구매 포인트</td>
+				<td >??? ???? ?????</td>
 				<td><input name="goods_point" type="text" size="40" value="${goods.goods_point }" /></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_point')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_point')"/>
 				</td>
 
 			</tr>
 
 			<tr>
-				<td >상품출판일</td>
+				<td >?????????</td>
 				<td>
 				  <input  name="goods_published_date"  type="date"  value="${goods.goods_published_date }" />
 				</td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_published_date')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_published_date')"/>
 				</td>
 
 			</tr>
 			
 			<tr>
-				<td >상품 총 페이지수</td>
+				<td >??? ?? ????????</td>
 				<td><input name="goods_total_page" type="text" size="40"  value="${goods.goods_total_page }"/></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_total_page"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_total_page"/>
 				</td>
 
 			</tr>
@@ -316,44 +315,44 @@ function fn_modify_goods(goods_id, attribute){
 				<td >ISBN</td>
 				<td><input name="goods_isbn" type="text" size="40" value="${goods.goods_isbn }" /></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_isbn')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_isbn')"/>
 				</td>
 
 			</tr>
 			<tr>
-				<td >상품 배송비</td>
+				<td >??? ????</td>
 				<td><input name="goods_delivery_price" type="text" size="40"  value="${goods.goods_delivery_price }"/></td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_delivery_price')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_delivery_price')"/>
 				</td>
 
 			</tr>
 			<tr>
-				<td >상품 도착 예정일</td>
+				<td >??? ???? ??????</td>
 				<td>
 				  <input name="goods_delivery_date" type="date"  value="${goods.goods_delivery_date }" />
 				  </td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_delivery_date')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_delivery_date')"/>
 				</td>
 
 			</tr>
 			
 			<tr>
-				<td >상품종류</td>
+				<td >???????</td>
 				<td>
 				<select name="goods_status">
-				  <option value="bestseller"  >베스트셀러</option>
-				  <option value="steadyseller" >스테디셀러</option>
-				  <option value="newbook" >신간</option>
-				  <option value="on_sale" >판매중</option>
-				  <option value="buy_out"  selected>품절</option>
-				  <option value="out_of_print" >절판</option>
+				  <option value="bestseller"  >?????????</option>
+				  <option value="steadyseller" >??????</option>
+				  <option value="newbook" >???</option>
+				  <option value="on_sale" >?????</option>
+				  <option value="buy_out"  selected>???</option>
+				  <option value="out_of_print" >????</option>
 				</select>
 				<input  type="hidden" name="h_goods_status" value="${goods.goods_status }"/>
 				</td>
 				<td>
-				 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_status')"/>
+				 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_status')"/>
 				</td>
 			</tr>
 			<tr>
@@ -364,59 +363,59 @@ function fn_modify_goods(goods_id, attribute){
 				</table>	
 			</DIV>
 			<DIV class="tab_content" id="tab2">
-				<h4>책목차</h4>
+				<h4>?????</h4>
 				<table>	
 				<tr>
-					<td >상품목차</td>
+					<td >???????</td>
 					<td><textarea  rows="100" cols="80" name="goods_contents_order">
 					  ${goods.goods_contents_order }
 					</textarea>
 					</td>
 					<td>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_contents_order')"/>
+					 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_contents_order')"/>
 					</td>
 				</tr>
 				</table>	
 			</DIV>
 			<DIV class="tab_content" id="tab3">
-				<H4>상품 저자 소개</H4>
+				<H4>??? ???? ???</H4>
 				<P>
 				 <table>
 	  				 <tr>
-						<td >상품 저자 소개</td>
+						<td >??? ???? ???</td>
 						<td><textarea  rows="100" cols="80" name="goods_writer_intro">
 						  ${goods.goods_writer_intro }
 						</textarea>
 						</td>
 						<td>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_writer_intro')"/>
+						 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_writer_intro')"/>
 						</td>
 				   </tr>
 			   </table>
 				</P>
 			</DIV>
 			<DIV class="tab_content" id="tab4">
-				<H4>상품소개</H4>
+				<H4>??????</H4>
 				<P>
 				<table>
 					<tr>
-						<td>상품소개</td>
+						<td>??????</td>
 						<td><textarea  rows="100" cols="80" name="goods_intro">
 						${goods.goods_intro }
 						</textarea>
 						</td>
 						<td>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_intro')"/>
+						 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_intro')"/>
 						</td>
 					</tr>
 			    </table>
 				</P>
 			</DIV>
 			<DIV class="tab_content" id="tab5">
-				<H4>출판사 상품 평가</H4>
+				<H4>????? ??? ??</H4>
 				<P>
 				<table>
 					<tr>
@@ -426,38 +425,38 @@ function fn_modify_goods(goods_id, attribute){
 						</td>
 						<td>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_publisher_comment')"/>
+						 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_publisher_comment')"/>
 						</td>
 					</tr>
 			</table>
 				</P>
 			</DIV>
 			<DIV class="tab_content" id="tab6">
-				<H4>추천사</H4>
+				<H4>?????</H4>
 				 <table>
 					 <tr>
-						<td>추천사</td>
+						<td>?????</td>
 						<td><textarea  rows="100" cols="80" name="goods_recommendation">
 						  ${goods.goods_recommendation }
 						</textarea>
 						</td>
 						<td>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						 <input  type="button" value="수정반영"  onClick="fn_modify_goods('${goods.goods_id }','goods_recommendation')"/>
+						 <input  type="button" value="???????"  onClick="fn_modify_goods('${goods.goods_id }','goods_recommendation')"/>
 						</td>
 					</tr>
 			    </table>
 			</DIV>
 			<DIV class="tab_content" id="tab7">
 			   <form id="FILE_FORM" method="post" enctype="multipart/form-data"  >
-				<h4>상품이미지</h4>
+				<h4>????????</h4>
 				 <table>
 					 <tr>
 					<c:forEach var="item" items="${imageFileList }"  varStatus="itemNum">
 			        <c:choose>
 			            <c:when test="${item.fileType=='main_image' }">
 			              <tr>
-						    <td>메인 이미지</td>
+						    <td>???? ?????</td>
 						    <td>
 							  <input type="file"  id="main_image"  name="main_image"  onchange="readURL(this,'preview${itemNum.count}');" />
 						      <%-- <input type="text" id="image_id${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
@@ -471,7 +470,7 @@ function fn_modify_goods(goods_id, attribute){
 						  &nbsp;&nbsp;&nbsp;&nbsp;
 						</td>
 						 <td>
-						 <input  type="button" value="수정"  onClick="modifyImageFile('main_image','${item.goods_id}','${item.image_id}','${item.fileType}')"/>
+						 <input  type="button" value="????"  onClick="modifyImageFile('main_image','${item.goods_id}','${item.image_id}','${item.fileType}')"/>
 						</td> 
 					</tr>
 					<tr>
@@ -482,7 +481,7 @@ function fn_modify_goods(goods_id, attribute){
 			         </c:when>
 			         <c:otherwise>
 			           <tr  id="${itemNum.count-1}">
-						<td>상세 이미지${itemNum.count-1 }</td>
+						<td>?? ?????${itemNum.count-1 }</td>
 						<td>
 							<input type="file" name="detail_image"  id="detail_image"   onchange="readURL(this,'preview${itemNum.count}');" />
 							<%-- <input type="text" id="image_id${itemNum.count }"  value="${item.fileName }" disabled  /> --%>
@@ -496,8 +495,8 @@ function fn_modify_goods(goods_id, attribute){
 						  &nbsp;&nbsp;&nbsp;&nbsp;
 						</td>
 						 <td>
-						 <input  type="button" value="수정"  onClick="modifyImageFile('detail_image','${item.goods_id}','${item.image_id}','${item.fileType}')"/>
-						  <input  type="button" value="삭제"  onClick="deleteImageFile('${item.goods_id}','${item.image_id}','${item.fileName}','${itemNum.count-1}')"/>
+						 <input  type="button" value="????"  onClick="modifyImageFile('detail_image','${item.goods_id}','${item.image_id}','${item.fileType}')"/>
+						  <input  type="button" value="????"  onClick="deleteImageFile('${item.goods_id}','${item.image_id}','${item.fileName}','${itemNum.count-1}')"/>
 						</td> 
 					</tr>
 					<tr>
@@ -518,26 +517,27 @@ function fn_modify_goods(goods_id, attribute){
 		   <tr>
 		     <td align=center colspan=2>
 		     
-		     <input   type="button" value="이미지파일추가하기"  onClick="fn_addFile()"  />
+		     <input   type="button" value="???????????????"  onClick="fn_addFile()"  />
 		   </td>
 		</tr> 
 	</table>
 	</form>
 	</DIV>
 	<DIV class="clear"></DIV>
+					
+</form>	
 
-
-<H3>상품삭제하기</H3>
+<H3>??????????</H3>
 <DIV id="search">
-<!-- 상품삭제 버튼 추가 -->
+<!-- ??????? ??? ??? -->
 				<td>
 					<input type="hidden" name="command"  value="modify_goods_info" /> 
 					<c:choose>
 					  <c:when test="${goods.goods_del_yn=='N' }">
-					    <input  type="button"  value="상품삭제" onClick="fn_delete_goods('${goods.goods_id }','Y')">   
+					    <input  type="button"  value="???????" onClick="fn_delete_goods('${goods.goods_id }','Y')">   
 					  </c:when>
 					  <c:when  test="${goods.goods_del_yn=='Y' }">
-					    <input  type="button"  value="상품복원" onClick="fn_delete_goods('${goods.goods_id }','N')">
+					    <input  type="button"  value="???????" onClick="fn_delete_goods('${goods.goods_id }','N')">
 					  </c:when>
 					  
 					</c:choose>
