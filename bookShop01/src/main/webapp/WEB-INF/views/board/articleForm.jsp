@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="${contextPath}/resources/css/subPage.css" rel="stylesheet" type="text/css" media="screen">
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -76,7 +75,7 @@
 	</div><br>
 	
 	<div>
-	       <input class="btn btn-success float-left" type="button" value="목록보기" onClick="backToList(this.form)" />
+		<input class="btn btn-success float-left" type="button" value="목록보기" onClick="backToList(this.form)" />
 		   <input class="btn btn-success float-right" type="submit" value="글 쓰기">
 	       <div id="d_file">
 	       </div>

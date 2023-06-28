@@ -11,6 +11,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <style>
+   .cls1 {text-decoration:none;}
+   .cls2{text-align:center; font-size:30px;}
+  </style>
   <meta charset="UTF-8">
   <title>글목록</title>
 </head>
@@ -73,7 +77,7 @@
     </c:choose>
 </table>
 
-<a  class="btn btn-success float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
+<a class="btn btn-success float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
                                                     '${contextPath}/member/loginForm.do')">글 게시</a>
 </body>
 </html>
