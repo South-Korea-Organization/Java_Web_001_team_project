@@ -3,7 +3,6 @@
 	isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html >
 <html>
@@ -87,15 +86,12 @@ function  calcPeriod(search_period){
 	//alert(beginDate+","+endDate);
 	return beginDate+","+endDate;
 }
-
-
-
 </script>
 </head>
 <body>
 	<H3>상품 조회</H3>
 	<form  method="post">	
-		<TABLE cellpadding="10" cellspacing="10"  >
+		<TABLE cellpadding="10" cellspacing="10" >
 			<TBODY>
 				<TR >
 					<TD>
@@ -194,18 +190,16 @@ function  calcPeriod(search_period){
 	</DIV>
 </form>	
 <DIV class="clear"></DIV>
-<TABLE class="list_view">
+<TABLE class="list_view table-bordered table-hover">
 		<TBODY align=center >
-			<tr style="background:#33ff00" >
+			<tr style="background:lightgray" >
 				<td>상품번호</td>
-				<td>상품이름(수정)</td>
+				<td>상품이름</td>
 				<td>저자</td>
 				<td>출판사</td>
 				<td>상품가격</td>
 				<td>입고일자</td>
 				<td>출판일</td>
-				<td>삭제여부</td>
-				
 			</tr>
    <c:choose>
      <c:when test="${empty newGoodsList }">			
@@ -216,7 +210,7 @@ function  calcPeriod(search_period){
 		     </TR>
 	 </c:when>
 	 <c:otherwise>
-     <c:forEach var="item" items="${newGoodsList }"  varStatus="item_num">
+     <c:forEach var="item" items="${newGoodsList }">
 			 <TR>       
 				<TD>
 				  <strong>${item.goods_id }</strong>
@@ -245,19 +239,6 @@ function  calcPeriod(search_period){
 					   <c:out value="${arr[0]}" />
 					</strong>
 				</td>
-				<td>
-				
-					   <c:choose>
-				         <c:when test="${item.goods_del_yn=='N' }">
-				           <strong>판매중</strong>  
-				         </c:when>
-				         <c:otherwise>
-				           <strong>삭제</strong>
-				         </c:otherwise>
-				       </c:choose>
-				</td>
-				
-
 				
 			</TR>
 	</c:forEach>
@@ -273,7 +254,7 @@ function  calcPeriod(search_period){
 		         <c:if test="${page ==10 }">
 		          <a href="${contextPath}/admin/goods/adminGooodsMain.do?chapter=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
 		         </c:if> 
-	      		 </c:forEach> 
+	      		</c:forEach> 
      
 		</TBODY>
 		

@@ -15,10 +15,4 @@ public interface MyPageService{
 	public void cancelOrder(String order_id) throws Exception;
 	public MemberVO myDetailInfo(String member_id) throws Exception;
 
-	// 마이페이지 추가
-	public void delMember(String member_id) throws Exception;
-	
-	// ( 2023.06.19 by Dean )
-	public List<OrderVO> listChangeMyOrderStatus(String member_id) throws Exception; 
-
 }

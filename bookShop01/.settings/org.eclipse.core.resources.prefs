@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/main/java/com/bookshop01/admin/goods/controller/AdminGoodsControllerImpl.java=UTF-8
-encoding//src/main/java/com/bookshop01/common/base/BaseController.java=UTF-8
-encoding//src/main/java/com/bookshop01/common/file/FileDownloadController.java=UTF-8
+encoding//src/main/java/com/bookshop01/board/controller/BoardControllerImpl.java=UTF-8
+encoding//src/main/java/com/bookshop01/goods/controller/GoodsControllerImpl.java=UTF-8
+encoding//src/main/java/com/bookshop01/member/controller/MemberControllerImpl.java=UTF-8
+encoding//src/main/java/com/bookshop01/order/controller/OrderControllerImpl.java=UTF-8

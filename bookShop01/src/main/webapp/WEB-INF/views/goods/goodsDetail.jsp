@@ -31,9 +31,10 @@
 	left: 50%;
 	top: 45%;
 	width: 300px;
-	height: 200px;
-	background-color: #ccffff;
-	border: 3px solid #87cb42;
+	color: black;
+	background-color: #82FA58;
+	border-radius: 10px;
+
 }
 
 #close {
@@ -44,7 +45,7 @@
 <script type="text/javascript">
 	function add_cart(goods_id) {
 		$.ajax({
-			type : "post",
+			type : "POST",
 			async : false, //false인 경우 동기식으로 처리한다.
 			url : "${contextPath}/cart/addGoodsInCart.do",
 			data : {
@@ -55,7 +56,10 @@
 				//alert(data);
 			//	$('#message').append(data);
 				if(data.trim()=='add_success'){
-					imagePopup('open', '.layer01');	
+					//alert("등록 성공");
+					imagePopup('open', '.layer01');
+
+
 				}else if(data.trim()=='already_existed'){
 					alert("이미 카트에 등록된 상품입니다.");	
 				}
@@ -65,7 +69,7 @@
 				alert("에러가 발생했습니다."+data);
 			},
 			complete : function(data, textStatus) {
-				//alert("작업을완료 했습니다");
+				//alert("작업을 완료 했습니다");
 			}
 		}); //end ajax	
 	}
@@ -85,6 +89,8 @@
 			jQuery('#layer').attr('style', 'visibility:hidden');
 		}
 	}
+
+
 	
 function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 	var _isLogOn=document.getElementById("isLogOn");
@@ -127,7 +133,10 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
     formObj.method="post";
     formObj.action="${contextPath}/order/orderEachGoods.do";
     formObj.submit();
-	}	
+	}
+
+
+
 </script>
 </head>
 <body>
@@ -211,10 +220,9 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 			</tbody>
 		</table>
 		<ul>
-			<li><a class="buy" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
-			<li><a class="cart" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
-			
-			<li><a class="wish" href="#">위시리스트</a></li>
+			<li><a class="buy btn" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
+			<li><a class="cart btn" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
+			<li><a class="wish btn" href="#">위시리스트</a></li>
 		</ul>
 	</div>
 	<div class="clear"></div>
@@ -233,8 +241,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<h4>책소개</h4>
 				<p>${fn:replace(goods.goods_intro,crcn,br)}</p>
 				<c:forEach var="image" items="${imageList }">
-					<img 
-						src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}">
+					<img src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}" alt="">
 				</c:forEach>
 			</div>
 			<div class="tab_content" id="tab2">
@@ -262,16 +269,22 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		</div>
 	</div>
 	<div class="clear"></div>
+
 	<div id="layer" style="visibility: hidden">
 		<!-- visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다. -->
 		<div id="popup">
 			<!-- 팝업창 닫기 버튼 -->
-			<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');"> <img
-				src="${contextPath}/resources/image/close.png" id="close" />
-			</a> <br /> <font size="12" id="contents">장바구니에 담았습니다.</font><br>
-<form   action='${contextPath}/cart/myCartList.do'  >				
-		<input  type="submit" value="장바구니 보기">
-</form>			
+
+
+
+				<div class="alert" role="alert">
+				<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');">
+                			<img src="${contextPath}/resources/image/close.png" id="close" alt=""/>
+                			</a>
+                  <p> 장바구니에 담았습니다 </p> <br>
+                   <a href="${contextPath}/cart/myCartList.do" class="alert-link"> 장바구니 바로가기</a>
+                </div>
+
 </body>
 </html>
 <input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/>

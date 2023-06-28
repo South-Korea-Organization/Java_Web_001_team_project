@@ -19,28 +19,6 @@
        <put-attribute name="title" value="내 정보 상세 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/myDetailInfo.jsp" />
      </definition>
-     
-     <!-- 마이페이지 !-->
-     <definition name="/mypage/myAddressPage" extends="baseLayout">
-       <put-attribute name="title" value="나의 주소록 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/mypage/myAddressPage.jsp" />
-     </definition>
-     <definition name="/mypage/myWithDrawal" extends="baseLayout">
-       <put-attribute name="title" value="회원 탈퇴 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/mypage/myWithDrawal.jsp" />
-     </definition>
-     
-     <!-- 마이페이지 취소/반품/교환/환불 내역 추가 2023.06.19 by Dean -->
-     <definition name="/mypage/listChangeMyOrderStatus" extends="baseLayout">
-       <put-attribute name="title" value="마이페이지 취소/반품/교환/환불/내역" />  
-       <put-attribute name="body" value="/WEB-INF/views/mypage/listChangeMyOrderStatus.jsp" />
-     </definition>
-     <!-- 마이페이지 취소/반품/교환/환불 내역 > 교환신청 추가 2023.06.21 by Dean -->
-     <definition name="/mypage/exchangeMyOrder" extends="baseLayout">
-       <put-attribute name="title" value="마이페이지 취소/반품/교환/환불/내역" />  
-       <put-attribute name="body" value="/WEB-INF/views/mypage/exchangeMyOrder.jsp" />
-     </definition>
-     
 </tiles-definitions>
 
 

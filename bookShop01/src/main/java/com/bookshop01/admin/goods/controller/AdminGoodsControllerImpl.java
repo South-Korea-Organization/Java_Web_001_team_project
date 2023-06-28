@@ -2,7 +2,6 @@ package com.bookshop01.admin.goods.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList ;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -25,13 +24,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookshop01.admin.goods.service.AdminGoodsService;
-import com.bookshop01.admin.member.service.AdminMemberService ;
-import com.bookshop01.admin.order.service.AdminOrderService ;
 import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.goods.vo.ImageFileVO;
 import com.bookshop01.member.vo.MemberVO;
-import com.bookshop01.order.vo.OrderVO ;
 
 @Controller("adminGoodsController")
 @RequestMapping(value="/admin/goods")
@@ -40,14 +36,6 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 	@Autowired
 	private AdminGoodsService adminGoodsService;
 	
-	// order�뿉�꽌 �뵲�샂
-	@Autowired
-	private AdminOrderService adminOrderService;
-	
-	// member�뿉�꽌 �뵲�샂
-	@Autowired
-	private AdminMemberService adminMemberService;
-	
 	@RequestMapping(value="/adminGoodsMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminGoodsMain(@RequestParam Map<String, String> dateMap,
 			                           HttpServletRequest request, HttpServletResponse response)  throws Exception {
@@ -55,7 +43,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		ModelAndView mav = new ModelAndView(viewName);
 		HttpSession session=request.getSession();
 		session=request.getSession();
-		session.setAttribute("side_menu", "admin_mode"); //留덉씠�럹�씠吏� �궗�씠�뱶 硫붾돱濡� �꽕�젙�븳�떎.
+		session.setAttribute("side_menu", "admin_mode"); //마이페이지 사이드 메뉴로 설정한다.
 		
 		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 		String section = dateMap.get("section");
@@ -69,7 +57,6 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		dateMap.put("endDate", endDate);
 		
 		Map<String,Object> condMap=new HashMap<String,Object>();
-		
 		if(section== null) {
 			section = "1";
 		}
@@ -80,7 +67,6 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		condMap.put("pageNum",pageNum);
 		condMap.put("beginDate",beginDate);
 		condMap.put("endDate", endDate);
-		
 		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
 		mav.addObject("newGoodsList", newGoodsList);
 		
@@ -95,7 +81,6 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		
 		mav.addObject("section", section);
 		mav.addObject("pageNum", pageNum);
-		
 		return mav;
 		
 	}
@@ -144,7 +129,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 				}
 			}
 			message= "<script>";
-			message += " alert('�깉�긽�뭹�쓣 異붽��뻽�뒿�땲�떎.');";
+			message += " alert('새상품을 추가했습니다.');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 		}catch(Exception e) {
@@ -157,7 +142,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			}
 			
 			message= "<script>";
-			message += " alert('�삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎. �떎�떆 �떆�룄�빐 二쇱꽭�슂');";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/admin/goods/addNewGoodsForm.do';";
 			message +=("</script>");
 			e.printStackTrace();
@@ -198,22 +183,7 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 		return resEntity;
 	}
 	
-	
-	@RequestMapping(value="/deleteGoods.do" ,method={RequestMethod.POST})
-	public ModelAndView deleteGoods(HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		ModelAndView mav = new ModelAndView();
-		Map<String,String> goodsMap=new HashMap<String,String>();
-		String goods_id=request.getParameter("goods_id");
-		String goods_del_yn=request.getParameter("goods_del_yn");
-		goodsMap.put("goods_del_yn", goods_del_yn);
-		goodsMap.put("goods_id", goods_id);
-		
-		adminGoodsService.modifyGoodsInfo(goodsMap);
-		mav.setViewName("redirect:/admin/goods/adminGoodsMain.do");
-		return mav;
-		
-	}
-	
+
 	@RequestMapping(value="/modifyGoodsImageInfo.do" ,method={RequestMethod.POST})
 	public void modifyGoodsImageInfo(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)  throws Exception {
 		System.out.println("modifyGoodsImageInfo");
@@ -336,80 +306,5 @@ public class AdminGoodsControllerImpl extends BaseController  implements AdminGo
 			e.printStackTrace();
 		}
 	}
-	
-	// 愿�由ъ옄 寃뚯떆�뙋 愿�由ш린�뒫 �엫�떆濡� 異붽�
-	
-	@RequestMapping(value="/adminBoardMain.do" ,method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView adminBoardMain(@RequestParam Map<String, String> dateMap,
-			                           HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		//留덉씠�럹�씠吏� �궗�씠�뱶 硫붾돱濡� �꽕�젙�븳�떎.
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		session.setAttribute("side_menu", "admin_mode"); 
-		
-		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
-		String section = dateMap.get("section");
-		String pageNum = dateMap.get("pageNum");
-		String beginDate=null,endDate=null;
-		
-		String [] tempDate=calcSearchPeriod(fixedSearchPeriod).split(",");
-		beginDate=tempDate[0];
-		endDate=tempDate[1];
-		dateMap.put("beginDate", beginDate);
-		dateMap.put("endDate", endDate);
-		
-		Map<String,Object> condMap=new HashMap<String,Object>();
-		HashMap<String,Object> condMap_mem=new HashMap<String,Object>();
-		//condMap_mem = condMap
-		
-		if(section== null) {
-			section = "1";
-		}
-		condMap.put("section",section);
-		condMap.put("chapter",section);
-		condMap_mem.put("section",section);
-		condMap_mem.put("chapter",section);
-		
-		if(pageNum== null) {
-			pageNum = "1";
-		}
-		condMap.put("pageNum",pageNum);
-		condMap.put("beginDate",beginDate);
-		condMap.put("endDate", endDate);
-		condMap_mem.put("pageNum",pageNum);
-		condMap_mem.put("beginDate",beginDate);
-		condMap_mem.put("endDate", endDate);
-		List<GoodsVO> newGoodsList=adminGoodsService.listNewGoods(condMap);
-		mav.addObject("newGoodsList", newGoodsList);
-		
-		// order�뿉�꽌 �뵲�샂
-		List<OrderVO> newOrderList=adminOrderService.listNewOrder(condMap);
-		mav.addObject("newOrderList",newOrderList);
-		
-		// member�뿉�꽌 �뵲�샂
-		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap_mem);
-		mav.addObject("member_list", member_list);
-		
-		
-		String beginDate1[]=beginDate.split("-");
-		String endDate2[]=endDate.split("-");
-		mav.addObject("beginYear",beginDate1[0]);
-		mav.addObject("beginMonth",beginDate1[1]);
-		mav.addObject("beginDay",beginDate1[2]);
-		mav.addObject("endYear",endDate2[0]);
-		mav.addObject("endMonth",endDate2[1]);
-		mav.addObject("endDay",endDate2[2]);
-		
-		mav.addObject("section", section);
-		mav.addObject("chapter",section);
-		mav.addObject("pageNum", pageNum);
-		return mav;
-		
-	}
-
-
 
 }
