@@ -80,6 +80,7 @@
 			 <c:otherwise>
 			   <li><a href="${contextPath}/member/loginForm.do" class="text-info">로그인</a></li>
 			   <li><a href="${contextPath}/member/memberForm.do" class="text-info">회원가입</a></li> 
+			   <li><a href="${contextPath}/member/memberForm.do" class="text-info">공지사항</a></li> 
 			 </c:otherwise>
 			</c:choose>
 			   <li><a href="${contextPath}/board/listArticles.do" class="text-info">고객센터</a></li>

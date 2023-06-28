@@ -93,7 +93,7 @@ aside #banner {
 	background-position: left; padding: 0px 0px 0px 7px; line-height: 1.5em; background-image: url("../imgs/notice_li.gif"); background-repeat: no-repeat;
 }
 article {
-	margin: 20px 0px 0px 15px; width: 980px; float: left;
+	margin: 20px 0px 0px 15px; width: 100%; position: static;
 }
 
 .link { 
