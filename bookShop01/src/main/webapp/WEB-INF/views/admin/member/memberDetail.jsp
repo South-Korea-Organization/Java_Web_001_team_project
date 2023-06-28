@@ -228,7 +228,7 @@ function fn_modify_member_info(member_id,mod_type){
 		$.ajax({
 			type : "post",
 			async : false, //false인 경우 동기식으로 처리한다.
-			url : "${contextPath}/admin/member/modifyMemberInfo.do",
+			url : "http://localhost:8090/bookshop01/admin/member/modifyMemberInfo.do",
 			data : {
 				member_id:member_id,
 				mod_type:mod_type,
@@ -266,7 +266,7 @@ function fn_delete_member(member_id ,del_yn){
     frm_mod_member.appendChild(i_member_id);
     frm_mod_member.appendChild(i_del_yn);
     frm_mod_member.method="post";
-    frm_mod_member.action="${contextPath}/admin/member/deleteMember.do";
+    frm_mod_member.action="/bookshop01/admin/member/deleteMember.do";
     frm_mod_member.submit();
 }
 </script>

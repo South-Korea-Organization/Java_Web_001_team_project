@@ -18,15 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.bookshop01.common.base.BaseController;
-import com.bookshop01.common.log.LoggingAdvice ;
 import com.bookshop01.member.vo.MemberVO;
 import com.bookshop01.mypage.service.MyPageService;
 import com.bookshop01.order.vo.OrderVO;
-
 
 @Controller("myPageController")
 @RequestMapping(value="/mypage")
@@ -36,9 +32,6 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 	
 	@Autowired
 	private MemberVO memberVO;
-	
-	// 오류 출력을 위해 추가
-	private static final Logger logger = LoggerFactory.getLogger(LoggingAdvice.class);
 	
 	@Override
 	@RequestMapping(value="/myPageMain.do" ,method = RequestMethod.GET)
@@ -58,28 +51,6 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		mav.addObject("message", message);
 		mav.addObject("myOrderList", myOrderList);
 
-		return mav;
-	}
-	
-	//취소/반품/교환/환불내역 (수정중)
-	@Override
-	@RequestMapping(value="/listChangeMyOrderStatus" ,method = RequestMethod.GET)
-	public ModelAndView listChangeMyOrderStatus(@RequestParam(required = false,value="message")  String message,
-			   HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		session.setAttribute("side_menu", "my_page"); //마이페이지 왼쪽 메뉴로 설정.
-		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		String  member_id=memberVO.getMember_id();
-		
-		List<OrderVO> myOrderList=myPageService.listChangeMyOrderStatus(member_id);
-		
-		mav.addObject("message", message);
-		mav.addObject("member_id", member_id);
-		mav.addObject("myOrderList",myOrderList);
 		return mav;
 	}
 	
@@ -140,27 +111,6 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		mav.setViewName("redirect:/mypage/myPageMain.do");
 		return mav;
 	}
-	
-	// 마이페이지 > 교환 신청 ( 23.06.22 by Dean )	
-	@Override 
-	@RequestMapping(value="/exchangeMyOrder.do" ,method = RequestMethod.POST)
-	public ModelAndView exchangeMyOrder(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		HttpSession session=request.getSession();
-		MemberVO orderer=(MemberVO)session.getAttribute("memberInfo");		
-		String  member_id=orderer.getMember_id();
-		
-		logger.info("회원ID:" + member_id);
-		logger.info("viewName:" + viewName);
-		logger.info("order_id:" + order_id);
-		List<OrderVO> myOrderList=myPageService.findMyOrderInfo(order_id);	
-		
-		mav.addObject("orderer", orderer);
-		mav.addObject("message", "exchange_order");
-		mav.addObject("myOrderList",myOrderList);
-		return mav;
-	}	
 	
 	@Override
 	@RequestMapping(value="/myDetailInfo.do" ,method = RequestMethod.GET)
@@ -226,30 +176,5 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}	
-	
-	// 마이페이지 추가
-	@Override
-	@RequestMapping(value="/delMember.do" ,method = RequestMethod.POST)
-	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,
-			                         HttpServletRequest request, HttpServletResponse response)  throws Exception {
-		HttpSession session=request.getSession();
-		session=request.getSession();
-		
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		String member_id=memberVO.getMember_id();
-		myPageService.delMember(member_id);
-		
-		mav.addObject("member_id", member_id);
-		//mav.addObject("message", "cancel_order");
-		
-		session.removeAttribute("memberInfo");
-		
-		mav.setViewName("redirect:/main/main.do");
-		return mav;
-		
-	}
-
 	
 }
