@@ -141,7 +141,7 @@ function fn_modify_order_state(order_id,select_id){
 		success : function(data, textStatus) {
 			if(data.trim()=='mod_success'){
 				alert("주문 정보를 수정했습니다.");
-				location.href="${contextPath}//admin/order/adminOrderMain.do";
+				location.href="/admin/order/adminOrderMain.do";
 			}else if(data.trim()=='failed'){
 				alert("다시 시도해 주세요.");	
 			}
@@ -266,26 +266,19 @@ function fn_detail_search(){
 }
 </script>
 </head>
-
-
 <body>
 	<H3>주문 조회</H3>
-<!-- 데이터를 ${contextPath}/admin/admin.do URL로 제출하는 POST 방식을 사용 -->
-	<form name="frm_delivery_list" action="${contextPath }/admin/admin.do" method="post">
-		<table>
+	<form name="frm_delivery_list" action="${contextPath }/admin/admin.do" method="post">	
+		<table   >
 			<tbody>
 				<tr>
 					<td>
-<!-- 간단조회 및 상세조회를 선택할 수 있는 라디오 버튼 그룹을 생성합니다. "간단조회"가 기본으로 선택되어 있습니다. 
-각 라디오 버튼에는 fn_enable_detail_search(this) 함수가 클릭 이벤트로 연결됩니다. -->					
 						<input type="radio" name="r_search_option" value="simple_search" checked onClick="fn_enable_detail_search(this)"/> 간단조회 &nbsp;&nbsp;&nbsp;
 						<input type="radio" name="r_search_option" value="detail_search"  onClick="fn_enable_detail_search(this)" /> 상세조회 &nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
 					<td>
-<!-- 주문 조회의 시작 및 종료 날짜를 선택할 수 있는 드롭다운 목록을 생성합니다. 현재 연도부터 5년 전까지의 옵션을 
-표시하며, 시작 및 종료 날짜의 기본값은 ${endYear}입니다. -->					
 					  <select name="curYear">
 					     <c:forEach   var="i" begin="0" end="5">
 					      <c:choose>
@@ -405,10 +398,10 @@ function fn_detail_search(){
 					 <c:forEach   var="i" begin="0" end="5">
 					      <c:choose>
 					        <c:when test="${endYear==endYear-i }">
-					          <option value="${2016-i }" selected>${2016-i  }</option>
+					          <option value="${2023-i }" selected>${2023-i  }</option>
 					        </c:when>
 					        <c:otherwise>
-					          <option value="${2016-i }">${2016-i }</option>
+					          <option value="${2023-i }">${2023-i }</option>
 					        </c:otherwise>
 					      </c:choose>
 					    </c:forEach>
@@ -535,36 +528,49 @@ function fn_detail_search(){
 				     <option  value="delivering">배송중</option>
 				     <option  value="finished_delivering">배송완료</option>
 				     <option  value="cancel_order">주문취소</option>
-				     <option  value="returning_goods">반품</option>
+				     <option  value="returning_goods">반품신청</option>
+                     <option  value="exchange_order">교환신청</option>
 				   </c:when>
 				    <c:when test="${item.delivery_state=='delivering' }">
 				    <option  value="delivery_prepared" >배송준비중</option>
 				     <option  value="delivering" selected >배송중</option>
 				     <option  value="finished_delivering">배송완료</option>
 				     <option  value="cancel_order">주문취소</option>
-				     <option  value="returning_goods">반품</option>
+				     <option  value="returning_goods">반품신청</option>
+                     <option  value="exchange_order">교환신청</option>
 				   </c:when>
 				   <c:when test="${item.delivery_state=='finished_delivering' }">
 				    <option  value="delivery_prepared" >배송준비중</option>
 				     <option  value="delivering"  >배송중</option>
 				     <option  value="finished_delivering" selected>배송완료</option>
 				     <option  value="cancel_order">주문취소</option>
-				     <option  value="returning_goods">반품</option>
+				     <option  value="returning_goods">반품신청</option>
+                     <option  value="exchange_order">교환신청</option>
 				   </c:when>
 				   <c:when test="${item.delivery_state=='cancel_order' }">
 				    <option  value="delivery_prepared" >배송준비중</option>
 				     <option  value="delivering"  >배송중</option>
 				     <option  value="finished_delivering" >배송완료</option>
 				     <option  value="cancel_order" selected>주문취소</option>
-				     <option  value="returning_goods">반품</option>
+				     <option  value="returning_goods">반품신청</option>
+                     <option  value="exchange_order">교환신청</option>                     
 				   </c:when>
 				   <c:when test="${item.delivery_state=='returning_goods' }">
 				    <option  value="delivery_prepared" >배송준비중</option>
 				     <option  value="delivering"  >배송중</option>
 				     <option  value="finished_delivering" >배송완료</option>
 				     <option  value="cancel_order" >주문취소</option>
-				     <option  value="returning_goods" selected>반품</option>
+				     <option  value="returning_goods" selected>반품신청</option>
+                     <option  value="exchange_order">교환신청</option>                     
 				   </c:when>
+                   <c:when test="${item.delivery_state=='exchange_order' }">
+				    <option  value="delivery_prepared" >배송준비중</option>
+				     <option  value="delivering"  >배송중</option>
+				     <option  value="finished_delivering" >배송완료</option>
+				     <option  value="cancel_order" >주문취소</option>                     
+				     <option  value="returning_goods">반품신청</option>
+                     <option  value="exchange_order" selected>교환신청</option>
+				   </c:when>                  
 				   </c:choose>
 				 </select> 
 				</td>

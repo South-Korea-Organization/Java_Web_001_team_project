@@ -53,7 +53,7 @@ public class GoodsControllerImpl extends BaseController   implements GoodsContro
 		keyword = keyword.toUpperCase();
 	    List<String> keywordList =goodsService.keywordSearch(keyword);
 	    
-	 // 최종 완성될 JSONObject 선언(전체)
+	 // 理쒖쥌 �셿�꽦�맆 JSONObject �꽑�뼵(�쟾泥�)
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("keyword", keywordList);
 		 		
@@ -75,13 +75,15 @@ public class GoodsControllerImpl extends BaseController   implements GoodsContro
 	
 	private void addGoodsInQuick(String goods_id,GoodsVO goodsVO,HttpSession session){
 		boolean already_existed=false;
-		List<GoodsVO> quickGoodsList; //최근 본 상품 저장 ArrayList
+		List<GoodsVO> quickGoodsList; //理쒓렐 蹂� �긽�뭹 ���옣 ArrayList
 		quickGoodsList=(ArrayList<GoodsVO>)session.getAttribute("quickGoodsList");
 		
 		if(quickGoodsList!=null){
-			if(quickGoodsList.size() < 4){ //미리본 상품 리스트에 상품개수가 세개 이하인 경우
+			if(quickGoodsList.size() < 4){ //誘몃━蹂� �긽�뭹 由ъ뒪�듃�뿉 �긽�뭹媛쒖닔媛� �꽭媛� �씠�븯�씤 寃쎌슦
 				for(int i=0; i<quickGoodsList.size();i++){
 					GoodsVO _goodsBean=(GoodsVO)quickGoodsList.get(i);
+					System.out.println(goods_id);
+					System.out.println(_goodsBean);
 					if(goods_id.equals(_goodsBean.getGoods_id())){
 						already_existed=true;
 						break;

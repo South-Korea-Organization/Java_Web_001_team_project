@@ -1,56 +1,48 @@
 package com.bookshop01.api.service;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
 @Service
 public class ApiService {
-
-	@SuppressWarnings("unchecked")
-	public Map<String, String> restApi(Map<String,String> paramMap,String url) {
-		
-		Map<String, String> m = new HashMap<String, String>();
-		
-		try {
-			
-			ObjectMapper mapper = new ObjectMapper();
-			String param = mapper.writeValueAsString(paramMap);
-			
-			System.out.println("ApiService : param : " +param);
-			
-			OkHttpClient client = new OkHttpClient();
-
-			MediaType mediaType = MediaType.parse("application/json");
-			RequestBody body = RequestBody.create(mediaType, param);
-			Request request = new Request.Builder().url(url).post(body)
-					.addHeader("cache-control", "no-cache").build();
-
-			Response response = client.newCall(request).execute();
-
-			String result = response.body().string();
-
-			ObjectMapper resultMap = new ObjectMapper();
-			m = mapper.readValue(result, Map.class);
-			
-			System.out.println("ApiService : map ë³€í™˜ê²°ê³¼ = " + m.toString());
-			System.out.println(result);
-			
-		} catch (Exception e) {
-			System.out.println("ApiService : -ì˜¤ë¥˜-");
-		}
-		
-		
-		return m;
-	}
 	
+    @SuppressWarnings("unchecked")   // ÁÖÈ²»ö ÁÙ ¾ø¾Ö´Â ±â´É
+	public Map<String, String> restApi(Map<String,String> paramMap,String url) {
+        
+        Map<String, String> m = new HashMap<String, String>();
+        
+        try {
+            
+            
+            ObjectMapper mapper = new ObjectMapper();
+            String param = mapper.writeValueAsString(paramMap);
+            
+            System.out.println(param);
+            
+            OkHttpClient client = new OkHttpClient();
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType,param);
+            Request request = new Request.Builder().url(url).post(body)
+                    .addHeader("cache-control", "no-cache").build();
+            Response response = client.newCall(request).execute();
+            String result = response.body().string();
+            ObjectMapper resultMap = new ObjectMapper();
+            m = mapper.readValue(result, Map.class);
+            
+            System.out.println("map º¯È¯ = " + m.toString());
+            System.out.println(result);
+            
+        } catch (Exception e) {
+            System.out.println("-¿À·ù-");
+        }
+        
+        
+        return m;
+    }    
 }

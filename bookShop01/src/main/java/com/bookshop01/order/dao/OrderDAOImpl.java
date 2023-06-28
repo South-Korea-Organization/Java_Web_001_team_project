@@ -21,6 +21,13 @@ public class OrderDAOImpl implements OrderDAO {
 		return orderGoodsList;
 	}
 	
+	// 마이페이지>취소/반품/교환/환불 신청 및 조회 ( 2023.06.19 by Dean )
+	public List<OrderVO> listMyOrderChangeOrderStatus(OrderVO orderVO) throws DataAccessException{
+		List<OrderVO> orderGoodsList=new ArrayList<OrderVO>();
+		orderGoodsList=(ArrayList)sqlSession.selectList("mapper.order.selectMyOrderList",orderVO);
+		return orderGoodsList;
+	}
+	
 	public void insertNewOrder(List<OrderVO> myOrderList) throws DataAccessException{
 		int order_id=selectOrderID();
 		for(int i=0; i<myOrderList.size();i++){

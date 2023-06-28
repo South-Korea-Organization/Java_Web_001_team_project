@@ -132,11 +132,8 @@
 	<H1>3.결제정보</H1>
 	<DIV class="detail_table">
 	
+	<!-- 카드 결제 후 성공/실패 결과값 가져오기 230531 -->
 	
-	
-	
-<!-- 결재기능 추가 -->
-
 	<c:if test="${cardResult.responseCode eq '0000' }">
 <!-- 	 결제 성공일때 -->
 	 	<table>
@@ -170,37 +167,10 @@
 				</TR>
 			</TBODY>
 		</table>
-	</c:if>
+	</c:if>	
 	
-		
-<!-- 결재기능 추가를 위해 주석처리 	
-		<table>
-			<TBODY>
-				<TR class="dot_line">
-					<TD class="fixed_join">결제방법</TD>
-					<TD>
-					   ${myOrderInfo.pay_method }
-				    </TD>
-				</TR>
-				<TR class="dot_line">
-					<TD class="fixed_join">결제카드</TD>
-					<TD>
-					   ${myOrderInfo.card_com_name}
-				    </TD>
-				</TR>
-				<TR class="dot_line">
-					<TD class="fixed_join">할부기간</TD>
-					<TD>
-					   ${myOrderInfo.card_pay_month }
-				    </TD>
-				</TR>
-			</TBODY>
-		</table>
- -->
-		
-		
-		
-		
+	<!-- 카드 결제 후 성공/실패 결과값 가져오기 끝 230531 -->
+	
 	</DIV>
 </form>
     <DIV class="clear"></DIV>

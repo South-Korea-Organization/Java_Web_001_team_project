@@ -1,0 +1,163 @@
+제목:세션이 종료되었을때 홈페이지로 이동하기
+
+1. web.xml 필터 추가
+
+<!-- 세션 끊어졌을때 홈페이지로 이동하기 230622 관리자페이지는 따로 필터를 추가해야한다.-->
+    <filter-mapping>
+	  <filter-name>WebFilter</filter-name>
+	  <url-pattern>/goods/*</url-pattern>
+	  <url-pattern>/order/*</url-pattern>
+	  <url-pattern>/mypage/*</url-pattern> 
+	  <!-- <url-pattern>/member/*</url-pattern> 오류나서 제거 -->
+	</filter-mapping>
+	<!-- 필터 -->
+	<filter>
+	  <!-- 필터명을 설정 - WebFilter -->
+	  <filter-name>WebFilter</filter-name>
+	  <!-- 호출할 클래스 이름을 설정 (package 포함) -->
+	  <filter-class>com.bookshop01.filter.login.LoginFilter</filter-class>
+	</filter>	
+   <!-- 세션 끊어졌을때 홈페이지로 이동하기 230622 관리자페이지는 따로 필터를 추가해야한다.-->
+
+2. 패키지 명 추가: 
+   com.bookshop01.filter.login;
+  LoginFilter 클래스 추가
+
+package com.bookshop01.filter.login;
+
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class LoginFilter implements Filter {	
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		HttpServletRequest httpRequest = (HttpServletRequest)req;
+		String requestURI = httpRequest.getRequestURI();
+		HttpServletResponse httpResponse = (HttpServletResponse)res;
+		
+		HttpSession session = httpRequest.getSession(false);
+		
+		System.out.println("체크 : 주소 = " + requestURI);
+		
+		if(session == null || session.getAttribute("memberInfo") == null) {
+			httpResponse.sendRedirect("/main/main.do");
+		}else {
+			chain.doFilter(req, res);
+		}
+	}
+	
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}	
+}
+
+
+제목:스프링에서 MYSQL 연동하기
+1.WEB-INF>config>jdbc>jdbc.properties
+
+# 마리아 db ##
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://211.115.206.199:3307/ordero
+jdbc.username=root
+jdbc.password=Vpdldjq199@
+
+2.pom.xml 에서 아래 추가
+
+<!--mysql 변경  230622 -->
+<dependency>
+   <groupId>commons-dbcp</groupId>
+	<artifactId>commons-dbcp</artifactId>
+		<version>1.4</version>
+</dependency>
+
+<dependency>
+  <groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>${org.springframework-version}</version>
+</dependency>
+<!--mysql 변경  230622 -->
+	
+
+제목:스프링에서 SQL 로그 출력하기
+1.pom.xml
+
+<dependency>
+    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+    <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+    <version>1.16</version>
+</dependency>
+	
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.0.1</version>
+</dependency>
+	
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.0.1</version>
+</dependency>	
+
+2.WEB-INF>config>jdbc>jdbc.properties
+#mysql용 sql 로그 출력하기
+jdbc.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+jdbc.url=jdbc:log4jdbc:mysql://211.115.206.199:3307/ordero
+jdbc.username=root
+jdbc.password=Vpdldjq199@
+
+#오라클 SQL 로그 출력하기
+jdbc.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+jdbc.url=jdbc:log4jdbc:oracle:thin:@localhost:1521:XE
+jdbc.username=dean
+jdbc.password=1234
+
+
+3.src/test/resources 아래에 새로운 파일 추가
+log4jdbc.log4j2.properties  아래 내용추가
+
+log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
+
+
+4.src/test/resources  log4j.xml 에 추가
+
+<!-- SQL Logger -->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="console"/>
+	</logger>
+	
+	<logger name="jdbc.audit" additivity="false">
+		<level value="warn"/>
+		<appender-ref ref="console"/>
+	</logger>
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console"/>
+	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="console"/>
+</logger>
