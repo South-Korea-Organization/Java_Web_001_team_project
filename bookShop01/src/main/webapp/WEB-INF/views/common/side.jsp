@@ -30,7 +30,7 @@
 	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">배송관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">게시판관리</a>
+	        <a class="nav-link" href="${contextPath}/admin/goods/adminBoardMain.do" style="padding-left:30px; font-size:20px;">게시판관리</a>
 	      </li>
 	    </ul>
 	  </div>
