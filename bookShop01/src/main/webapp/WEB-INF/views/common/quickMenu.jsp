@@ -4,6 +4,7 @@
     %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link href="${contextPath}/resources/css/main_page.css" rel="stylesheet" type="text/css" media="screen">
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <script>
@@ -70,23 +71,10 @@ function goodsDetail(){
 }
 </script>  
  
-<body>    
-    <div id="sticky" >
-	<ul>
-		<li><a href="#">
-		   <img	width="24" height="24" src="${contextPath}/resources/image/facebook_icon.png">
-				페이스북
-		</a></li>
-		<li><a href="#">
-		   <img width="24" height="24" src="${contextPath}/resources/image/twitter_icon.png">
-			트위터
-		</a></li>
-		<li><a href="#">
-		   <img	width="24" height="24" src="${contextPath}/resources/image/rss_icon.png">
-				RSS 피드
-		 </a></li>
-	</ul>
-	<div class="recent">
+<body>
+  <div class="stickyHeight">
+    <div class="sticky">
+	  <div class="recent">
 		<h3>최근 본 상품</h3>
 		  <ul>
 		<!--   상품이 없습니다. -->
@@ -95,7 +83,7 @@ function goodsDetail(){
 				     <strong>상품이 없습니다.</strong>
 			</c:when>
 			<c:otherwise>
-	       <form name="frm_sticky"  >	        
+	       <form name="frm_sticky">	        
 		      <c:forEach var="item" items="${quickGoodsList }" varStatus="itemNum">
 		         <c:choose>
 		           <c:when test="${itemNum.count==1 }">
@@ -113,20 +101,21 @@ function goodsDetail(){
 			      </c:otherwise>
 			      </c:choose>
 		     </c:forEach>
+		     </form>
 		   </c:otherwise>
 	      </c:choose>
 		 </ul>
-     </form>		 
-	</div>
+		</div>
 	 <div>
 	 <c:choose>
 	    <c:when test="${ empty quickGoodsList }">
-		    <h5>  &nbsp; &nbsp; &nbsp; &nbsp;  0/0  &nbsp; </h5>
+		    <h5> 0/0 </h5>
 	    </c:when>
 	    <c:otherwise>
-           <h5><a  href='javascript:fn_show_previous_goods();'> 이전 </a> &nbsp;  <span id="cur_goods_num">1</span>/${quickGoodsListNum}  &nbsp; <a href='javascript:fn_show_next_goods();'> 다음 </a> </h5>
+           <h5><a  href='javascript:fn_show_previous_goods();'>전</a> <span id="cur_goods_num">1</span>/${quickGoodsListNum}  <a href='javascript:fn_show_next_goods();'>후</a> </h5>
        </c:otherwise>
        </c:choose>
+    </div>
     </div>
 </div>
 </body>
