@@ -420,9 +420,9 @@ function fn_detail_search(){
 	</div>
 	
 <div class="clear"></div>
-<table class="list_view">
-		<tbody align=center >
-			<tr align=center bgcolor="#ffcc00">
+<TABLE class="list_view table-bordered table-hover">
+		<TBODY align=center >
+			<tr style="background:lightgray" >
 				<td class="fixed" >회원아이디</td>
 				<td class="fixed">회원이름</td>
 				<td>휴대폰번호</td>
