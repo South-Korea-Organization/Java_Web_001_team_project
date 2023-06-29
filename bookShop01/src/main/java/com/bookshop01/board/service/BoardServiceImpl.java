@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bookshop01.board.dao.BoardDAO;
 import com.bookshop01.board.vo.ArticleVO;
+import com.bookshop01.board.vo.ImageVO;
 
 
 @Service("boardService")
