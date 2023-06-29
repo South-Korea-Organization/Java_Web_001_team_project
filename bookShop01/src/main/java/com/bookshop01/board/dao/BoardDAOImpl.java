@@ -2,6 +2,7 @@ package com.bookshop01.board.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
