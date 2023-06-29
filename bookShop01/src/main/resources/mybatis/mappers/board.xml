@@ -67,7 +67,7 @@
     <update id="insertNewReply"  parameterType="java.util.Map">
         update t_board
         set reply=#{content}
-        where articleNO=#{articleNO}
+        
     </update>
 	
 	<delete id="deleteArticle"  parameterType="int">
