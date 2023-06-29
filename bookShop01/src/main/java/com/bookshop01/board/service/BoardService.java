@@ -12,4 +12,7 @@ public interface BoardService {
 	//public Map viewArticle(int articleNO) throws Exception;
 	public void modArticle(Map articleMap) throws Exception;
 	public void removeArticle(int articleNO) throws Exception;
+
+	public void addReply(Map replyMap) throws Exception;
+	//reply로 저장하기 위해
 }

@@ -1,8 +1,8 @@
 package com.bookshop01.board.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,23 +32,12 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
 		return articleNO;
 	}
-    
-	//´ÙÁß ÆÄÀÏ ¾÷·Îµå
-	/*
+
 	@Override
-	public void insertNewImage(Map articleMap) throws DataAccessException {
-		List<ImageVO> imageFileList = (ArrayList)articleMap.get("imageFileList");
-		int articleNO = (Integer)articleMap.get("articleNO");
-		int imageFileNO = selectNewImageFileNO();
-		for(ImageVO imageVO : imageFileList){
-			imageVO.setImageFileNO(++imageFileNO);
-			imageVO.setArticleNO(articleNO);
-		}
-		sqlSession.insert("mapper.board.insertNewImage",imageFileList);
-	}
-	
-   */
-	
+	public void insertNewReply(Map replyMap) throws DataAccessException {
+		sqlSession.update("mapper.board.insertNewReply", replyMap);
+	} // reply
+
 	@Override
 	public ArticleVO selectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectArticle", articleNO);
@@ -71,7 +60,8 @@ public class BoardDAOImpl implements BoardDAO {
 		imageFileList = sqlSession.selectList("mapper.board.selectImageFileList",articleNO);
 		return imageFileList;
 	}
-	
+
+
 	private int selectNewArticleNO() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewArticleNO");
 	}
