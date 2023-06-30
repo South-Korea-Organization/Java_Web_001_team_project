@@ -63,7 +63,7 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 	
 	//취소/반품/교환/환불내역 (수정중)
 	@Override
-	@RequestMapping(value="/listChangeMyOrderStatus" ,method = RequestMethod.GET)
+	@RequestMapping(value="/listChangeMyOrderStatus.do" ,method = RequestMethod.GET)
 	public ModelAndView listChangeMyOrderStatus(@RequestParam(required = false,value="message")  String message,
 			   HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		HttpSession session=request.getSession();
