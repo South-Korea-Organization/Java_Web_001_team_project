@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface BoardController {
 	
-	public ModelAndView listArticles(@RequestParam("num") int num, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listArticles(@RequestParam("num") int num,@RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
 	

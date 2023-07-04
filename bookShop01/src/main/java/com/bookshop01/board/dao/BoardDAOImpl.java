@@ -89,14 +89,17 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	//게시글 목록, 페이징
 	@Override
-	public List<ArticleVO> listPage(int displayPost, int postNum) throws DataAccessException{
+	public List<ArticleVO> listPage(int displayPost, int postNum, String searchType, String keyword) throws DataAccessException{
 		
-		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		HashMap<String, Object> data = new HashMap<String, Object>();
 		
 		data.put("displayPost", displayPost);
 		data.put("postNum", postNum);
 		
-		return sqlSession.selectList("mapper.board.listPage", data);
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return sqlSession.selectList("mapper.board.listPageSearch", data);
 	}
 
 }

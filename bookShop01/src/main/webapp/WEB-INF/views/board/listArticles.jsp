@@ -78,11 +78,11 @@
 </table>
 
 <div>
-	<c:if test="${prev}">
-		<span>[ <a href="/board/listArticles.do?num=${startPageNum - 1}">이전</a> ]</span>
+	<c:if test="${page.prev}">
+		<span>[ <a href="/board/listArticles.do?num=${page.startPageNum - 1}">이전</a> ]</span>
 	</c:if>
 	
-	<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+	<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
 		<span>
 			<c:if test="${select != num}">
 				<a href="/board/listArticles.do?num=${num}">${num}</a> 
@@ -94,11 +94,45 @@
 		</span>
 	</c:forEach>
 	
-	<c:if test="${next}">
-		<span>[ <a href="/board/listArticles.do?num=${endPageNum + 1}">다음</a> ]</span>
+	<c:if test="${page.next}">
+		<span>[ <a href="/board/listArticles.do?num=${page.endPageNum + 1}">다음</a> ]</span>
 	</c:if>
 </div>
 
+
+<div>
+  <select name="searchType">
+      <option value="title">제목</option>
+         <option value="content">내용</option>
+      <option value="title_content">제목+내용</option>
+      <option value="writer">작성자</option>
+  </select>
+  
+  <input type="text" name="keyword" />
+  
+  <button type="button" id="searchBtn">검색</button>
+ </div>
+
+<script>
+
+//클릭 이벤트와 엔터 키 이벤트를 모두 처리하는 함수
+function handleSearch() {
+	let searchType = document.getElementsByName("searchType")[0].value;
+	let keyword =  document.getElementsByName("keyword")[0].value;
+
+	location.href = "/board/listArticles.do?num=1" + "&searchType=" + searchType + "&keyword=" + keyword;
+}
+
+// 클릭 이벤트 처리
+document.getElementById("searchBtn").onclick = handleSearch;
+
+// 엔터 키 이벤트 처리
+document.addEventListener("keydown", function(event) {
+	if (event.key === "Enter") {
+			handleSearch();
+  	}
+});
+</script>
 
 <a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do?num=${num }', 
                                                     '${contextPath}/member/loginForm.do')">글 게시</a>
