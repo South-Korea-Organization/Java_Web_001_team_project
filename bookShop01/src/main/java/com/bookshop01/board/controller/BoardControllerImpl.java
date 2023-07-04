@@ -41,21 +41,83 @@ public class BoardControllerImpl  implements BoardController{
 	@Autowired
 	private ArticleVO articleVO;
 	
+	
 	@Override
 	@RequestMapping(value= "/board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listArticles(@RequestParam("num") int num, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-
-		List articlesList = boardService.listArticles();
+		
+		
+		// 개시물 총 개수
+		int count = boardService.count();
+		
+		// 한번에 출력할 게시물 개수
+		int postNum = 10*num;
+		
+		// 하단 페이징 번호( 10 / 총 개시물 개수 ) 의 올림 
+		int pageNum = (int)Math.ceil((double)count/10);
+		
+		// 출력할 게시물
+		int displayPost = postNum - 9;
+		
+		// 한번에 표시할 페이징 번호의 개수
+		int pageNum_cnt = 10;
+		
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+		
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1) ;
+		
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNum_cnt));
+		
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
+		
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+		
+		List<ArticleVO> articlesList = null;
+		articlesList = boardService.listPage(displayPost, postNum);
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("pageNum", pageNum);
 		mav.addObject("articlesList", articlesList);
+		
+		// 시작 및 끝 번호
+		mav.addObject("startPageNum", startPageNum);
+		mav.addObject("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		mav.addObject("prev", prev);
+		mav.addObject("next", next);
+		mav.addObject("num", num);
+		
+		// 현재 페이지
+		mav.addObject("select", num);
+		
 		return mav;
 		
 	}
 	
-
+	//기존 listArticles
+//	@Override
+//	@RequestMapping(value= "/board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
+//	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		String viewName = (String)request.getAttribute("viewName");
+//
+//		List articlesList = boardService.listArticles();
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("articlesList", articlesList);
+//		return mav;
+//		
+//	}
+//	
+	
+	
 	@Override
-	@RequestMapping(value="/board/addNewArticle.do" ,method = RequestMethod.POST)
+	@RequestMapping(value="/board/addNewArticle.do" ,method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, 
 	HttpServletResponse response) throws Exception {
@@ -91,7 +153,7 @@ public class BoardControllerImpl  implements BoardController{
 	
 			message = "<script>";
 			message += " alert('새 글을 추가함');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do'; ";
+			message += " location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do?num=1'; ";
 			message +=" </script>";
 		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
@@ -100,7 +162,7 @@ public class BoardControllerImpl  implements BoardController{
 			
 			message = " <script>";
 			message +=" alert('오류가 발생했다. 다시 시도해라');');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/board/articleForm.do'; ";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/board/articleForm.do?num=1'; ";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -108,21 +170,22 @@ public class BoardControllerImpl  implements BoardController{
 		return resEnt;
 	}
 
-	@RequestMapping(value="/board/viewArticle.do" ,method = RequestMethod.GET)
-	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO,
+	@RequestMapping(value="/board/viewArticle.do" ,method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView viewArticle(@RequestParam("num") int num,@RequestParam("articleNO") int articleNO,
                                     HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
 		articleVO=boardService.viewArticle(articleNO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", articleVO);
+		mav.addObject("num", num);
 		return mav;
 	}
 
 
   @RequestMapping(value="/board/modArticle.do" ,method = RequestMethod.POST)
   @ResponseBody
-  public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest,
+  public ResponseEntity modArticle(@RequestParam("num") int num, MultipartHttpServletRequest multipartRequest,
     HttpServletResponse response) throws Exception{
     multipartRequest.setCharacterEncoding("utf-8");
 	Map<String,Object> articleMap = new HashMap<String, Object>();
@@ -135,6 +198,7 @@ public class BoardControllerImpl  implements BoardController{
 
 	String imageFileName= upload(multipartRequest);
 	articleMap.put("imageFileName", imageFileName);
+	articleMap.put("num", num);
 
 	String articleNO=(String)articleMap.get("articleNO");
 	String message;
@@ -154,7 +218,7 @@ public class BoardControllerImpl  implements BoardController{
        }
        message = "<script>";
 	   message += " alert('글을 수정했습니다.');";
-	   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
+	   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?num="+num+"&articleNO="+articleNO+"';";
 	   message +=" </script>";
        resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
     }catch(Exception e) {
@@ -162,7 +226,7 @@ public class BoardControllerImpl  implements BoardController{
       srcFile.delete();
       message = "<script>";
 	  message += " alert('오류가 발생했다. 다시 시도해라');";
-	  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?articleNO="+articleNO+"';";
+	  message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?num=1&articleNO="+articleNO+"';";
 	  message +=" </script>";
       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 	  e.printStackTrace();
@@ -242,13 +306,14 @@ public class BoardControllerImpl  implements BoardController{
 		message = "<script>";
 		message += " alert('글을 삭제했습니다.');";
 		message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+		message += " location.href='"+request.getContextPath()+"/board/listArticles.do?num=1';";
 		message +=" </script>";
 	    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 	       
 	}catch(Exception e) {
 		message = "<script>";
 		message += " alert('오류가 발생했다. 다시 시도해라.');";
-		message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+		message += " location.href='"+request.getContextPath()+"/board/listArticles.do?num=1';";
 		message +=" </script>";
 	    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 	    e.printStackTrace();
@@ -258,11 +323,21 @@ public class BoardControllerImpl  implements BoardController{
 
 
 
-	@RequestMapping(value = "/board/*Form.do", method = {RequestMethod.GET, RequestMethod.POST})
-	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/board/articleForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	private ModelAndView articleForm(@RequestParam("num") int num,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		mav.addObject("num", num);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/board/replyForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	private ModelAndView replyForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+
 		return mav;
 	}
 
