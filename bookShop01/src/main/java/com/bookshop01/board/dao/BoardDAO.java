@@ -18,9 +18,9 @@ public interface BoardDAO {
 	public void deleteArticle(int articleNO) throws DataAccessException;
 	public List selectImageFileList(int articleNO) throws DataAccessException;
 
-	public void insertNewReply(Map replyMap) throws DataAccessException;;
+	//public void insertNewReply(Map replyMap) throws DataAccessException;;
 	// reply add function
 	
 	public int count() throws DataAccessException;
-	public List<ArticleVO> listPage(int displayPost, int postNum) throws DataAccessException;
+	public List<ArticleVO> listPage(int displayPost, int postNum, String searchType, String keyword) throws DataAccessException;
 }

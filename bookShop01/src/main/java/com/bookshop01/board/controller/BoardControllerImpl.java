@@ -1,7 +1,6 @@
 package com.bookshop01.board.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookshop01.board.service.BoardService;
 import com.bookshop01.board.vo.ArticleVO;
-import com.bookshop01.board.vo.ImageVO;
+import com.bookshop01.board.vo.Page;
 import com.bookshop01.member.vo.MemberVO;
 
 
@@ -44,58 +42,76 @@ public class BoardControllerImpl  implements BoardController{
 	
 	@Override
 	@RequestMapping(value= "/board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listArticles(@RequestParam("num") int num, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listArticles(@RequestParam("num") int num,
+									 @RequestParam(value = "searchType", required = false, defaultValue = "title") String searchType, 
+									 @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+									HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		
+		Page page = new Page();
 		
-		// 개시물 총 개수
-		int count = boardService.count();
-		
-		// 한번에 출력할 게시물 개수
-		int postNum = 10*num;
-		
-		// 하단 페이징 번호( 10 / 총 개시물 개수 ) 의 올림 
-		int pageNum = (int)Math.ceil((double)count/10);
-		
-		// 출력할 게시물
-		int displayPost = postNum - 9;
-		
-		// 한번에 표시할 페이징 번호의 개수
-		int pageNum_cnt = 10;
-		
-		// 표시되는 페이지 번호 중 마지막 번호
-		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
-		
-		// 표시되는 페이지 번호 중 첫번째 번호
-		int startPageNum = endPageNum - (pageNum_cnt - 1) ;
-		
-		// 마지막 번호 재계산
-		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNum_cnt));
-		
-		if(endPageNum > endPageNum_tmp) {
-			endPageNum = endPageNum_tmp;
-		}
-		
-		boolean prev = startPageNum == 1 ? false : true;
-		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
-		
-		List<ArticleVO> articlesList = null;
-		articlesList = boardService.listPage(displayPost, postNum);
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("pageNum", pageNum);
-		mav.addObject("articlesList", articlesList);
-		
-		// 시작 및 끝 번호
-		mav.addObject("startPageNum", startPageNum);
-		mav.addObject("endPageNum", endPageNum);
+		page.setNum(num);
+		page.setCount(boardService.count());  
 
-		// 이전 및 다음 
-		mav.addObject("prev", prev);
-		mav.addObject("next", next);
-		mav.addObject("num", num);
-		
-		// 현재 페이지
+		List<ArticleVO> articlesList = null; 
+		articlesList = boardService.listPage(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+		ModelAndView mav = new ModelAndView(viewName);
+
+		mav.addObject("articlesList", articlesList);   
+		mav.addObject("page", page); 
+
 		mav.addObject("select", num);
+		
+		
+		//페이징 원본
+//		// 개시물 총 개수
+//		int count = boardService.count();
+//		
+//		// 한번에 출력할 게시물 개수
+//		int postNum = 10*num;
+//		
+//		// 하단 페이징 번호( 10 / 총 개시물 개수 ) 의 올림 
+//		int pageNum = (int)Math.ceil((double)count/10);
+//		
+//		// 출력할 게시물
+//		int displayPost = postNum - 9;
+//		
+//		// 한번에 표시할 페이징 번호의 개수
+//		int pageNum_cnt = 10;
+//		
+//		// 표시되는 페이지 번호 중 마지막 번호
+//		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+//		
+//		// 표시되는 페이지 번호 중 첫번째 번호
+//		int startPageNum = endPageNum - (pageNum_cnt - 1) ;
+//		
+//		// 마지막 번호 재계산
+//		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)pageNum_cnt));
+//		
+//		if(endPageNum > endPageNum_tmp) {
+//			endPageNum = endPageNum_tmp;
+//		}
+//		
+//		boolean prev = startPageNum == 1 ? false : true;
+//		boolean next = endPageNum * pageNum_cnt >= count ? false : true;
+//		
+//		List<ArticleVO> articlesList = null;
+//		articlesList = boardService.listPage(displayPost, postNum);
+//		ModelAndView mav = new ModelAndView(viewName);
+//		mav.addObject("pageNum", pageNum);
+//		mav.addObject("articlesList", articlesList);
+//		
+//		// 시작 및 끝 번호
+//		mav.addObject("startPageNum", startPageNum);
+//		mav.addObject("endPageNum", endPageNum);
+//
+//		// 이전 및 다음 
+//		mav.addObject("prev", prev);
+//		mav.addObject("next", next);
+//		mav.addObject("num", num);
+//		
+//		// 현재 페이지
+//		mav.addObject("select", num);
 		
 		return mav;
 		
@@ -217,7 +233,7 @@ public class BoardControllerImpl  implements BoardController{
          oldFile.delete();
        }
        message = "<script>";
-	   message += " alert('글을 수정했습니다.');";
+	   message += " alert('글을 수정했습니다.'	);";
 	   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?num="+num+"&articleNO="+articleNO+"';";
 	   message +=" </script>";
        resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -235,47 +251,48 @@ public class BoardControllerImpl  implements BoardController{
   }
 
 
-	@RequestMapping(value="/board/addReply.do", method = RequestMethod.POST)
+  @RequestMapping(value="/board/addReply.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest,
-								   HttpServletResponse response) throws Exception {
+	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest, 
+			HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String,Object> replyMap = new HashMap<String, Object>();
+		Map<String,Object> articleMap = new HashMap<String, Object>();
 		Enumeration enu=multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			replyMap.put(name,value);
+			articleMap.put(name,value);
 		}
 		String imageFileName= upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
-		replyMap.put("parentNO", 0);
-		replyMap.put("member_id", member_id);
-
+		articleMap.put("parentNO", 0);
+		articleMap.put("member_id", member_id);
+		articleMap.put("imageFileName", imageFileName);
+		
 		String message;
 		ResponseEntity resEnt=null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			boardService.addReply(replyMap);
-			/*if(imageFileName!=null && imageFileName.length()!=0) {
-				File srcFile = new
+			int articleNO = boardService.addNewArticle(articleMap);
+			if(imageFileName!=null && imageFileName.length()!=0) {
+				File srcFile = new 
 				File(ARTICLE_IMAGE_REPO+ "\\" + "temp"+ "\\" + imageFileName);
 				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
-			}*/
-
+			}
+	
 			message = "<script>";
 			message += " alert('새 답글을 추가함');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do'; ";
+			message += " location.href='"+multipartRequest.getContextPath()+"/board/listArticles.do?num=1'; ";
 			message +=" </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
 			File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
 			srcFile.delete();
-
+			
 			message = " <script>";
 			message +=" alert('오류가 발생했다. 다시 시도해라');');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/board/articleForm.do'; ";
@@ -284,8 +301,8 @@ public class BoardControllerImpl  implements BoardController{
 			e.printStackTrace();
 		}
 		return resEnt;
-
-
+		
+		
 	}
 
   @Override
