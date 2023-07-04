@@ -30,7 +30,7 @@
 	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">배송관리</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath}/admin/goods/adminBoardMain.do" style="padding-left:30px; font-size:20px;">게시판관리</a>
+	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">게시판관리</a>
 	      </li>
 	    </ul>
 	  </div>
@@ -45,7 +45,7 @@
 	        <a class="nav-link mypageNav" href="${contextPath}/mypage/listMyOrderHistory.do">주문내역/배송조회</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link mypageNav" href="${contextPath}/mypage/listChangeMyOrderStatus.do">반품/교환 신청 및 조회</a>
+	        <a class="nav-link mypageNav" href="#">반품/교환 신청 및 조회</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link mypageNav" href="#">주문 취소 내역</a>

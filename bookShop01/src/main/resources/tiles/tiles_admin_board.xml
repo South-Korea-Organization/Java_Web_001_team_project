@@ -5,7 +5,7 @@
 <tiles-definitions>
 
     <definition name="/admin/goods/adminBoardMain" extends="baseLayout">
-       <put-attribute name="title" value="관리자 게시판관리 메인 페이지" />
+       <put-attribute name="title" value="관리자 메인 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/board/modifyBoardMain.jsp" />
     </definition>
     
