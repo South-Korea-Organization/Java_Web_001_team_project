@@ -17,10 +17,12 @@ public class ArticleVO {
 	private String imageFileName;
 	private String member_id;
 	private Date  writeDate;
+
 	private String reply;
 	
 	
 	public ArticleVO() {
+		System.out.println("ArticleVO");
 	}
 
 	public int getArticleNO() {

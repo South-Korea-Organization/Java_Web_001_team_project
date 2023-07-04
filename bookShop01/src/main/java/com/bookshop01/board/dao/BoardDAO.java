@@ -20,7 +20,4 @@ public interface BoardDAO {
 
 	public void insertNewReply(Map replyMap) throws DataAccessException;;
 	// reply add function
-	
-	public int count() throws DataAccessException;
-	public List<ArticleVO> listPage(int displayPost, int postNum) throws DataAccessException;
 }

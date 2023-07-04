@@ -85,7 +85,7 @@
 			   <li><a href="${contextPath}/member/memberForm.do" class="text-success">회원가입</a></li>
 			 </c:otherwise>
 			</c:choose>
-			   <li><a href="${contextPath}/board/listArticles.do?num=1" class="text-success">고객센터</a></li>
+			   <li><a href="${contextPath}/board/listArticles.do" class="text-success">고객센터</a></li>
       <c:if test="${isLogOn==true and memberInfo.member_id =='admin' }">  
 	   	   <li class="no_line"><a href="${contextPath}/admin/goods/adminGoodsMain.do" class="text-success font-weight-bold">관리자</a></li>
 	    </c:if>

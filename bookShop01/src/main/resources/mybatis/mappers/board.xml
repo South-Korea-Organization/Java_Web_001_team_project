@@ -13,6 +13,7 @@
     <result property="writeDate" column="writeDate" />
     <result property="imageFileName" column="imageFileName" />
     <result property="reply" column="reply" />
+
   </resultMap> 
   
   <resultMap id="imgResult" type="imageVO">
@@ -79,24 +80,6 @@
     ]]>      
   </delete>
 
- <!--다중 이미지 추가 SQL문 -->   
-  <!--
-    <insert id="insertNewArticle"  parameterType="java.util.Map">
-    <![CDATA[
-      insert into t_board(articleNO, id, title, content, imageFileName)
-      values(#{articleNO}, #{id}, #{title}, #{content}, null)
-    ]]>      
-  </insert>
- 
-   <insert id="insertNewImage"  parameterType="java.util.Map">
-    <foreach item="item"  collection="list"   open="INSERT ALL" 
-                  separator=" " close="SELECT * FROM DUAL" >
-      INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
-      VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO}, sysdate)
-    </foreach>
-  </insert>
- -->
- 
   <select id="selectNewImageFileNO" resultType="int"  >
     <![CDATA[
       SELECT  nvl(max(imageFileNO),0) from t_imageFile		
@@ -110,20 +93,5 @@
       where articleNO=#{articleNO}	
     ]]>
   </select> 
-  
-  <select id="count" resultType="int">
-  	SELECT count(articleNO) from t_board
-  </select>
-  
-  <select id="listPage" parameterType="hashMap" resultType="articleVO">
-  	select articleNO, title, content, member_id, writeDate
-    from (
-        select articleNO, title, content, member_id, writeDate,
-            row_number() over(order by articleNO desc) as rNum
-        from t_board
-        ) t_board
-    where rNum between #{displayPost} and #{postNum}
-        order by articleNO desc
-  </select>
   
 </mapper>

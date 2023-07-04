@@ -291,6 +291,7 @@ public class PaymentService {
 		
 		//네이버 전용
 		paramMap.put("payType",payType);
+		
 		paramMap.put("amount",amount);
 		paramMap.put("itemName",itemName);
 		paramMap.put("userName",userName);
@@ -303,10 +304,13 @@ public class PaymentService {
 				
 		paramMap.put("timestamp",timestamp);
 		paramMap.put("signature",signature);
+		
 		resultMap = apiService.restApi(paramMap, url);
+		
 		
 		//연동 결과
 		System.out.println("paymentservice(naverOrder) : 네이버 주문 API 통신 결과 = " + resultMap.toString());
+		
 		return resultMap;
 	}
 	

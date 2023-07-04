@@ -51,9 +51,9 @@
     </tr>
   </c:when>
   <c:when test="${articlesList !=null }" >
-    <c:forEach  var="article" items="${articlesList }" >
+    <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
      <tr align="center">
-	<td width="5%">${article.articleNO}</td>
+	<td width="5%">${articleNum.count}</td>
 	<td width="10%">${article.member_id }</td>
 	<td align='left'  width="35%">
 	  <span style="padding-right:30px"></span>
@@ -63,10 +63,10 @@
 	              <span style="padding-left:20px"></span>
 	         </c:forEach>
 	         <span style="font-size:12px;">[답변]</span>
-                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
+                   <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
 	          </c:when>
 	          <c:otherwise>
-	            <a class='cls1' href="${contextPath}/board/viewArticle.do?num=${num }&articleNO=${article.articleNO}">${article.title }</a>
+	            <a href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title }</a>
 	          </c:otherwise>
 	        </c:choose>
 	  </td>
@@ -77,30 +77,9 @@
     </c:choose>
 </table>
 
-<div>
-	<c:if test="${prev}">
-		<span>[ <a href="/board/listArticles.do?num=${startPageNum - 1}">이전</a> ]</span>
-	</c:if>
-	
-	<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
-		<span>
-			<c:if test="${select != num}">
-				<a href="/board/listArticles.do?num=${num}">${num}</a> 
-			</c:if>
-			
-			<c:if test="${select == num}">
-		   		<b>${num}</b>
-		    </c:if>
-		</span>
-	</c:forEach>
-	
-	<c:if test="${next}">
-		<span>[ <a href="/board/listArticles.do?num=${endPageNum + 1}">다음</a> ]</span>
-	</c:if>
-</div>
+<a class="btn btn-success float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do',
+                                                    '${contextPath}/member/loginForm.do')">글 게시
+</a>
 
-
-<a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do?num=${num }', 
-                                                    '${contextPath}/member/loginForm.do')">글 게시</a>
 </body>
 </html>

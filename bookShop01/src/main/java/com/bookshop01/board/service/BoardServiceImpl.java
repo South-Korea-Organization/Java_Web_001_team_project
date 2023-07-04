@@ -31,32 +31,12 @@ public class BoardServiceImpl  implements BoardService{
 	public int addNewArticle(Map articleMap) throws Exception{
 		return boardDAO.insertNewArticle(articleMap);
 	}
-	
-	 //다중 이미지 추가하기
-	/*
+
 	@Override
 	public void addReply(Map replyMap) throws Exception {
 		boardDAO.insertNewReply(replyMap);
-	public int addNewArticle(Map articleMap) throws Exception{
-		int articleNO = boardDAO.insertNewArticle(articleMap);
-		articleMap.put("articleNO", articleNO);
-		boardDAO.insertNewImage(articleMap);
-		return articleNO;
 	}
-	*/
-	/*
-	//다중 파일 보이기
-	@Override
-	public Map viewArticle(int articleNO) throws Exception {
-		Map articleMap = new HashMap();
-		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
-		List<ImageVO> imageFileList = boardDAO.selectImageFileList(articleNO);
-		articleMap.put("article", articleVO);
-		articleMap.put("imageFileList", imageFileList);
-		return articleMap;
-	}
-   */
-	
+
 	
 	 //단일 파일 보이기
 	@Override
@@ -75,15 +55,8 @@ public class BoardServiceImpl  implements BoardService{
 	public void removeArticle(int articleNO) throws Exception {
 		boardDAO.deleteArticle(articleNO);
 	}
-	
-	@Override
-	public int count() throws Exception{
-		return boardDAO.count();
-	}
-	
-	@Override
-	public List<ArticleVO> listPage(int displayPost, int postNum) throws Exception{
-		return boardDAO.listPage(displayPost, postNum);
-	}
-	
+
+
+
+
 }

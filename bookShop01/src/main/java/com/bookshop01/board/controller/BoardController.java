@@ -12,16 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface BoardController {
 	
-	public ModelAndView listArticles(@RequestParam("num") int num, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
 	
-	public ModelAndView viewArticle(@RequestParam("num") int num,@RequestParam("articleNO") int articleNO,
+	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO,
 			                        HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ResponseEntity modArticle(@RequestParam("num") int num,MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
+	//public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
 	public ResponseEntity  removeArticle(@RequestParam("articleNO") int articleNO,
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
 	//reply add function
+
 }
