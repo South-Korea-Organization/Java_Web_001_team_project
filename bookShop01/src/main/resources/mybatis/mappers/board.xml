@@ -152,5 +152,23 @@
         order by articleNO desc
   </select>
   
+    <select id="searchCount" parameterType="hashMap" resultType="int">
+  	SELECT count(articleNO) from t_board
+  	<if test='searchType.equals("title")'>
+        where title like '%' || #{keyword} || '%'
+        </if>
+        <if test='searchType.equals("content")'>
+        where content like '%' || #{keyword} || '%'
+        </if>
+        <if test='searchType.equals("title_content")'>
+        where (title like '%' || #{keyword} || '%')
+        	or (content like '%' || #{keyword} || '%') 
+        </if>
+        <if test='searchType.equals("writer")'>
+        where member_id like '%' || #{keyword} || '%'
+        </if>
+  	
+  </select>
+  
   
 </mapper>

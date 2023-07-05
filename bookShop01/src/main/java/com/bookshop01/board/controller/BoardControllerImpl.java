@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bookshop01.board.service.BoardService;
 import com.bookshop01.board.vo.ArticleVO;
 import com.bookshop01.board.vo.Page;
+import com.bookshop01.board.vo.ImageVO;
 import com.bookshop01.member.vo.MemberVO;
 
 
@@ -51,7 +52,11 @@ public class BoardControllerImpl  implements BoardController{
 		Page page = new Page();
 		
 		page.setNum(num);
-		page.setCount(boardService.count());  
+		//page.setCount(boardService.count());  
+		page.setCount(boardService.searchCount(searchType, keyword));
+		
+		// 검색 타입과 검색어
+		page.setSearchTypeKeyword(searchType, keyword);
 
 		List<ArticleVO> articlesList = null; 
 		articlesList = boardService.listPage(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
@@ -61,6 +66,9 @@ public class BoardControllerImpl  implements BoardController{
 		mav.addObject("page", page); 
 
 		mav.addObject("select", num);
+		
+		mav.addObject("searchType", searchType);
+		mav.addObject("keyword", keyword);
 		
 		
 		//페이징 원본
@@ -188,13 +196,27 @@ public class BoardControllerImpl  implements BoardController{
 
 	@RequestMapping(value="/board/viewArticle.do" ,method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView viewArticle(@RequestParam("num") int num,@RequestParam("articleNO") int articleNO,
+									@RequestParam(value = "searchType", required = false, defaultValue = "title") String searchType, 
+									@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
                                     HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
+		
+		Page page = new Page();
+		
+		page.setNum(num);
+		//page.setCount(boardService.count());  
+		page.setCount(boardService.searchCount(searchType, keyword));
+		
+		page.setSearchTypeKeyword(searchType, keyword);
+		
 		articleVO=boardService.viewArticle(articleNO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", articleVO);
+		mav.addObject("page",page);
 		mav.addObject("num", num);
+		mav.addObject("searchType", searchType);
+		mav.addObject("keyword", keyword);
 		return mav;
 	}
 

@@ -23,4 +23,6 @@ public interface BoardDAO {
 	
 	public int count() throws DataAccessException;
 	public List<ArticleVO> listPage(int displayPost, int postNum, String searchType, String keyword) throws DataAccessException;
+	
+	public int searchCount(String searchType, String keyword) throws DataAccessException;
 }

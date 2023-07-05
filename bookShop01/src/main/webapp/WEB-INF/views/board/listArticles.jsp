@@ -63,10 +63,10 @@
 	              <span style="padding-left:20px"></span>
 	         </c:forEach>
 	         <span style="font-size:12px;">[답변]</span>
-                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a>
+                   <a class='cls1' href="${contextPath}/board/viewArticle.do?num=${select}&articleNO=${article.articleNO}${page.searchTypeKeyword}">${article.title}</a>
 	          </c:when>
 	          <c:otherwise>
-	            <a class='cls1' href="${contextPath}/board/viewArticle.do?num=${num }&articleNO=${article.articleNO}">${article.title }</a>
+	            <a class='cls1' href="${contextPath}/board/viewArticle.do?num=${select}&articleNO=${article.articleNO}${page.searchTypeKeyword}">${article.title }</a>
 	          </c:otherwise>
 	        </c:choose>
 	  </td>
@@ -79,13 +79,13 @@
 
 <div>
 	<c:if test="${page.prev}">
-		<span>[ <a href="/board/listArticles.do?num=${page.startPageNum - 1}">이전</a> ]</span>
+		<span>[ <a href="/board/listArticles.do?num=${page.startPageNum - 1}${page.searchTypeKeyword}">이전</a> ]</span>
 	</c:if>
 	
 	<c:forEach begin="${page.startPageNum}" end="${page.endPageNum}" var="num">
 		<span>
 			<c:if test="${select != num}">
-				<a href="/board/listArticles.do?num=${num}">${num}</a> 
+				<a href="/board/listArticles.do?num=${num}${page.searchTypeKeyword}">${num}</a> 
 			</c:if>
 			
 			<c:if test="${select == num}">
@@ -95,23 +95,23 @@
 	</c:forEach>
 	
 	<c:if test="${page.next}">
-		<span>[ <a href="/board/listArticles.do?num=${page.endPageNum + 1}">다음</a> ]</span>
+		<span>[ <a href="/board/listArticles.do?num=${page.endPageNum + 1}${page.searchTypeKeyword}">다음</a> ]</span>
 	</c:if>
 </div>
 
 
 <div>
-  <select name="searchType">
-      <option value="title">제목</option>
-         <option value="content">내용</option>
-      <option value="title_content">제목+내용</option>
-      <option value="writer">작성자</option>
-  </select>
-  
-  <input type="text" name="keyword" />
-  
-  <button type="button" id="searchBtn">검색</button>
- </div>
+ <select name="searchType">
+     <option value="title" <c:if test="${searchType eq 'title'}">selected</c:if>>제목</option>
+        <option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
+     <option value="title_content" <c:if test="${searchType eq 'title_content'}">selected</c:if>>제목+내용</option>
+     <option value="writer" <c:if test="${searchType eq 'writer'}">selected</c:if>>작성자</option>
+ </select>
+ 
+ <input type="text" name="keyword" value="${keyword}"/>
+ 
+ <button type="button" id="searchBtn">검색</button>
+</div>
 
 <script>
 
@@ -134,7 +134,7 @@ document.addEventListener("keydown", function(event) {
 });
 </script>
 
-<a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do?num=${num }', 
+<a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do?num=${select}', 
                                                     '${contextPath}/member/loginForm.do')">글 게시</a>
 </body>
 </html>

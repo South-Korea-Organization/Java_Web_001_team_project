@@ -101,5 +101,17 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectList("mapper.board.listPageSearch", data);
 	}
+	
+	// 게시물 총 갯수 + 검색 적용
+	@Override
+	public int searchCount(String searchType, String keyword) throws DataAccessException {
+	 
+	 HashMap data = new HashMap();
+	 
+	 data.put("searchType", searchType);
+	 data.put("keyword", keyword);
+	 
+	 return sqlSession.selectOne("mapper.board.searchCount", data); 
+	}
 
 }

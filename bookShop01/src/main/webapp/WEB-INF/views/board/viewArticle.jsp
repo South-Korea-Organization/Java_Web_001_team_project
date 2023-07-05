@@ -189,8 +189,7 @@
 		      <input class="btn btn-success" type=button value="수정하기" onClick="fn_enable(this.form)">
 		      <input class="btn btn-success" type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
 		    </c:if>
-		    <button onclick="javascript:history.back()">목록목록</button>
-		    <input class="btn btn-success" type=button value="리스트로 돌아가기"  onClick="location.href='${contextPath}/board/listArticles.do?num=${num }'">
+		    <input class="btn btn-success" type=button value="리스트로 돌아가기"  onClick="location.href='${contextPath}/board/listArticles.do?num=${num }&articleNO=${article.articleNO}${page.searchTypeKeyword}'">
 		    <input class="btn btn-success" type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
 		     
 	   </td>
