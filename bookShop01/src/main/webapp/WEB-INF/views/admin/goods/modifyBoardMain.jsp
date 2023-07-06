@@ -528,12 +528,8 @@ function init(){
 													</strong>
 												</a>
 											</TD>
-											<TD>
-												<strong>${item.goods_writer }</strong>
-											</TD>
-											<TD >
-												<strong>${item.goods_publisher }</strong>
-											</TD>
+											
+											
 											<td>
 												<strong>${item.goods_sales_price }</strong>
 											</td>
@@ -541,7 +537,7 @@ function init(){
 												<strong>${item.goods_credate }</strong>
 											</td>
 											<td>
-												<c:set var="pub_date" value="${item.goods_published_date}"/>
+												<c:set var="pub_date" value="${item.GOODS_CREDATE}"/>
 												<c:set var="arr" value="${fn:split(pub_date,' ')}"/>
 												<strong>
 													<c:out value="${arr[0]}"/>
@@ -1190,16 +1186,7 @@ function init(){
 			
 			
 
-			<div class="tab_content" id="tab4">
-				<H4>제품소개</H4>
-				<table>
-					<tr>
-						<td >제품소개</td>
-						<td><textarea  rows="100" cols="80" name="goods_intro"></textarea></td>
-				    </tr>
-			    </table>
-			</div>
-
+			
 		</div>
 	</div>
 	<div class="clear"></div>

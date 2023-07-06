@@ -144,7 +144,6 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		<h1>컴퓨터와 인터넷</h1>
 		<h2>국내외 도서 &gt; 컴퓨터와 인터넷 &gt; 웹 개발</h2>
 		<h3>${goods.goods_title }</h3>
-		<h4>${goods.goods_writer} &nbsp; 저| ${goods.goods_publisher}</h4>
 	</hgroup>
 	<div id="goods_image">
 		<figure>
@@ -179,19 +178,13 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<tr>
 					<td class="fixed">발행일</td>
 					<td class="fixed">
-					   <c:set var="pub_date" value="${goods.goods_published_date}" />
+					   <c:set var="pub_date" value="${goods.GOODS_CREDATE}" />
 					   <c:set var="arr" value="${fn:split(pub_date,' ')}" />
 					   <c:out value="${arr[0]}" />
 					</td>
 				</tr>
-				<tr>
-					<td class="fixed">페이지 수</td>
-					<td class="fixed">${goods.goods_total_page}쪽</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed">ISBN</td>
-					<td class="fixed">${goods.goods_isbn}</td>
-				</tr>
+
+
 				<tr>
 					<td class="fixed">배송료</td>
 					<td class="fixed"><strong>무료</strong></td>
@@ -229,36 +222,14 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 	<!-- 내용 들어 가는 곳 -->
 	<div id="container">
 		<ul class="tabs">
-			<li><a href="#tab1">책소개</a></li>
-			<li><a href="#tab2">저자소개</a></li>
-			<li><a href="#tab3">책목차</a></li>
+			
 			<li><a href="#tab4">출판사서평</a></li>
 			<li><a href="#tab5">추천사</a></li>
 			<li><a href="#tab6">리뷰</a></li>
 		</ul>
 		<div class="tab_container">
-			<div class="tab_content" id="tab1">
-				<h4>책소개</h4>
-				<p>${fn:replace(goods.goods_intro,crcn,br)}</p>
-				<c:forEach var="image" items="${imageList }">
-					<img src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}" alt="">
-				</c:forEach>
-			</div>
-			<div class="tab_content" id="tab2">
-				<h4>저자소개</h4>
-				<p>
-				<div class="writer">저자 : ${goods.goods_writer}</div>
-				 <p>${fn:replace(goods.goods_writer_intro,crcn,br) }</p> 
-				
-			</div>
-			<div class="tab_content" id="tab3">
-				<h4>책목차</h4>
-				<p>${fn:replace(goods.goods_contents_order,crcn,br)}</p> 
-			</div>
-			<div class="tab_content" id="tab4">
-				<h4>출판사서평</h4>
-				 <p>${fn:replace(goods.goods_publisher_comment ,crcn,br)}</p> 
-			</div>
+			
+
 			<div class="tab_content" id="tab5">
 				<h4>추천사</h4>
 				<p>${fn:replace(goods.goods_recommendation,crcn,br) }</p>

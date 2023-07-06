@@ -225,12 +225,8 @@ function  calcPeriod(search_period){
 				    <strong>${item.goods_title } </strong>
 				 </a> 
 				</TD>
-				<TD>
-				<strong>${item.goods_writer }</strong> 
-				</TD>
-				<TD >
-				   <strong>${item.goods_publisher }</strong> 
-				</TD>
+				
+				
 				<td>
 				  <strong>${item.goods_sales_price }</strong>
 				</td>
@@ -238,7 +234,7 @@ function  calcPeriod(search_period){
 				 <strong>${item.goods_credate }</strong> 
 				</td>
 				<td>
-				    <c:set var="pub_date" value="${item.goods_published_date}" />
+				    <c:set var="pub_date" value="${item.GOODS_CREDATE}" />
 					   <c:set var="arr" value="${fn:split(pub_date,' ')}" />
 					<strong>
 					   <c:out value="${arr[0]}" />

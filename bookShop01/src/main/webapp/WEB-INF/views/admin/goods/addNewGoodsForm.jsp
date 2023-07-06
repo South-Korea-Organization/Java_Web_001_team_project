@@ -41,10 +41,7 @@
 	<div class="tab_container" id="container">
 		<ul class="tabs">
 			<li><a href="#tab1">상품정보</a></li>
-			<li><a href="#tab2">상품목차</a></li>
-			<li><a href="#tab3">상품저자소개</a></li>
 			<li><a href="#tab4">상품소개</a></li>
-			<li><a href="#tab5">출판사 상품 평가</a></li>
 			<li><a href="#tab6">추천사</a></li>
 			<li><a href="#tab7">상품이미지</a></li>
 		</ul>
@@ -63,15 +60,7 @@
 				<td >제품이름</td>
 				<td><input name="goods_title" type="text" size="40" /></td>
 			</tr>
-			
-			<tr>
-				<td >저자</td>
-				<td><input name="goods_writer" type="text" size="40" /></td>
-			</tr>
-			<tr>
-				<td >출판사</td>
-				<td><input name="goods_publisher" type="text" size="40" /></td>
-			</tr>
+
 			<tr>
 				<td >제품정가</td>
 				<td><input name="goods_price" type="text" size="40" /></td>
@@ -87,21 +76,7 @@
 				<td >제품 구매 포인트</td>
 				<td><input name="goods_point" type="text" size="40" /></td>
 			</tr>
-			
-			<tr>
-				<td >제품출판일</td>
-				<td><input  name="goods_published_date"  type="date" size="40" /></td>
-			</tr>
-			
-			<tr>
-				<td >제품 총 페이지수</td>
-				<td><input name="goods_total_page" type="text" size="40" /></td>
-			</tr>
-			
-			<tr>
-				<td >ISBN</td>
-				<td><input name="goods_isbn" type="text" size="40" /></td>
-			</tr>
+
 			<tr>
 				<td >제품 배송비</td>
 				<td><input name="goods_delivery_price" type="text" size="40" /></td>
@@ -131,42 +106,7 @@
 			</tr>
 				</table>	
 			</div>
-			<div class="tab_content" id="tab2">
-				<H4>책목차</H4>
-				<table>	
-				 <tr>
-					<td >책목차</td>
-					<td><textarea  rows="100" cols="80" name="goods_contents_order"></textarea></td>
-				</tr>
-				</table>	
-			</div>
-			<div class="tab_content" id="tab3">
-				<H4>제품 저자 소개</H4>
-				 <table>
-  				 <tr>
-					<td>제품 저자 소개</td>
-					<td><textarea  rows="100" cols="80" name="goods_writer_intro"></textarea></td>
-			    </tr>
-			   </table>
-			</div>
-			<div class="tab_content" id="tab4">
-				<H4>제품소개</H4>
-				<table>
-					<tr>
-						<td >제품소개</td>
-						<td><textarea  rows="100" cols="80" name="goods_intro"></textarea></td>
-				    </tr>
-			    </table>
-			</div>
-			<div class="tab_content" id="tab5">
-				<H4>출판사 제품 평가</H4>
-				<table>
-				 <tr>
-					<td>출판사 제품 평가</td>
-					<td><textarea  rows="100" cols="80" name="goods_publisher_comment"></textarea></td>
-			    </tr>
-			</table>
-			</div>
+			
 			<div class="tab_content" id="tab6">
 				<H4>추천사</H4>
 				 <table>
