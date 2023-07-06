@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
+import com.bookshop01.board.vo.ReplyVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -33,6 +34,13 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
 		return articleNO;
 	}
+
+	@Override
+	public void insertNewReply(Map replyMap) throws DataAccessException {
+		int replyNO = NewReplyNO();
+		replyMap.put("replyNO", replyNO);
+		sqlSession.insert("mapper.board.insertNewReply", replyMap);
+	} // reply
     
 	//´ÙÁß ÆÄÀÏ ¾÷·Îµå
 	/*
@@ -49,10 +57,19 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
    */
+
+	private int NewReplyNO() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.NewReplyNO");
+	}
 	
 	@Override
 	public ArticleVO selectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectArticle", articleNO);
+	}
+
+	@Override
+	public List<ReplyVO> selectReply(int articleNO) throws DataAccessException {
+		return sqlSession.selectList("mapper.board.selectReply", articleNO);
 	}
 
 	@Override
@@ -101,7 +118,8 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectList("mapper.board.listPageSearch", data);
 	}
-	
+
+
 	// 게시물 총 갯수 + 검색 적용
 	@Override
 	public int searchCount(String searchType, String keyword) throws DataAccessException {

@@ -17,10 +17,9 @@ public class ArticleVO {
 	private String imageFileName;
 	private String member_id;
 	private Date  writeDate;
-	private String reply;
 	
 	
-	public ArticleVO() {
+	public ArticleVO() { System.out.println("ArticleVO");
 	}
 
 	public int getArticleNO() {
@@ -54,14 +53,6 @@ public class ArticleVO {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getReply() {
-		return reply;
-	}
-
-	public void setReply(String reply) {
-		this.reply = reply;
 	}
 
 	public String getContent() {

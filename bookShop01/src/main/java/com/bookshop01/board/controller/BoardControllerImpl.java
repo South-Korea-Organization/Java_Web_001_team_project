@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bookshop01.board.vo.ReplyVO;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +40,7 @@ public class BoardControllerImpl  implements BoardController{
 	private BoardService boardService;
 	@Autowired
 	private ArticleVO articleVO;
+	private ReplyVO replyVO;
 	
 	
 	@Override
@@ -210,6 +212,7 @@ public class BoardControllerImpl  implements BoardController{
 		page.setSearchTypeKeyword(searchType, keyword);
 		
 		articleVO=boardService.viewArticle(articleNO);
+		List replyVO=boardService.replyList(articleNO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", articleVO);
@@ -217,6 +220,7 @@ public class BoardControllerImpl  implements BoardController{
 		mav.addObject("num", num);
 		mav.addObject("searchType", searchType);
 		mav.addObject("keyword", keyword);
+		mav.addObject("reply",replyVO);
 		return mav;
 	}
 
@@ -255,7 +259,7 @@ public class BoardControllerImpl  implements BoardController{
          oldFile.delete();
        }
        message = "<script>";
-	   message += " alert('글을 수정했습니다.'	);";
+	   message += " alert('글을 수정했습니다.');";
 	   message += " location.href='"+multipartRequest.getContextPath()+"/board/viewArticle.do?num="+num+"&articleNO="+articleNO+"';";
 	   message +=" </script>";
        resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -275,36 +279,39 @@ public class BoardControllerImpl  implements BoardController{
 
   @RequestMapping(value="/board/addReply.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest, 
-			HttpServletResponse response) throws Exception {
+	public ResponseEntity addReply(@RequestParam("articleNO") int articleNO,
+								   MultipartHttpServletRequest multipartRequest,
+									HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String,Object> articleMap = new HashMap<String, Object>();
+		Map<String,Object> replyMap = new HashMap<String, Object>();
 		Enumeration enu=multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			articleMap.put(name,value);
+			replyMap.put(name,value);
 		}
 		String imageFileName= upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
-		articleMap.put("parentNO", 0);
-		articleMap.put("member_id", member_id);
-		articleMap.put("imageFileName", imageFileName);
+		replyMap.put("parentNO", 0);
+		replyMap.put("member_id", member_id);
+		replyMap.put("articleNO", articleNO);
+
+		System.out.println(replyMap);
 		
 		String message;
 		ResponseEntity resEnt=null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			int articleNO = boardService.addNewArticle(articleMap);
-			if(imageFileName!=null && imageFileName.length()!=0) {
+			boardService.addReply(replyMap);
+			/*if(imageFileName!=null && imageFileName.length()!=0) {
 				File srcFile = new 
 				File(ARTICLE_IMAGE_REPO+ "\\" + "temp"+ "\\" + imageFileName);
 				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
 				FileUtils.moveFileToDirectory(srcFile, destDir,true);
-			}
+			}*/
 	
 			message = "<script>";
 			message += " alert('새 답글을 추가함');";
@@ -312,8 +319,6 @@ public class BoardControllerImpl  implements BoardController{
 			message +=" </script>";
 		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName);
-			srcFile.delete();
 			
 			message = " <script>";
 			message +=" alert('오류가 발생했다. 다시 시도해라');');";
@@ -372,9 +377,15 @@ public class BoardControllerImpl  implements BoardController{
 	}
 	
 	@RequestMapping(value = "/board/replyForm.do", method = {RequestMethod.GET, RequestMethod.POST})
-	private ModelAndView replyForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView replyForm(@RequestParam("articleNO") int articleNO,
+								   HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
+
+		ArticleVO article = new ArticleVO();
+		article.setArticleNO(articleNO); // int값을 articleVO 객체에 설정
+		System.out.println(articleNO);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("article", article);
 		mav.setViewName(viewName);
 
 		return mav;

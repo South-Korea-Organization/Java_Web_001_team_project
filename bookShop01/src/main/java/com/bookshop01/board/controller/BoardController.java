@@ -32,6 +32,7 @@ public interface BoardController {
 	public ResponseEntity  removeArticle(@RequestParam("articleNO") int articleNO,
 										HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ResponseEntity addReply(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
-	//reply add function
+	public ResponseEntity addReply(@RequestParam("articleNO") int articleNO,
+								   MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
+//reply add function
 }
