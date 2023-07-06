@@ -73,16 +73,16 @@
 	 
 	 }
 	 
-	 function fn_reply_form(url, parentNO){
+	 function fn_reply_form(url, articleNO){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
-	     var parentNOInput = document.createElement("input");
-	     parentNOInput.setAttribute("type","hidden");
-	     parentNOInput.setAttribute("name","parentNO");
-	     parentNOInput.setAttribute("value", parentNO);
+	     var articleNOInput = document.createElement("input");
+	     articleNOInput.setAttribute("type","hidden");
+	     articleNOInput.setAttribute("name","articleNO");
+	     articleNOInput.setAttribute("value", articleNO);
 		 
-	     form.appendChild(parentNOInput);
+	     form.appendChild(articleNOInput);
 	     document.body.appendChild(form);
 		 form.submit();
 	 }
@@ -135,6 +135,16 @@
 	  </div>
 	  <input type="text" value="<fmt:formatDate value="${article.writeDate}" />" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 	</div>
+	<div class="input-group input-group-lg">
+             <div class="input-group-prepend">
+               <span class="input-group-text" style="width:100px">reply</span>
+             </div>
+             <c:forEach var="reply" items="${reply}">
+                 <input type="text" name="content" value="${reply.content}","${article.member_id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+             </c:forEach>
+
+           </div>
+           <br>
 
 
 	<table style="width:700px">

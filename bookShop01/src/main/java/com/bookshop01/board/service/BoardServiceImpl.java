@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bookshop01.board.vo.ReplyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,33 +32,18 @@ public class BoardServiceImpl  implements BoardService{
 	public int addNewArticle(Map articleMap) throws Exception{
 		return boardDAO.insertNewArticle(articleMap);
 	}
-	
-	 //다중 이미지 추가하기
-	/*
+
 	@Override
 	public void addReply(Map replyMap) throws Exception {
 		boardDAO.insertNewReply(replyMap);
-	public int addNewArticle(Map articleMap) throws Exception{
-		int articleNO = boardDAO.insertNewArticle(articleMap);
-		articleMap.put("articleNO", articleNO);
-		boardDAO.insertNewImage(articleMap);
-		return articleNO;
 	}
-	*/
-	/*
-	//다중 파일 보이기
+
 	@Override
-	public Map viewArticle(int articleNO) throws Exception {
-		Map articleMap = new HashMap();
-		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
-		List<ImageVO> imageFileList = boardDAO.selectImageFileList(articleNO);
-		articleMap.put("article", articleVO);
-		articleMap.put("imageFileList", imageFileList);
-		return articleMap;
+	public List<ReplyVO> replyList(int articleNO) throws Exception{
+		List<ReplyVO> replyList = boardDAO.selectReply(articleNO);
+		return replyList;
 	}
-   */
-	
-	
+
 	 //단일 파일 보이기
 	@Override
 	public ArticleVO viewArticle(int articleNO) throws Exception {
