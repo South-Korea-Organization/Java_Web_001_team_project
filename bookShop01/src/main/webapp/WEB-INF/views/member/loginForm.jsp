@@ -50,7 +50,8 @@ function result(){
                                 </div>
                             </div>
                             <div class="col-6 text-right">
-                                <a href="#" class="text-success">아이디/비밀번호 찾기</a>
+                                <a href="${contextPath}/member/search_id.do" class="text-success" >아이디찾기</a> |
+		   						<a href="${contextPath}/member/search_pw.do" class="text-success" >비밀번호찾기</a> 
                             </div>
                         </div>
                         <br>

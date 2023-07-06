@@ -121,4 +121,26 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		
 		return resEntity ;
 	}
+	
+	@Override
+	@RequestMapping(value="/search_pw.do" ,method = RequestMethod.POST)
+	public ResponseEntity search_pw(@ModelAttribute("memberVO") MemberVO _memberVO,
+			                HttpServletRequest request, HttpServletResponse response) 
+			                		throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	
+		
+		System.out.println( resEntity ) ;
+		return resEntity ;
+	
+	}
+	
+	
+	
+	
 }
