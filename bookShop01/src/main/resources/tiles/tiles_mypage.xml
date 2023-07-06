@@ -41,6 +41,11 @@
        <put-attribute name="body" value="/WEB-INF/views/mypage/exchangeMyOrder.jsp" />
      </definition>
      
+      <definition name="/member/search_pw" extends="baseLayout">
+         <put-attribute name="title" value="비번 찾기 페이지" />
+         <put-attribute name="body" value="/WEB-INF/views/member/search_pw.jsp" />
+      </definition>
+     
 </tiles-definitions>
 
 

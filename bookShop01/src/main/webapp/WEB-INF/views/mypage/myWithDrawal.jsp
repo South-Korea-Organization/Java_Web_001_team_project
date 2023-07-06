@@ -471,7 +471,7 @@
 		<table align=center>
 		<tr >
 			<td >
-				<input type="submit"  value="회원탈퇴" onclick= "clickEvent()">
+				<input type="submit"  value="회원탈퇴" onclick= "clickEvent()" class="btn btn-outline-success" >
 			</td>
 		</tr>
 	</table>

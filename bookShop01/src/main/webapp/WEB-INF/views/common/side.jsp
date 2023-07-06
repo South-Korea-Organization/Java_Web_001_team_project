@@ -56,6 +56,9 @@
 	      <li class="nav-item">
 	        <a class="nav-link mypageNav" href="${contextPath}/mypage/myDetailInfo.do">회원 정보 관리</a>
 	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link mypageNav" href="${contextPath}/mypage/myWithDrawal.do">회원 탈퇴</a>
+	      </li>
 	    </ul>
 	  </div>
 	</nav>

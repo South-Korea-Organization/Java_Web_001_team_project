@@ -22,4 +22,7 @@ public interface MemberController {
 	public ResponseEntity   search_id(@RequestParam("email1") String email1, HttpServletRequest request, 
 			HttpServletResponse response) throws Exception;
 	
+	public ResponseEntity  search_pw(@ModelAttribute("member") MemberVO member,
+			 HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }
