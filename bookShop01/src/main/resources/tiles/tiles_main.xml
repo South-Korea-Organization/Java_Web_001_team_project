@@ -13,10 +13,36 @@
 		<put-attribute name="quickMenu" value="/WEB-INF/views/common/quickMenu.jsp" />
 	</definition>
 
+	<!-- 메인페이지 원본 -->
 	<definition name="/main/main" extends="baseLayout">
 		<put-attribute name="title" value="쇼핑몰 메인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
 	</definition>
+	
+	<!-- 메인페이지2 : 소형식물 -->
+	<definition name="/main/main2" extends="baseLayout">
+       <put-attribute name="title" value="쇼핑몰 메인페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/main/main2.jsp" />
+    </definition>
+    
+    <!-- 메인페이지3 : 중형식물 -->
+	<definition name="/main/main3" extends="baseLayout">
+       <put-attribute name="title" value="쇼핑몰 메인페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/main/main3.jsp" />
+    </definition>
+    
+    <!-- 메인페이지4 : 중형식물 -->
+	<definition name="/main/main4" extends="baseLayout">
+       <put-attribute name="title" value="쇼핑몰 메인페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/main/main4.jsp" />
+    </definition>
+    
+    <!-- 메인페이지5 : 화환 -->
+	<definition name="/main/main5" extends="baseLayout">
+       <put-attribute name="title" value="쇼핑몰 메인페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/main/main5.jsp" />
+    </definition>
+    
 </tiles-definitions>
 
 

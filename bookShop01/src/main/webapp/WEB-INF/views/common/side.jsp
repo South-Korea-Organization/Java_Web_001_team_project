@@ -78,19 +78,19 @@
 	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 	    <ul class="navbar-nav">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath }/goods/goodsList.do" style="padding-left:30px; font-size:20px;">Home</a>
+	        <a class="nav-link" href="${contextPath }/main/main.do" style="padding-left:30px; font-size:20px;">Home</a>
+	      </li>	      
+	      <li class="nav-item">
+	        <a class="nav-link" href="${contextPath }/main/main2.do" style="padding-left:30px; font-size:20px;">소형 식물</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">소형 식물</a>
+	        <a class="nav-link" href="${contextPath }/main/main3.do" style="padding-left:30px; font-size:20px;">중형 식물</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">중형 식물</a>
+	        <a class="nav-link" href="${contextPath }/main/main4.do" style="padding-left:30px; font-size:20px;">대형 식물</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;">대형 식물</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#" style="padding-left:30px; font-size:20px;"> 화환 </a>
+	        <a class="nav-link" href="${contextPath }/main/main5.do" style="padding-left:30px; font-size:20px;"> 화환 </a>
 	      </li>
 	      
 	    </ul>
