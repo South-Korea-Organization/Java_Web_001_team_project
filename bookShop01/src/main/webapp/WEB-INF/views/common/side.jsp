@@ -66,35 +66,68 @@
 </c:when>
 <c:otherwise>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Steplant</a>
-	  	<div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
+	
+	<!-- 화환 -->
+	<div class="btn-group">
+	  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    화환
 	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-	    <ul class="navbar-nav">
-	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath }/main/main.do" style="padding-left:30px; font-size:20px;">Home</a>
-	      </li>	      
-	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath }/main/main2.do" style="padding-left:30px; font-size:20px;">소형 식물</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath }/main/main3.do" style="padding-left:30px; font-size:20px;">중형 식물</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath }/main/main4.do" style="padding-left:30px; font-size:20px;">대형 식물</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="${contextPath }/main/main5.do" style="padding-left:30px; font-size:20px;"> 화환 </a>
-	      </li>
-	      
-	    </ul>
+	  <div class="dropdown-menu">
+	    <a class="dropdown-item" href="${contextPath}/main/main2.do">근조화환</a>
+	    <a class="dropdown-item" href="#">축하화환</a>
+	    <a class="dropdown-item" href="#">개업식화분</a>
 	  </div>
+	</div>
+	
+	<!-- 관상식물 -->
+	<div class="btn-group">	  
+	  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    관상식물
+	  </button>
+	  <div class="dropdown-menu">
+	    <a class="dropdown-item" href="${contextPath}/main/main3.do">관상수</a>
+	    <a class="dropdown-item" href="#">다육이</a>
+	    <a class="dropdown-item" href="#">동양란</a>
+	    <a class="dropdown-item" href="#">서양란</a>
+	    <a class="dropdown-item" href="#">선인장</a>
+	  </div>	  
+	</div>
+          
+	<!-- 기능성식물 -->
+	<div class="btn-group">	  
+	  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    기능성식물
+	  </button>
+	  <div class="dropdown-menu">
+	    <a class="dropdown-item" href="${contextPath}/main/main4.do">과실수</a>
+	    <a class="dropdown-item" href="#">공기정화식물</a>
+	    <a class="dropdown-item" href="#">관엽수</a>
+	  </div>	  
+	</div>
+	
+	<!-- 꽃배달서비스 -->
+	<div class="btn-group">	  
+	  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    꽃배달서비스
+	  </button>
+	  <div class="dropdown-menu">
+	    <a class="dropdown-item" href="${contextPath}/main/main5.do">꽃다발</a>
+	  </div>	  
+	</div>
+	
+	<!-- 부가제품 -->
+	<div class="btn-group">	  
+	  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	    부가제품
+	  </button>
+	  <div class="dropdown-menu">
+	    <a class="dropdown-item" href="${contextPath}/main/main3.do">화분</a>
+	    <a class="dropdown-item" href="#">분재</a>
+	    <a class="dropdown-item" href="#">꽃박스</a>
+	  </div>	  
+	</div>
+	
+			          
 	</nav>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 	
