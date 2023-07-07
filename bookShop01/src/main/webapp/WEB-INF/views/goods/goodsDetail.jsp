@@ -178,7 +178,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<tr>
 					<td class="fixed">발행일</td>
 					<td class="fixed">
-					   <c:set var="pub_date" value="${goods.GOODS_CREDATE}" />
+					   <c:set var="pub_date" value="${goods.goods_credate}" />
 					   <c:set var="arr" value="${fn:split(pub_date,' ')}" />
 					   <c:out value="${arr[0]}" />
 					</td>
