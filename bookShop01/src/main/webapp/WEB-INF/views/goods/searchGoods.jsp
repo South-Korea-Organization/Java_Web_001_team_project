@@ -94,7 +94,7 @@
 						<h2>
 							<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">${item.goods_title }</a>
 						</h2>
-						<c:set var="goods_pub_date" value="${item.GOODS_CREDATE }" />
+						<c:set var="goods_pub_date" value="${item.goods_credate }" />
 					   <c:set var="arr" value="${fn:split(goods_pub_date,' ')}" />
 						
 					</td>
