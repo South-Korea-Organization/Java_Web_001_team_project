@@ -74,8 +74,8 @@
 	  </button>
 	  <div class="dropdown-menu">
 	    <a class="dropdown-item" href="${contextPath}/main/main2.do">근조화환</a>
-	    <a class="dropdown-item" href="#">축하화환</a>
-	    <a class="dropdown-item" href="#">개업식화분</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main3.do">축하화환</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main4.do">개업식화분</a>
 	  </div>
 	</div>
 	
@@ -85,11 +85,11 @@
 	    관상식물
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main3.do">관상수</a>
-	    <a class="dropdown-item" href="#">다육이</a>
-	    <a class="dropdown-item" href="#">동양란</a>
-	    <a class="dropdown-item" href="#">서양란</a>
-	    <a class="dropdown-item" href="#">선인장</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main5.do">관상수</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main6.do">다육이</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main7.do">동양란</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main8.do">서양란</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main9.do">선인장</a>
 	  </div>	  
 	</div>
           
@@ -99,9 +99,9 @@
 	    기능성식물
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main4.do">과실수</a>
-	    <a class="dropdown-item" href="#">공기정화식물</a>
-	    <a class="dropdown-item" href="#">관엽수</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main10.do">과실수</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main11.do">공기정화식물</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main12.do">관엽수</a>
 	  </div>	  
 	</div>
 	
@@ -111,7 +111,7 @@
 	    꽃배달서비스
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main5.do">꽃다발</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main13.do">꽃다발</a>
 	  </div>	  
 	</div>
 	
@@ -121,9 +121,9 @@
 	    부가제품
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main3.do">화분</a>
-	    <a class="dropdown-item" href="#">분재</a>
-	    <a class="dropdown-item" href="#">꽃박스</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main14.do">화분</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main15.do">분재</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main16.do">꽃박스</a>
 	  </div>	  
 	</div>
 	
