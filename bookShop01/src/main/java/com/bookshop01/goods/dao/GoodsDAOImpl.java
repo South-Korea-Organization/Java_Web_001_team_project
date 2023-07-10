@@ -16,12 +16,22 @@ public class GoodsDAOImpl  implements GoodsDAO{
 	@Autowired
 	private SqlSession sqlSession;
 
+	// 메인에서 사용했던 검색기능(goods_status 통해 검색)
 	@Override
 	public List<GoodsVO> selectGoodsList(String goodsStatus ) throws DataAccessException {
 		List<GoodsVO> goodsList=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsList",goodsStatus);
 	   return goodsList;	
      
 	}
+	
+	// 일반적인 검색기능(goods_sort 통해 검색)
+	@Override
+	public List<GoodsVO> selectGoodsList_bysort(String goodsSort ) throws DataAccessException {
+		List<GoodsVO> goodsList=(ArrayList)sqlSession.selectList("mapper.goods.selectGoodsList_bysort",goodsSort);
+	   return goodsList;	
+     
+	}
+	
 	@Override
 	public List<String> selectKeywordSearch(String keyword) throws DataAccessException {
 	   List<String> list=(ArrayList)sqlSession.selectList("mapper.goods.selectKeywordSearch",keyword);

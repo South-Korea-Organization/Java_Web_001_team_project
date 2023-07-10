@@ -41,7 +41,7 @@ public class MainController extends BaseController {
 		return mav;
 	}
 	
-	// 메이페이지2 : 소형식물	
+	// 메이페이지2 
 	@RequestMapping(value= "/main/main2.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main2(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
@@ -51,12 +51,12 @@ public class MainController extends BaseController {
 		
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}	
 	
-	// 메이페이지3 : 중형식물	
+	// 메이페이지3
 	@RequestMapping(value= "/main/main3.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main3(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
@@ -66,12 +66,12 @@ public class MainController extends BaseController {
 		
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}	
 	
-	// 메이페이지4 : 대형식물	
+	// 메이페이지4
 	@RequestMapping(value= "/main/main4.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main4(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
@@ -81,12 +81,12 @@ public class MainController extends BaseController {
 		
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}	
 	
-	// 메이페이지5 : 화환	
+	// 메이페이지5 
 	@RequestMapping(value= "/main/main5.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main5(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
@@ -96,9 +96,175 @@ public class MainController extends BaseController {
 		
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}	
+	
+	// 메이페이지6 
+	@RequestMapping(value= "/main/main6.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main6(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지7 
+	@RequestMapping(value= "/main/main7.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main7(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지8 
+	@RequestMapping(value= "/main/main8.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main8(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지9 
+	@RequestMapping(value= "/main/main9.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main9(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지10 
+	@RequestMapping(value= "/main/main10.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main10(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지11 
+	@RequestMapping(value= "/main/main11.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main11(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지12 
+	@RequestMapping(value= "/main/main12.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main12(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지13 
+	@RequestMapping(value= "/main/main13.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main13(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지14 
+	@RequestMapping(value= "/main/main14.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main14(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지15 
+	@RequestMapping(value= "/main/main15.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main15(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+	
+	// 메이페이지16 
+	@RequestMapping(value= "/main/main16.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView main16(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session;
+		ModelAndView mav=new ModelAndView();
+		String viewName=(String)request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		session=request.getSession();
+		session.setAttribute("side_menu", "user");
+		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
+		mav.addObject("goodsMap", goodsMap);
+		return mav;
+	}	
+
 
 }

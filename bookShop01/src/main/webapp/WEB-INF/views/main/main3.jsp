@@ -10,11 +10,10 @@
   request.setCharacterEncoding("UTF-8");
 %>  
 
-<!-- 
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
-	<h3 class="font-italic">small_plants</h3>
-	<c:forEach var="item" items="${goodsMap.bestseller }">
+	<h3 class="font-italic">축하화환</h3>
+	<c:forEach var="item" items="${goodsMap.congratulatory_wreath }">
 	   <c:set  var="goods_count" value="${goods_count+1 }" />
 		<div class="book">
 			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
@@ -31,69 +30,4 @@
   </c:forEach>
 </div>
 <div class="clear"></div>
- -->
-
-<div class="main_book" >
-<c:set  var="goods_count" value="0" />
-	<h3 class="font-italic">medium_plants</h3>
-	<c:forEach var="item" items="${goodsMap.newbook }" >
-	   <c:set  var="goods_count" value="${goods_count+1 }" />
-		<div class="book">
-		  <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-            <img width="150" height="200"
-				src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-	      </a>
-
-		<div class="title">${item.goods_title }</div>
-		<div class="price">
-		    <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
-		       ${goods_price}원
-		  </div>
-	</div>
-	</c:forEach>
-</div>
-<div class="clear"></div>
-
-<!-- 
-<div class="main_book" >
-<c:set  var="goods_count" value="0" />
-	<h3 class="font-italic">big_plants</h3>
-	<c:forEach var="item" items="${goodsMap.steadyseller }" >
-	   <c:set  var="goods_count" value="${goods_count+1 }" />
-		<div class="book">
-		  <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-	        <img width="121" height="154"
-            				src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-	      </a>
-
-		<div class="title">${item.goods_title }</div>
-		<div class="price">
-		    <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
-		       ${goods_price}원
-		  </div>
-	</div>
-	</c:forEach>
-	</div>
  
-<div class="main_book">
-   <c:set  var="goods_count" value="0" />
-	<h3 class="font-italic">hwahwan_plants</h3>
-	<c:forEach var="item" items="${goodsMap.bestseller }">
-	   <c:set  var="goods_count" value="${goods_count+1 }" />
-		<div class="book">
-			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
-                <img width="150" height="200"
-				     src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
-			</a> 
-
-			<div class="title">${item.goods_title }</div>
-			<div class="price">
-		  	   <fmt:formatNumber  value="${item.goods_price}" type="number" var="goods_price" />
-		          ${goods_price}원
-			</div>
-		</div>
-  </c:forEach>
-</div>
-<div class="clear"></div>
---> 
-   
