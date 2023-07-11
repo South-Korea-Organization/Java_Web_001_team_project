@@ -68,13 +68,13 @@ public class MainController extends BaseController {
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}	
 	
 	// 메이페이지4
-	// 메이페이지4 : 대형식물	
+
 	@RequestMapping(value= "/main/main4.do" ,method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView main4(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session;
@@ -85,7 +85,7 @@ public class MainController extends BaseController {
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods_bysort();
-		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();
+		
 		mav.addObject("goodsMap", goodsMap);
 		return mav;
 	}	

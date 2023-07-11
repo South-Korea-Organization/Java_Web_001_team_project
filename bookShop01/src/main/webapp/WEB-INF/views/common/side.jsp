@@ -47,9 +47,11 @@
 	      <li class="nav-item">
 	        <a class="nav-link mypageNav" href="${contextPath}/mypage/listChangeMyOrderStatus.do">반품/교환 신청 및 조회</a>
 	      </li>
+	      <!-- 
 	      <li class="nav-item">
 	        <a class="nav-link mypageNav" href="#">주문 취소 내역</a>
 	      </li>
+	       -->
 	      <li class="nav-item">
 	        <a class="nav-link mypageNav" href="#">세금계산서</a>
 	      </li>
