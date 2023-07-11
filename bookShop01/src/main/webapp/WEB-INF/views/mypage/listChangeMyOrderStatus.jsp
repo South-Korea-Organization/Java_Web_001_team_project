@@ -185,9 +185,10 @@ function  calcPeriod(search_period){
 </script>
 </head>
 <body>
-<h1>취소/반품/교환/환불 내역 조회
+<table class="list_view table table-hover table-bordered">
+<h3>취소/반품/교환/환불 내역 조회
     <A href="#"> <IMG  src="${contextPath}/resources/image/btn_more_see.jpg">  </A> 
-</h1>
+</h3>
 <!--검색기능 시작-->	
 	<form  method="post" name="frm">
 	<table>	
@@ -299,7 +300,7 @@ function  calcPeriod(search_period){
 
 <table class="list_view">
 		<tbody align=center >
-			<tr style="background:#33ff00" >
+			 <tr style="background:lightgray" >
 				<td>주문번호</td>
 				<td>주문일자</td>
 				<td>주문상품</td>
