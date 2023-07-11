@@ -5,6 +5,38 @@
 
 <mapper namespace="mapper.mypage">
 <!-- 리절트 맵 정의 -->
+    <!-- 교환 테이블 VO by Dean -->
+    <resultMap id="exchangeOrderResult" type="ExchangeOrderVO">    
+        <result property="exchange_seq_num" column="exchange_seq_num" />
+		<result property="order_id" column="order_id" />
+		<result property="goods_id" column="goods_id" />
+		<result property="member_id" column="member_id" />
+		<result property="exchange_goods_qty" column="exchange_goods_qty" />				
+		<result property="exchange_request_date" column="exchange_request_date" />
+		<result property="exchagne_reception_date" column="exchagne_reception_date" />
+		<result property="exchange_cancel_date" column="exchange_cancel_date" />
+		<result property="exchange_reason_code" column="exchange_reason_code" />		
+		<result property="exchange_status_code" column="exchange_status_code" />
+		<result property="exchange_memo" column="exchange_memo" />		
+	</resultMap>
+	
+       <!-- 반품 테이블 VO by Dean -->	
+       <resultMap id="returnOrderResult" type="ReturnOrderVO">    
+        <result property="return_seq_num" column="return_seq_num" />
+		<result property="order_id" column="order_id" />
+		<result property="goods_id" column="goods_id" />
+		<result property="member_id" column="member_id" />
+		<result property="return_goods_qty" column="return_goods_qty" />				
+		<result property="return_request_date" column="return_request_date" />
+		<result property="exchagne_reception_date" column="exchagne_reception_date" />
+		<result property="return_cancel_date" column="return_cancel_date" />
+		<result property="return_reason_code" column="return_reason_code" />		
+		<result property="return_status_code" column="return_status_code" />
+		<result property="return_tracking_number" column="return_tracking_number" />		
+		<result property="return_memo" column="return_memo" />	
+	</resultMap>
+
+	<!-- change_goods_qty,totPageCnt 추가 by Dean --> 
 	<resultMap id="orderGoodsResult" type="orderVO">
 		<result property="order_id" column="order_id" />
 		<result property="member_id" column="member_id" />
@@ -39,6 +71,8 @@
 		<result property="goods_qty" column="goods_qty" />
 		
 		<result property="goods_fileName" column="goods_fileName" />
+		<result property="change_goods_qty" column="change_goods_qty" />
+		<result property="totPageCnt" column="totPageCnt" />
 	</resultMap> 
 
 	
@@ -144,20 +178,146 @@
 	   where order_id=#{order_id}
 	</update>
 	
-	<!-- 마이페이지>취소/반품/교환/환불 신청 조회 (2023.06.19 by Dean ) -->
-	<select id="listChangeMyOrderStatus" resultMap="orderGoodsResult" parameterType="String"  >
+	<!-- 마이페이지>취소/반품/교환/환불 신청 조회 (2023.06.19 by Dean ) 7.4 수정    7.6페이징 추가 수정-->
+	<select id="listChangeMyOrderStatus" resultMap="orderGoodsResult" parameterType="java.util.Map">	
+		 select 
+		 		* 
+		 from 
+		 (		
+			    select  
+			    	rowNum as recNum, t.*, tot.totPageCnt
+			    	
+			    from 
+			    (
+			    	select 
+		                count(*) totPageCnt
+		            from
+		                t_shopping_order 
+		            where 
+		            	member_id=#{member_id}    
+		            	<if test="beginDate != '' and beginDate != null  and endDate != '' and endDate != null">
+		            		 and  to_char(pay_order_time,'yyyy-mm-dd')  between #{beginDate} and #{endDate}
+	                    </if>                  
+	                    <if test="'orderer_name'.equals(#{search_type})">
+	                  	  and orderer_name like '%'|| #{searchWord} || '%'			        
+				        </if>	
+	                    <if test="'goods_title'.equals(#{seracyh_type})">
+	                   	  and goods_title like '%'|| #{searchWord} || '%'			          
+				        </if>	
+				        <if test="'orderer_hp'.equals(#{seracyh_type})">
+				       	  and orderer_hp like '%'|| #{searchWord} || '%'			         
+				        </if>	
+				        <if test="delivery_state != '' and delivery_state != null">
+	            		 and delivery_state=#{delivery_state}
+	                    </if> 
+		        )tot, 					  
+				(		    
+					select 
+						* 
+					from 
+				    	t_shopping_order
+				    where  
+		            	  member_id=#{member_id}                
+		            	  <if test="beginDate != '' and beginDate != null  and endDate != '' and endDate != null">
+		            		 and  to_char(pay_order_time,'yyyy-mm-dd')  between #{beginDate} and #{endDate}
+		                  </if>                  
+		                  <if test="'orderer_name'.equals(#{search_type})">
+		                  	  and orderer_name like '%'|| #{searchWord} || '%'			        
+					      </if>	
+		                  <if test="'goods_title'.equals(#{seracyh_type})">
+		                   	  and goods_title like '%'|| #{searchWord} || '%'			          
+					      </if>	
+					       <if test="'orderer_hp'.equals(#{seracyh_type})">
+					       	  and orderer_hp like '%'|| #{searchWord} || '%'			         
+					      </if>	
+					      <if test="delivery_state != '' and delivery_state != null">
+		            		 and delivery_state=#{delivery_state}
+		                  </if> 
+				                   order by order_id desc   
+			    ) t 
+		  )							
+		  where				
+				recNum between (#{section}-1)*100+ (#{pageNum}-1)*10+1 and (#{section}-1)*100+(#{pageNum})*10			
+			
+	</select>	
+	
+	<!-- 마이페이지>취소/반품/교환/환불 신청 조회 > 교환신청 (2023.06.21, 27 by Dean ) -->
+	<insert id="insertExchageMyOrder" parameterType="ExchangeOrderVO"  >
+		<selectKey resultType="int" keyProperty="exchange_seq_num" order="BEFORE">
+	    	select exchange_seq_num.nextval from dual
+	    </selectKey>
+	    
 	    <![CDATA[
-			select * from t_shopping_order 
-			where member_id=#{member_id} 
-			order by order_id desc
-    	]]>
-	</select>
-		
-	<!-- 마이페이지>취소/반품/교환/환불 신청 조회 > 교환신청 (2023.06.21 by Dean ) -->
-	<update id="updateExchangeMyOrder" parameterType="String">
+		   insert into T_SHOPPING_EXCHANGE_ORDER(
+		          exchange_seq_num,  
+		          order_id,                        
+	              member_id,                       
+	              goods_id, 	                   
+	              exchange_goods_qty,              
+	              exchange_request_date,           
+                  exchange_reception_date,         
+                  exchange_cancel_date,            
+	              exchange_reason_code,            
+                  exchange_status_code,
+                  exchange_memo)     			            
+		   values(
+		          #{exchange_seq_num},
+			      #{order_id},
+			      #{member_id},
+			      #{goods_id},
+			      #{exchange_goods_qty}, 
+			      sysdate,
+			      #{exchange_reception_date},				     
+				  #{exchange_cancel_date },
+				  #{exchange_reason_code},
+				  #{exchange_status_code},
+				  #{exchange_memo} 	 			   
+				 )
+		]]>
+	</insert> 
+	
+	<!-- 마이페이지>취소/반품/교환/환불 신청 조회 > 반품신청 (2023.06.30 by Dean ) -->
+	<insert id="insertReturnMyOrder" parameterType="ReturnOrderVO"  >
+		<selectKey resultType="int" keyProperty="return_seq_num" order="BEFORE">
+	    	select return_seq_num.nextval from dual
+	    </selectKey>
+	    
+	    <![CDATA[
+		   insert into T_SHOPPING_RETURN_ORDER(
+		          return_seq_num,  
+		          order_id,                        
+	              member_id,                       
+	              goods_id, 	                   
+	              return_goods_qty,              
+	              return_request_date,           
+                  return_reception_date,         
+                  return_cancel_date,            
+	              return_reason_code,            
+                  return_status_code,
+                  return_tracking_number,
+                  return_memo)            			            
+		   values(
+		          #{return_seq_num},
+			      #{order_id},
+			      #{member_id},
+			      #{goods_id},
+			      #{return_goods_qty}, 
+			      sysdate,
+			      #{return_reception_date},				     
+				  #{return_cancel_date },
+				  #{return_reason_code},
+				  #{return_status_code},
+				  #{return_tracking_number},
+				  #{return_memo}			 			   
+				 )
+		]]>
+	</insert>	
+	
+	<!-- 마이페이지>취소/반품/교환/환불 신청 조회 > 교환/반품신청 수량 주문테이블에 update (2023.07.03 by Dean ) -->
+	<update id="updateChangeOrderQty" parameterType="java.util.HashMap">
 	   update t_shopping_order
-	 	  set delivery_state='exchange_order'
-	   where order_id=#{order_id}  
+	 	  set change_goods_qty=#{change_goods_qty}
+	   where order_id=#{order_id} and goods_id=#{goods_id}
 	</update>
 	
 	<!-- 마이페이지 회원탈퇴 -->

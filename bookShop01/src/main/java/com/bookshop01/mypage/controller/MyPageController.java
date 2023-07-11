@@ -18,12 +18,19 @@ public interface MyPageController {
 	public ResponseEntity modifyMyInfo(@RequestParam("attribute")  String attribute,
 					            @RequestParam("value")  String value,
 					            HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	// 마이페이지 추가
+	// 회원탈퇴
 	public ModelAndView delMember(@RequestParam(required = false,value="message")  String message,HttpServletRequest request, HttpServletResponse response)  throws Exception ;
 	
-	// 2023.6.19 by Dean
-	public ModelAndView listChangeMyOrderStatus(@RequestParam(required = false,value="message")  String message ,HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	// 2023.6.19 by Dean  
+	// 교환/반품 > 리스트 2023.6.19 by Dean	
+	public ModelAndView listChangeMyOrderStatus(@RequestParam Map<String, String> dateMap,
+            HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	// 교환/반품 > 교환 등록 전처리  
 	public ModelAndView exchangeMyOrder(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
-
+	// 교환/반품 > 교환등록	
+	public ModelAndView addExChangeMyOrder(@RequestParam Map<String, String> receiverMap, HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
+	// 교환/반품 > 반품 등록 전처리  by Dean 23.07.03
+	public ModelAndView returnMyOrder(@RequestParam("order_id")  String order_id,HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	// 교환/반품 > 반품등록  by Dean 23.06.30
+	public ModelAndView addReturnMyOrder(@RequestParam Map<String, String> receiverMap, HttpServletRequest request, HttpServletResponse response)  throws Exception;			
 }

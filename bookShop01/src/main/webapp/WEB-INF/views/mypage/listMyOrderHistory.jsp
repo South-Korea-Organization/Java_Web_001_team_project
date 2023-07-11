@@ -143,6 +143,7 @@ function fn_cancel_order(order_id){
 </form>	
 <div class="clear"></div>
 <table class="list_view table table-hover table-bordered">
+<table class="list_view">
 		<tbody align=center >
 			<tr style="background:lightgray" >
 				<td class="fixed" >주문번호</td>
@@ -186,7 +187,7 @@ function fn_cancel_order(order_id){
 				   <strong>
 				      <c:forEach var="item2" items="${myOrderHistList}" varStatus="j">
 				          <c:if  test="${item.order_id ==item2.order_id}" >
-				             ${item.goods_sales_price*item.order_goods_qty }원/${item.order_goods_qty }<br>
+				             ${item.goods_sales_price*item2.order_goods_qty }원/${item2.order_goods_qty }<br><!--수정 각상품별 수량이 다른 오류 수정 by Dean 230627-->
 				         </c:if>   
 					 </c:forEach>
 				   </strong>
@@ -206,8 +207,14 @@ function fn_cancel_order(order_id){
 					    <c:when test="${item.delivery_state=='cancel_order' }">
 					       주문취소
 					    </c:when>
-					    <c:when test="${item.delivery_state=='returning_goods' }">
-					       반품
+                        <c:when test="${item.delivery_state=='return_req' }">
+					       반품신청
+					    </c:when>
+					    <c:when test="${item.delivery_state=='return_end' }">
+					       반품완료
+					    </c:when>
+                        <c:when test="${item.delivery_state=='exchange_req' }">
+					       교환신청
 					    </c:when>
 				  </c:choose>
 				  </strong>
