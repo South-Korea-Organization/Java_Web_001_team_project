@@ -42,8 +42,8 @@ function fn_exchange_order(order_id){
 	if(answer==true){
 		var checkNum = 0;    //  교환할 상품이 체크된 갯수
 		var formObj=document.frm;
-		var num = formObj.goods_id.length;	
-				
+		var num = formObj.goods_id.length;
+	
 		var i_order_id = document.createElement("input"); 
 	    
 	    i_order_id.name="order_id";
@@ -58,19 +58,12 @@ function fn_exchange_order(order_id){
 		formObj.appendChild(i_exchange_status_code);
 		
 	//	alert( "주문번호 : " +  order_id );
-	
-		if (num == undefined )  // 상품이 한개인 경우
-		{			
-			if ( formObj.goods_id.checked == true )	checkNum++;
-		}
-		else{
-			for(i=0;i<num; i++)
+		for(i=0;i<num; i++)
+		{
+			if ( formObj.goods_id[i].checked == true )
 			{
-				if ( formObj.goods_id[i].checked == true )
-				{
-		//			alert( "상품코드:" + formObj.goods_id[i].value  + "상품수량:" + formObj.order_goods_qty[i].value);
-					checkNum++;
-				}
+		//		alert( "상품코드:" + formObj.goods_id[i].value  + "상품수량:" + formObj.order_goods_qty[i].value);
+				checkNum++;
 			}
 		}
 		
@@ -93,18 +86,15 @@ function fn_exchange_order(order_id){
 		
 	}
 }
+
 function fn_return_order(order_id){
 	var answer=confirm("반품하시겠습니까?");
 	if(answer==true){
-		var formObj=document.createElement("form");
+		var checkNum = 0;    //  반품할 상품이 체크된 갯수
+		var formObj=document.frm;
+		var num = formObj.goods_id.length;
 		
-		if ( formObj.returnReason.value =="" )
-		{
-			alert("반품사유를 선택해 주세요");
-			return false;
-		}
-		
-		
+	//	alert("체크상품" + num);
 		var i_order_id = document.createElement("input"); 
 	    
 	    i_order_id.name="order_id";
@@ -115,11 +105,38 @@ function fn_return_order(order_id){
 		var i_return_status_code = document.createElement("input")
 		i_return_status_code.name ="return_status_code";
 		i_return_status_code.value = "return_req"   // 반품신청 코드
-		formObj.appendChild(i_return_status_code);		
+		formObj.appendChild(i_return_status_code);			
 		
-	    document.body.appendChild(formObj); 
-	    formObj.method="post";	    
-		formObj.action="${contextPath}/mypage/addReturnMyOrder.do";	  
+		if (num == undefined )  // 상품이 한개인 경우
+		{			
+			if ( formObj.goods_id.checked == true )	checkNum++;
+		}
+		else{
+			for(i=0;i<num; i++)
+			{
+				if ( formObj.goods_id[i].checked == true )
+				{
+				//	alert( "상품코드:" + formObj.goods_id[i].value  + "상품수량:" + formObj.order_goods_qty[i].value);
+					checkNum++;
+				}
+			}
+		}	
+				
+		if ( checkNum < 1 ) 
+		{
+	    	alert("반품할 상품을 1개이상 체크해 주세요");
+			return false;
+		}		
+		
+		if ( formObj.returnReason.value =="" )
+		{
+			alert("반품사유를 선택해 주세요");
+			return false;
+		}		
+		
+   	    document.body.appendChild(formObj); 
+	    formObj.method="post";
+	    formObj.action="${contextPath}/mypage/addReturnMyOrder.do";	    								      
 	    formObj.submit();	
 	}
 }
@@ -177,7 +194,7 @@ function calcGoodsPrice(bookPrice,obj){
 </head>
 <body>
 
-<h1>교환 내역 조회
+<h1>반품 내역 조회
     <A href="#"> <IMG  src="${contextPath}/resources/image/btn_more_see.jpg">  </A> 
 </h1>
 
@@ -214,7 +231,7 @@ function calcGoodsPrice(bookPrice,obj){
             </tr>
             <c:forEach var="item" items="${myOrderList }"  varStatus="status">
             <tr>           
-              	    <td><input type="checkbox" name="goods_id"  checked  value="${item.goods_id }"></td>    <!-- onClick="calcGoodsPrice(${item.goods_sales_price },this)"-->
+                    <td><input type="checkbox" name="goods_id"  checked  value="${item.goods_id }"></td>    <!-- onClick="calcGoodsPrice(${item.goods_sales_price },this)"-->
                     <td class="goods_image">
                       <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
                         <IMG width="75" alt=""  src="${contextPath}/thumbnails.do?goods_id=${item.goods_id}&fileName=${item.goods_fileName}">
@@ -249,7 +266,7 @@ function calcGoodsPrice(bookPrice,obj){
     
     
     <br><br><br>	
-  <h1>교환 사유 선택(필수)
+  <h1>반품 사유 선택(필수)
         <a href="#"> <img  src="${contextPath}/resources/image/btn_more_see.jpg" />  </a>
 </h1>
     <table border=0 width=100%  cellpadding=10 cellspacing=10>
@@ -322,14 +339,14 @@ function calcGoodsPrice(bookPrice,obj){
     
   <table>
     <tr>
-<td> 		              
-           <c:if test="${message eq 'exchange_req'}">
+<td>
+            <c:if test="${message eq 'exchange_req'}">
              <p><input  type="button" onClick="fn_exchange_order('${myOrderList[0].order_id}')" value="교환신청"  /></p>  
            </c:if>
            
            <c:if test="${message eq 'return_req'}">
              <p><input  type="button" onClick="fn_return_order('${myOrderList[0].order_id}')" value="반품신청" /></p>     
-           </c:if>          	    	
+           </c:if>   	    	
         </td>
     </tr>
     </table>

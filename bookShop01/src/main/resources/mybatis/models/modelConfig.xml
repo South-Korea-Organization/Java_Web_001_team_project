@@ -12,6 +12,9 @@
     <typeAlias type="com.bookshop01.mypage.vo.MyPageVO" alias="mypageVO" />
     <typeAlias type="com.bookshop01.board.vo.ArticleVO" alias="articleVO" />
     <typeAlias type="com.bookshop01.board.vo.ImageVO" alias="imageVO" />
+    
+    <typeAlias type="com.bookshop01.mypage.vo.ExchangeOrderVO" alias="exchangeOrderVO" />  
+    <typeAlias type="com.bookshop01.mypage.vo.ReturnOrderVO" alias="returnOrderVO" />  
   </typeAliases>
 </configuration>
 

@@ -38,7 +38,22 @@ public class OrderVO {
 	private String goods_fileName;
 	private String orderer_hp;
 	
-	
+	// 추가  by Dean
+	private int change_goods_qty;
+	public int getChange_goods_qty() {
+		return change_goods_qty;
+	}
+	public void setChange_goods_qty(int change_goods_qty) {
+		this.change_goods_qty = change_goods_qty;
+	}
+	public int getTotPageCnt() {
+		return totPageCnt;
+	}
+	public void setTotPageCnt(int totPageCnt) {
+		this.totPageCnt = totPageCnt;
+	}
+	private int totPageCnt;
+		
 	
 	
 	

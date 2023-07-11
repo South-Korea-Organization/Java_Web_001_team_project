@@ -94,7 +94,7 @@
 <c:set  var="goods_count" value="0" />
 	<h3 class="font-italic">steady-seller</h3>
 	<c:forEach var="item" items="${goodsMap.steadyseller }" >
-	   <c:set  var="goods_count" value="${goods_count }" />
+	   <c:set  var="goods_count" value="${goods_count+1 }" />
 		<div class="book">
 		  <a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
 	        <img width="121" height="154"
