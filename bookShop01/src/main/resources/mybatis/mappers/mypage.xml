@@ -13,7 +13,7 @@
 		<result property="member_id" column="member_id" />
 		<result property="exchange_goods_qty" column="exchange_goods_qty" />				
 		<result property="exchange_request_date" column="exchange_request_date" />
-		<result property="exchagne_reception_date" column="exchagne_reception_date" />
+		<result property="exchange_reception_date" column="exchange_reception_date" />
 		<result property="exchange_cancel_date" column="exchange_cancel_date" />
 		<result property="exchange_reason_code" column="exchange_reason_code" />		
 		<result property="exchange_status_code" column="exchange_status_code" />
@@ -28,7 +28,7 @@
 		<result property="member_id" column="member_id" />
 		<result property="return_goods_qty" column="return_goods_qty" />				
 		<result property="return_request_date" column="return_request_date" />
-		<result property="exchagne_reception_date" column="exchagne_reception_date" />
+		<result property="return_reception_date" column="return_reception_date" />
 		<result property="return_cancel_date" column="return_cancel_date" />
 		<result property="return_reason_code" column="return_reason_code" />		
 		<result property="return_status_code" column="return_status_code" />

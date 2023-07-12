@@ -29,7 +29,7 @@
 	}
 </script>
 <body>
-
+<div class="text-center">
 <table class="table table-hover">
   <thead>
     <tr>
@@ -77,6 +77,7 @@
     </c:choose>
 </table>
 
+
 <div>
 	<c:if test="${page.prev}">
 		<span>[ <a href="/board/listArticles.do?num=${page.startPageNum - 1}${page.searchTypeKeyword}">이전</a> ]</span>
@@ -97,7 +98,7 @@
 	<c:if test="${page.next}">
 		<span>[ <a href="/board/listArticles.do?num=${page.endPageNum + 1}${page.searchTypeKeyword}">다음</a> ]</span>
 	</c:if>
-</div>
+</div><br>
 
 
 <div>
@@ -110,7 +111,8 @@
  
  <input type="text" name="keyword" value="${keyword}"/>
  
- <button type="button" id="searchBtn">검색</button>
+ <button class="btn-sm btn-outline-secondary" type="button" id="searchBtn">검색</button>
+</div>
 </div>
 
 <script>
@@ -136,5 +138,9 @@ document.addEventListener("keydown", function(event) {
 
 <a  class="cls1 btn btn-primary float-right" role="button" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do?num=${select}', 
                                                     '${contextPath}/member/loginForm.do')">글 게시</a>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

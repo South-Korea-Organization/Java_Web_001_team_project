@@ -261,7 +261,7 @@ function  calcPeriod(search_period){
 					    </c:forEach>	
 					</select>                    				 
 					 일</td>
-              <td rowspan="3">&nbsp;&nbsp;<input type="button" id="btnSearch" name="btnSearch"   value=" 조 회 " onClick="fn_detail_search()"/></td>
+              <td rowspan="3">&nbsp;<input class="btn-sm btn-outline-secondary" type="button" id="btnSearch" name="btnSearch"   value=" 조회 " onClick="fn_detail_search()"/></td>
              </tr>
              <tr>
                <td>						               
@@ -380,15 +380,15 @@ function  calcPeriod(search_period){
 			<td>
                <c:choose>
 			     <c:when test="${item.delivery_state=='delivery_prepared'}">
-			       <input  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소"  />
+			       <input class="btn-sm btn-danger" type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소"  />
 			     </c:when>
                  <c:when test="${item.delivery_state=='delivering'}">
-                    <p><input  type="button" onClick="fn_exchange_order('${item.order_id}')" value="교환신청"  /></p>                    
-                    <p><input  type="button" onClick="fn_return_order('${item.order_id}')" value="반품신청" /></p>           	     
+                    <p><input  class="btn-sm btn-info" type="button" onClick="fn_exchange_order('${item.order_id}')" value="교환신청"  /></p>
+                    <p><input  class="btn-sm btn-secondary" type="button" onClick="fn_return_order('${item.order_id}')" value="반품신청" /></p>
                  </c:when>   
                   <c:when test="${item.delivery_state=='finished_delivering'}">
-                    <p><input  type="button" onClick="fn_exchange_order('${item.order_id}')" value="교환신청"  /></p>                    
-                    <p><input  type="button" onClick="fn_return_order('${item.order_id}')" value="반품신청" /></p>           	     
+                    <p><input  class="btn-sm btn-info" type="button" onClick="fn_exchange_order('${item.order_id}')" value="교환신청"  /></p>
+                    <p><input  class="btn-sm btn-secondary" type="button" onClick="fn_return_order('${item.order_id}')" value="반품신청" /></p>
                  </c:when>              
 			   </c:choose>			               	  
 			</td>

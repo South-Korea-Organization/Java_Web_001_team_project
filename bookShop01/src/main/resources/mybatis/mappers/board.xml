@@ -64,7 +64,7 @@
 
     <select id="selectReply" resultType="articleVO"   parameterType="int">
         <![CDATA[
-          SELECT content from t_reply
+          SELECT content,member_id from t_reply
           where articleNO = #{articleNO}
         ]]>
     </select>

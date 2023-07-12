@@ -212,10 +212,9 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				</tr>
 			</tbody>
 		</table>
-		<ul>
-			<li><a class="buy btn" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
-			<li><a class="cart btn" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
-			<li><a class="wish btn" href="#">위시리스트</a></li>
+		<ul >
+			<li ><a class="btn-lg btn-success" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
+			<li ><a class="btn-lg btn-success" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
 		</ul>
 	</div>
 	<div class="clear"></div>

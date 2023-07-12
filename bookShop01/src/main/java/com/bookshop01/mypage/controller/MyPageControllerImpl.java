@@ -443,7 +443,7 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		MemberVO orderer=(MemberVO)session.getAttribute("memberInfo");		
 		String  member_id=orderer.getMember_id();
 		
-		logger.info("�쉶�썝ID:" + member_id);
+		logger.info("memberID:" + member_id);
 		logger.info("viewName:" + viewName);
 		logger.info("order_id:" + order_id);
 		List<OrderVO> myOrderList=myPageService.findMyOrderInfo(order_id);	

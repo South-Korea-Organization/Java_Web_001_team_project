@@ -228,10 +228,10 @@ function fn_cancel_order(order_id){
 				<td>
 			     <c:choose>
 			   <c:when test="${item.delivery_state=='delivery_prepared'}">
-			       <input  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소"  />
+			       <input  class="btn-sm btn-outline-danger" type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소"  />
 			   </c:when>
 			   <c:otherwise>
-			      <input  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소" disabled />
+			      <input  class="btn-sm btn-secondary" type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소" disabled />
 			   </c:otherwise>
 			  </c:choose>
 			    </td>
