@@ -50,6 +50,10 @@ public class BoardControllerImpl  implements BoardController{
 									 @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
 									HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
+
+		HttpSession session = request.getSession();
+		session.setAttribute("side_menu", "board_mode");
+		/*listArticle에서 board_mode 사용*/
 		
 		Page page = new Page();
 		

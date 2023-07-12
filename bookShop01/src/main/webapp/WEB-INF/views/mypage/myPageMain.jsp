@@ -110,10 +110,10 @@ function fn_cancel_order(order_id){
 			<td>
 			  <c:choose>
 			   <c:when test="${item.delivery_state=='delivery_prepared'}">
-			       <input  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소"  />
+			       <input  class="btn-sm btn-outline-danger"  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소"  />
 			   </c:when>
 			   <c:otherwise>
-			      <input  type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소" disabled />
+			      <input  class="btn-sm btn-outline-secondary" type="button" onClick="fn_cancel_order('${item.order_id}')" value="주문취소" disabled />
 			   </c:otherwise>
 			  </c:choose>
 			</td>
@@ -189,5 +189,8 @@ function fn_cancel_order(order_id){
    </td>
    </tr>
 </table>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

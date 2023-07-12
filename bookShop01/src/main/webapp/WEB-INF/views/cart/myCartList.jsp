@@ -183,7 +183,7 @@ function fn_order_all_cart_goods(){
 </script>
 </head>
 <body>
-	<table class="list_view table table-hover">
+	<table class="list_view table table-hover text-center">
 		<thead>
 			<tr style="background-color:#e0e0e0">
 				<td class="fixed" >구분</td>
@@ -231,7 +231,7 @@ function fn_order_all_cart_goods(){
 					<td>
 					   <input style="width:30px;"type="text" id="cart_goods_qty" name="cart_goods_qty" size=3 value="${cart_goods_qty}"><br>
 						<a style="text-decoration:none; color:deepblue;" href="javascript:modify_cart_qty(${item.goods_id },${item.goods_sales_price*0.9 },${cnt.count-1 });" >
-						    <h4>수량 변경</h4>
+						    <p>수량 변경</p>
 						</a>
 					</td>
 					<td>
@@ -262,8 +262,8 @@ function fn_order_all_cart_goods(){
 	<br>
 	
 	<table  width=80%   class="list_view">
-	<thead style="background:#e0e0e0">
-	     <tr  align=center  class="fixed" >
+	<thead style="background:#e0e0e0;">
+	     <tr  class="text-center" align=center  class="fixed" >
 	       <td class="fixed">총 상품수 </td>
 	       <td>총 상품금액</td>
 	       <td>  </td>

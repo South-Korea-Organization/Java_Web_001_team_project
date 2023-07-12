@@ -265,64 +265,62 @@ function calcGoodsPrice(bookPrice,obj){
     
     
     
-    <br><br><br>	
-  <h1>반품 사유 선택(필수)
-        <a href="#"> <img  src="${contextPath}/resources/image/btn_more_see.jpg" />  </a>
-</h1>
-    <table border=0 width=100%  cellpadding=10 cellspacing=10>
-      <tr>
-        <td>
-          
-             <table width="200">
-               <tr>
-                 <td><strong>1.단순변심</strong></td>
-               </tr>
-               <tr>
-                 <td><label>
-                   <input type="radio" name="returnReason" value="10" id="returnReason">
-                   필요없어짐</label></td>
-               </tr>
-               <tr>
-                 <td><label>
-                   <input type="radio" name="returnReason" value="11" id="returnReason">
-                   그외 문제</label></td>
-               </tr>
-             </table>
-             <table width="241">
-               <tr>
-                 <td><strong>2.상품문제</strong></td>
-               </tr>
-               <tr>
-                 <td><label>
-                   <input type="radio" name="returnReason" value="20" id="returnReason">
-                   상품의 구성품/부속품이 없음</label></td>
-               </tr>
-               <tr>
-                 <td><label>
-                   <input type="radio" name="returnReason" value="21" id="returnReason">
-                   상품 설명과 다름</label></td>
-               </tr>
-               <tr>
-                 <td><input type="radio" name="returnReason" value="22" id="returnReason">
-    상품이 파손 배송</td>
-               </tr>
-               <tr>
-                 <td><input type="radio" name="returnReason" value="24" id="returnReason">
-    상품 결함 또는 기능 이상</td>
-               </tr>
-             </table>
-             <table width="200">
-               <tr>
-                 <td><strong>3.배송문제</strong></td>
-               </tr>
-               <tr>
-                 <td><label>
-                   <input type="radio" name="returnReason" value="30" id="returnReason">
-                   다른 상품이 배송</label></td>
-               </tr>
-             </table>
-             <p>&nbsp;</p></td>
-       </tr>
+    <br><br><br>
+    <div class="shadow p-3 mb-5 bg-white rounded">
+      <h1 class="font-italic">반품 사유 선택 (필수) </h1>
+        <table class="table">
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <strong class="text-dark"> 1. 단순변심 </strong>
+                </button>
+              </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                <input type="radio" name="returnReason" value="10" id="returnReason"> 필요없어짐 </input><br><br>
+                <input class="pl-3" type="radio" name="returnReason" value="11" id="returnReason"> 그외 문제</input>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <strong class="text-dark"> 2. 상품문제 </strong>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <input type="radio" name="returnReason" value="20" id="returnReason"> 상품의 구성품/부속품이 없음</input><br><br>
+                <input type="radio" name="returnReason" value="21" id="returnReason"> 상품 설명과 다름</input><br><br>
+    			<input type="radio" name="returnReason" value="22" id="returnReason"> 상품이 파손 배송</input><br><br>
+                <input type="radio" name="returnReason" value="24" id="returnReason"> 상품 결함 또는 기능 이상</input>
+
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <strong class="text-dark"> 3. 배송문제 </strong>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body">
+                <input type="radio" name="returnReason" value="30" id="returnReason"> 다른 상품이 배송</input>
+              </div>
+            </div>
+          </div>
+        </div>
+
        <!--
        <tr>
         <td>수량 :
@@ -341,11 +339,11 @@ function calcGoodsPrice(bookPrice,obj){
     <tr>
 <td>
             <c:if test="${message eq 'exchange_req'}">
-             <p><input  type="button" onClick="fn_exchange_order('${myOrderList[0].order_id}')" value="교환신청"  /></p>  
+             <p><input  class="btn-lg btn-danger" type="button" onClick="fn_exchange_order('${myOrderList[0].order_id}')" value="교환신청"  /></p>
            </c:if>
            
            <c:if test="${message eq 'return_req'}">
-             <p><input  type="button" onClick="fn_return_order('${myOrderList[0].order_id}')" value="반품신청" /></p>     
+             <p><input  class="btn-lg btn-danger" type="button" onClick="fn_return_order('${myOrderList[0].order_id}')" value="반품신청" /></p>
            </c:if>   	    	
         </td>
     </tr>
@@ -353,7 +351,10 @@ function calcGoodsPrice(bookPrice,obj){
     
                 
     <br><br><br>	
-  <h1>&nbsp;</h1>
+
 </form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>    
 </html>

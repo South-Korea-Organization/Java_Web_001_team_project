@@ -135,16 +135,40 @@
 	  </div>
 	  <input type="text" value="<fmt:formatDate value="${article.writeDate}" />" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
 	</div>
-	<div class="input-group input-group-lg">
-             <div class="input-group-prepend">
-               <span class="input-group-text" style="width:100px">reply</span>
-             </div>
-             <c:forEach var="reply" items="${reply}">
-                 <input type="text" name="content" value="${reply.content}","${article.member_id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
-             </c:forEach>
+	<div class="shadow p-3 mb-5 bg-white rounded">
 
-           </div>
-           <br>
+                <label>REPLY    :   </label>
+                <div class="input-group input-group-lg">
+    	            <div class="input-group-prepend">
+    		            <input style="width: 100px" type="text" name="member_id" value="작성자" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+    		            <input type="text" name="content"  class="form-control" value="내용" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+    	            </div>
+                </div><br>
+
+                <div id="replyContainer">
+                    <%-- 기존에 저장된 reply.content를 보여주는 input 태그들 --%>
+                    <c:choose>
+                      <c:when test="${empty reply}">
+                        <p>아직 댓글이 없습니다.</p>
+                      </c:when>
+                      <c:otherwise>
+                        <c:forEach var="reply" items="${reply}">
+                        <div class="input-group input-group-lg">
+                        	  <div class="input-group-prepend">
+                        	   <input style="width: 100px" type="text" name="member_id" value="${reply.member_id}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+                        	   <input type="text" name="content" value="${reply.content}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled/>
+
+                        	</div>
+                        	</div>
+                        	<br>
+
+                        </c:forEach>
+                      </c:otherwise>
+                    </c:choose>
+                  </div>
+              </div>
+               <br>
+
 
 
 	<table style="width:700px">

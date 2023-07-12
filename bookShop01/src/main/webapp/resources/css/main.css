@@ -218,9 +218,7 @@ article ul#page_control li .page_contrl_active {
 #detail_table ul li {
 	padding: 0px 20px; float: left;
 }
-#detail_table ul li a {
-	border-radius: 5px; border: 2px solid rgb(153, 153, 153); border-image: none; width: 150px; height: 25px; text-align: center; padding-top: 7px; font-family: "NanumGothic", Serif; font-size: 1.2em; font-weight: bold; display: block;
-}
+
 /*#detail_table ul li a.buy {
 	background-position: 15px; background-repeat: no-repeat;
 }
@@ -420,6 +418,10 @@ article h1_TITLE {
 	padding: 0px 0px 5px; letter-spacing: 2px; font-family: "NanumGothic"; font-size: 1.1em; border-bottom-color: rgb(102, 102, 102); border-bottom-width: 2px;
 }
 
+h1{
+	margin: 0px 0px 10px; padding: 0px 0px 10px; color: rgb(0, 0, 0); text-transform: uppercase; font-family: "NanumGothic", Serif; font-size: 1.4em; border-bottom-color: rgb(0, 0, 0); border-bottom-width: 2px; border-bottom-style: solid;
+
+}
 
 .main_book {
 	width: auto; padding-top: 7px; font-size: 0.75em;
