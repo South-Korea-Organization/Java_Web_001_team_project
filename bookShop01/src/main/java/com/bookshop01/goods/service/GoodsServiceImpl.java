@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bookshop01.goods.dao.GoodsDAO;
 import com.bookshop01.goods.vo.GoodsVO;
 import com.bookshop01.goods.vo.ImageFileVO;
+import com.bookshop01.goods.vo.ReplyVO;
 
 @Service("goodsService")
 @Transactional(propagation=Propagation.REQUIRED)
@@ -80,6 +82,31 @@ public class GoodsServiceImpl implements GoodsService{
 	public List<GoodsVO> searchGoods(String searchWord) throws Exception{
 		List goodsList=goodsDAO.selectGoodsBySearchWord(searchWord);
 		return goodsList;
+	}
+	
+	@Override
+	public void addReply(ReplyVO reply) throws Exception{
+		goodsDAO.addReply(reply);
+	}
+	
+	@Override
+	public List<ReplyVO> replyList(String goods_id) throws Exception{
+		return goodsDAO.replyList(goods_id);
+	}
+	
+	@Override
+	public void deleteReply(ReplyVO reply) throws Exception{
+		goodsDAO.deleteReply(reply);
+	}
+	
+	@Override
+	public String idCheck(int repNum) throws Exception{
+		return goodsDAO.idCheck(repNum);
+	}
+	
+	@Override
+	public void modifyReply(ReplyVO reply) throws DataAccessException{
+		goodsDAO.modifyReply(reply);
 	}
 	
 	

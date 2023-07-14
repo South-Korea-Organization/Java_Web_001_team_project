@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+
 import com.bookshop01.goods.vo.GoodsVO;
+import com.bookshop01.goods.vo.ReplyVO;
 
 public interface GoodsService {
 	
@@ -18,4 +21,15 @@ public interface GoodsService {
 	
 	public List<String> keywordSearch(String keyword) throws Exception;
 	public List<GoodsVO> searchGoods(String searchWord) throws Exception;
+	
+	// 상품 댓글 작성
+	public void addReply(ReplyVO reply) throws Exception;
+	// 상품 댓글 리스트
+	public List<ReplyVO> replyList(String goods_id) throws Exception;
+	// 상품 댓글 삭제
+	public void deleteReply(ReplyVO reply) throws Exception;
+	// 아이디 체크
+	public String idCheck(int repNum) throws Exception;
+	// 상품 댓글 수정
+	public void modifyReply(ReplyVO reply) throws Exception;
 }
