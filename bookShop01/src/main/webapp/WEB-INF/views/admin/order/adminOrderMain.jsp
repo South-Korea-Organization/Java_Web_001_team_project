@@ -277,7 +277,7 @@ function fn_detail_search(){
 <body>
 	<H3>주문 조회</H3>
 	<form name="frm_delivery_list" action="${contextPath }/admin/admin.do" method="post">	
-		<table   >
+		<table class="table">
 			<tbody>
 				<tr>
 					<td>
@@ -474,7 +474,7 @@ function fn_detail_search(){
 	</div>
 	
 <div class="clear"></div>
-<table class="list_view table-bordered">
+<table class="list_view table-bordered table-hover">
 		<tbody align=center >
 			<tr style="background:lightgray" >
 				<td class="fixed" >주문번호</td>
@@ -570,7 +570,7 @@ function fn_detail_search(){
 				 </select> 
 				</td>
 				<td width=10%>
-			     <input  type="button" value="배송수정"  onClick="fn_modify_order_state('${item.order_id}','s_delivery_state${i.index}')"/>
+			     <input class="btn-sm btn-secondary" type="button" value="배송수정"  onClick="fn_modify_order_state('${item.order_id}','s_delivery_state${i.index}')"/>
 			    </td>
 			</tr>
 		</c:when>
@@ -594,7 +594,12 @@ function fn_detail_search(){
         </tr>  		   
 		</tbody>
 	</table>
-  </form>   	
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 	<div class="clear"></div>
 </body>
 </html>

@@ -467,7 +467,7 @@
 		</table>
 		</div>
 		<div class="clear">
-		<br><br>
+		<br>
 		<table align=center>
 		<tr >
 			<td >
@@ -478,6 +478,6 @@
 	</div>
 	<input  type="hidden" name="h_tel1" value="${memberInfo.tel1}" />
 	<input  type="hidden" name="h_hp1" value="${memberInfo.hp1}" />		
-</form>	
+</form>	<br>
 </body>
 </html>

@@ -41,7 +41,6 @@ function fn_cancel_order(order_id){
 </head>
 <body>
 <h1>최근주문내역
-    <A href="#"> <IMG  src="${contextPath}/resources/image/btn_more_see.jpg">  </A> 
 </h1>
 <table class="list_view table-bordered table-hover">
 		<tbody align=center >
@@ -129,9 +128,9 @@ function fn_cancel_order(order_id){
 
 <br><br><br>	
 <h1>계좌내역
-    <a href="#"> <img  src="${contextPath}/resources/image/btn_more_see.jpg" />  </a>
+
 </h1>
-<table border=0 width=100%  cellpadding=10 cellspacing=10>
+<table class="table table-striped">
   <tr>
     <td>
 	   예치금 &nbsp;&nbsp;  <strong>10000원</strong>
@@ -160,12 +159,12 @@ function fn_cancel_order(order_id){
 
 <br><br><br>	
 <h1>나의 정보
-    <a href="#"> <img  src="${contextPath}/resources/image/btn_more_see.jpg" />  </a>
+
 </h1>
-<table border=0 width=100% cellpadding=10 cellspacing=10>
+<table class="table table-striped">
   <tr>
     <td>
-	   이메일:
+	   이메일
    </td>
     <td>
 	   <strong>${memberInfo.email1 }@${memberInfo.email2 }</strong>

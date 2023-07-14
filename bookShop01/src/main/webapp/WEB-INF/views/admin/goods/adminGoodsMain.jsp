@@ -276,8 +276,9 @@ function  calcPeriod(search_period){
 <H3>상품등록하기</H3>
 <DIV id="search">
 	<form action="${contextPath}/admin/goods/addNewGoodsForm.do">
-		<input   type="submit" value="상품 등록하기">
+		<input class="btn-sm btn-info" type="submit" value="상품 등록하기">
 	</form>
 </DIV>
+<br><br>
 </body>
 </html>
