@@ -1,6 +1,8 @@
 package com.bookshop01.goods.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bookshop01.common.base.BaseController;
 import com.bookshop01.goods.service.GoodsService;
 import com.bookshop01.goods.vo.GoodsVO;
+import com.bookshop01.goods.vo.ReplyVO;
+import com.bookshop01.member.vo.MemberVO;
 
 import net.sf.json.JSONObject;
 
@@ -28,16 +36,65 @@ public class GoodsControllerImpl extends BaseController   implements GoodsContro
 	@Autowired
 	private GoodsService goodsService;
 	
+
+	// 상품 소감(댓글) 수정
+	@ResponseBody
+	@RequestMapping(value = "/modifyReply.do", method = RequestMethod.POST)
+	public int modifyReply(ReplyVO reply, HttpSession session) throws Exception {
+	 
+	 int result = 0;
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("memberInfo");
+	 String member_id = goodsService.idCheck(reply.getRepNum());
+	 
+	 if(member.getMember_id().equals(member_id)) {
+	  
+	  reply.setMember_id(member.getMember_id());
+	  goodsService.modifyReply(reply);
+	  result = 1;
+	 }
+	 
+	 return result;
+	} 
+	
+	// 상품 댓글 삭제
+	@RequestMapping(value="/deleteReply.do", method = RequestMethod.POST)
+	public void deleteReply(ReplyVO reply, HttpSession session,HttpServletResponse response) throws Exception{
+
+		
+		MemberVO member = (MemberVO)session.getAttribute("memberInfo");
+		String member_id = goodsService.idCheck(reply.getRepNum());
+		
+		if(member.getMember_id().equals(member_id)) {
+			reply.setMember_id(member.getMember_id());
+			goodsService.deleteReply(reply);
+
+		}
+		response.sendRedirect("/goods/goodsDetail.do?goods_id=" + reply.getGoods_id());
+		
+	}
+	
 	@RequestMapping(value="/goodsDetail.do" ,method = RequestMethod.GET)
 	public ModelAndView goodsDetail(@RequestParam("goods_id") String goods_id,
 			                       HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
+		Map<String,Object> articleMap = new HashMap<String, Object>();
 		HttpSession session=request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		articleMap.put("member_id", member_id);
 		Map goodsMap=goodsService.goodsDetail(goods_id);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("goodsMap", goodsMap);
+		//mav.addObject("member_id", member_id);
+		
 		GoodsVO goodsVO=(GoodsVO)goodsMap.get("goodsVO");
 		addGoodsInQuick(goods_id,goodsVO,session);
+		
+		//리플 조회
+		List<ReplyVO> reply = goodsService.replyList(goods_id);
+		mav.addObject("reply", reply);
+		
 		return mav;
 	}
 	
@@ -99,5 +156,16 @@ public class GoodsControllerImpl extends BaseController   implements GoodsContro
 		}
 		session.setAttribute("quickGoodsList",quickGoodsList);
 		session.setAttribute("quickGoodsListNum", quickGoodsList.size());
+	}
+	
+	@RequestMapping(value = "/goodsDetail.do", method = RequestMethod.POST)
+	public String addReply(ReplyVO reply, HttpSession session) throws Exception{
+		
+		MemberVO member = (MemberVO)session.getAttribute("memberInfo");
+		reply.setMember_id(member.getMember_id());
+		
+		goodsService.addReply(reply);
+		
+		return "redirect:/goods/goodsDetail.do?goods_id=" + reply.getGoods_id();
 	}
 }

@@ -112,5 +112,43 @@
 		]]>
 	</select>
 	
+	<!-- 상품 댓글 작성 -->
+	<insert id="addReply">
+		insert into goods_reply(goods_id, member_id, repNum, repCon)
+			values( #{goods_id}, #{member_id}, goods_reply_seq.nextval, #{repCon})
+	</insert>
+	
+	<!-- 상품 댓글 리스트 -->
+	<select id="replyList" resultType="com.bookshop01.goods.vo.ReplyVO">
+		select 
+			r.goods_id, r.member_id, r.repNum, r.repCon, r.repDate, m.member_name
+		from goods_reply r 
+			inner join t_shopping_member m
+				on r.member_id = m.member_id
+			where goods_id = #{goods_id}
+	</select>
+	
+	<!-- 상품 댓글 삭제 -->
+	<delete id="deleteReply">
+		delete goods_reply
+			where repNum = #{repNum}
+				and Member_id = #{member_id}
+	</delete>
+	
+	<!-- 아이디 체크 -->
+	<select id="replyIdCheck" resultType="String">
+		select member_id
+			from goods_reply
+				where repNum = #{repNum}
+	</select>
+	
+	<!-- 상품 소감(댓글) 수정 -->
+	<update id="modifyReply">
+	 update goods_reply
+	     set
+	         repCon = #{repCon}
+	     where repNum = #{repNum}
+	         and member_id = #{member_id}
+	</update>
 
 </mapper>

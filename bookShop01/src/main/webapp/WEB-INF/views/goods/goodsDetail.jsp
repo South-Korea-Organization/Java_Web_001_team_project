@@ -16,6 +16,28 @@
 <html>
 <head>
 <style>
+ section.replyForm { padding:30px 0; }
+ section.replyForm div.input_area { margin:10px 0; }
+ section.replyForm textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px;; height:150px; }
+ section.replyForm button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+ 
+ section.replyList { padding:30px 0; }
+ section.replyList ol { padding:0; margin:0; }
+ section.replyList ol li { padding:10px 0; border-bottom:2px solid #eee; }
+ section.replyList div.userInfo { }
+ section.replyList div.userInfo .userName { font-size:20px; font-weight:bold; }
+ section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
+ section.replyList div.replyContent { padding:10px; margin:20px 0; }
+ 
+ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
+ 
+ div.replyModal { position:relative; z-index:1; display:none;}
+ div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
+ div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:525px; height:290px; padding:20px 10px; background:#fff; border:2px solid #666; }
+ div.modalContent textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px; height:200px; }
+ div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+ div.modalContent button.modal_cancel { margin-left:20px; }
+ 
 #layer {
 	z-index: 2;
 	position: absolute;
@@ -43,6 +65,29 @@
 }
 </style>
 <script type="text/javascript">
+
+	function fn_delete_reply(url,repNum,goods_id){
+		 var form = document.createElement("form");
+		 form.setAttribute("method", "post");
+		 form.setAttribute("action", url);
+	    var repNumInput = document.createElement("input");
+	    repNumInput.setAttribute("type","hidden");
+	    repNumInput.setAttribute("name","repNum");
+	    repNumInput.setAttribute("value", repNum);
+	    
+		 
+	    form.appendChild(repNumInput);
+	    
+	    var goodsIdInput = document.createElement("input");
+	    goodsIdInput.setAttribute("type", "hidden");
+	    goodsIdInput.setAttribute("name", "goods_id");
+	    goodsIdInput.setAttribute("value", goods_id);
+	    form.appendChild(goodsIdInput);
+	    document.body.appendChild(form);
+	    form.submit();
+	
+	}
+	
 	function add_cart(goods_id) {
 		$.ajax({
 			type : "POST",
@@ -134,6 +179,12 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
     formObj.action="${contextPath}/order/orderEachGoods.do";
     formObj.submit();
 	}
+	
+	$(document).on("click", ".delete", function(){
+		
+		var date = {repNum : $(this)}
+		
+	})
 
 
 
@@ -142,7 +193,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 <body>
 	<hgroup>
 		<h1>컴퓨터와 인터넷</h1>
-		<h2>국내외 도서 &gt; 컴퓨터와 인터넷 &gt; 웹 개발</h2>
+		<h2>${goods.goods_sort } &gt; 컴퓨터와 인터넷 &gt; 웹 개발</h2>
 		<h3>${goods.goods_title }</h3>
 	</hgroup>
 	<div id="goods_image">
@@ -212,9 +263,10 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				</tr>
 			</tbody>
 		</table>
-		<ul >
-			<li ><a class="btn-lg btn-success" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
-			<li ><a class="btn-lg btn-success" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
+		<ul>
+			<li><a class="buy btn" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
+			<li><a class="cart btn" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
+			<li><a class="wish btn" href="#">위시리스트</a></li>
 		</ul>
 	</div>
 	<div class="clear"></div>
@@ -237,7 +289,70 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<h4>리뷰</h4>
 			</div>
 		</div>
+		
 	</div>
+	<hr>
+	<div id="reply" class="shadow p-3 mb-5 bg-white rounded">
+		<div>
+			
+			<hr style="border: solid 1px ;">
+			<h3> 상품 리뷰 </h3>
+			<hr style="border: solid 1px ;" >
+		</div>
+		<c:if test="${memberInfo.member_id == null }">
+			<p> 댓글을 남기시려면 <a href="${contextPath}/member/loginForm.do">로그인</a>해주세요</p>
+		</c:if>
+		
+		<c:if test="${memberInfo.member_id != null }">
+ 		<section class="replyForm">
+ 		 <form role="form" method="post" autocomplete="off">
+ 		 	<input type="hidden" name="goods_id" value="${goods.goods_id }">
+ 		 	<div class="input_area">
+ 		 		<textarea name="repCon" id="repCon"></textarea>
+ 		 	</div>
+ 		 	<div class="input_area">
+ 		 		<button type="submit" id="reply_btn">댓글 남기기</button>
+ 		 	</div>
+ 		 	
+ 		 </form>
+		</section>
+		</c:if>
+
+ 		<section class="replyList">
+ 			 <ol>
+ 			 	<c:forEach items="${reply }" var="reply">
+ 			 	<li>
+ 			 		<div class="userInfo">
+ 			 			<span class="userName">${reply.member_id }</span>
+ 			 			<span class="date"><fmt:formatDate value="${reply.repDate }" pattern="yyyy-MM-dd" /></span>
+ 			 		</div>
+ 			 		<div class="replyContent" data-repNum="${reply.repNum}">${reply.repCon }</div>
+ 			 		<div class="replyFooter">
+ 			 			<button type="button" class="modify" data-repNum="${reply.repNum }">수정</button>
+ 			 			<button type="button" class="delete" onClick="fn_delete_reply('${contextPath}/goods/deleteReply.do', ${reply.repNum}, ${goods.goods_id})">삭제</button>
+ 			 		</div>
+ 			 	</li>
+ 			 	</c:forEach>
+ 		 	 </ol>    
+ 		 	 <script>
+ 		 		$(document).on("click", ".modify", function(){
+ 		 		 $(".replyModal").fadeIn(300);//.attr("style", "display:block;");
+ 		 		 
+ 		 		 var repNum = $(this).attr("data-repNum");
+ 		 		 var repCon = $(this).parent().parent().children(".replyContent").text();
+ 		 		 
+ 		 		 $(".modal_repCon").val(repCon);
+ 		 		 $(".modal_modify_btn").attr("data-repNum", repNum);
+ 		 		 
+
+ 		 		});
+ 		 	 </script>
+ 		 	 
+ 		 	 
+ 		</section>
+	</div>
+	</div>
+	
 	<div class="clear"></div>
 
 	<div id="layer" style="visibility: hidden">
@@ -254,6 +369,70 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
                   <p> 장바구니에 담았습니다 </p> <br>
                    <a href="${contextPath}/cart/myCartList.do" class="alert-link"> 장바구니 바로가기</a>
                 </div>
+         </div>
+         </div>
+         
+         <div class="replyModal">
+	
+		<div class="modalContent">
+		  
+			<div>
+				<textarea class="modal_repCon" name="modal_repCon"></textarea>
+			</div>
+		  
+			<div>
+				<button type="button" class="modal_modify_btn">수정</button>
+				<button type="button" class="modal_cancel">취소</button>
+			</div>
+	</div>
+	
+	<div class="modalBackground"></div>
+
+</div>
+	
+<script>
+//$(".modal_cancel").click(function(){
+// $(".replyModal").fadeOut(300);//.attr("style", "display:none;");
+//});
+$(document).ready(function() {
+  $(".modal_cancel").click(function() {
+    $(".replyModal").fadeOut(300);
+  });
+
+  $(".modal_modify_btn").click(function() {
+	  var modifyConfirm = confirm("정말로 수정하시겠습니까?");
+
+	  if (modifyConfirm) {
+	    var data = {
+	      repNum: $(this).attr("data-repNum"),
+	      repCon: $(".modal_repCon").val()
+	    }; // ReplyVO 형태로 데이터 생성
+
+	    $.ajax({
+	      url: "/goods/modifyReply.do",
+	      type: "post",
+	      data: data,
+	      success: function(result) {
+	        if (result == 1) {
+	          // 해당하는 댓글 내용 업데이트
+	          var repNum = data.repNum;
+	          var repCon = data.repCon;
+	          $(".replyContent[data-repNum='" + repNum + "']").text(repCon);
+
+	          $(".replyModal").fadeOut(300);
+	        } else {
+	          alert("작성자 본인만 할 수 있습니다.");
+	        }
+	      },
+	      error: function() {
+	        alert("로그인하셔야합니다.");
+	      }
+	    });
+	  }
+	});
+});
+</script>
+
 
 </body>
 </html>
