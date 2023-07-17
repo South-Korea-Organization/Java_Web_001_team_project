@@ -8,7 +8,61 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
   request.setCharacterEncoding("UTF-8");
-%>  
+%>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner" style="border-radius: 7rem; width: 100%">
+    <div class="carousel-item active">
+      <video class="d-block w-100" src="../resources/image/video3.mp4" autoplay muted></video>
+    </div>
+    <div class="carousel-item">
+      <video class="d-block w-100" src="../resources/image/video2.mp4" autoplay muted></video>
+    </div>
+    <div class="carousel-item">
+      <video class="d-block w-100" src="../resources/image/video1.mp4" autoplay muted></video>
+    </div>
+    <div class="carousel-item">
+          <video class="d-block w-100" src="../resources/image/video4.mp4" autoplay muted></video>
+    </div>
+    <div class="carousel-item">
+      <video class="d-block w-100" src="../resources/image/video5.mp4" autoplay muted></video>
+    </div>
+  </div>
+   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="sr-only">Previous</span>
+   </a>
+   <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="sr-only">Next</span>
+   </a>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var carouselNextBtn = document.getElementById("carouselNextBtn");
+    var carouselVideos = document.querySelectorAll("#carouselExampleControls video");
+    var currentVideoIndex = 0;
+
+    function playNextVideo() {
+      if (currentVideoIndex === carouselVideos.length - 1) {
+        // 마지막 동영상 재생 완료 시 다음 버튼 클릭
+        carouselNextBtn.click();
+      } else {
+        // 다음 동영상 재생
+        carouselVideos[currentVideoIndex + 1].play();
+      }
+    }
+
+    // 동영상 재생 완료 이벤트 감지
+    carouselVideos.forEach(function(video) {
+      video.addEventListener("ended", playNextVideo);
+    });
+  });
+</script>
+
+
+
+<br><br>
 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -49,9 +103,9 @@
 </div>
 <br>
 
-<iframe width="1000" height="400" src="https://www.youtube.com/embed/UKfOWXflQSI?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-<br><br>
+
+<br>
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
 	<h3 class="font-italic">best-seller</h3>
