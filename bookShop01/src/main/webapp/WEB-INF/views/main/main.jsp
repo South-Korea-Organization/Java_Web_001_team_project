@@ -47,6 +47,11 @@
     <span class="sr-only">Next</span>
   </button>
 </div>
+<br>
+
+<iframe width="1000" height="400" src="https://www.youtube.com/embed/UKfOWXflQSI?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<br><br>
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
 	<h3 class="font-italic">best-seller</h3>
@@ -67,6 +72,8 @@
   </c:forEach>
 </div>
 <div class="clear"></div>
+
+
 
 <div class="main_book" >
 <c:set  var="goods_count" value="0" />
