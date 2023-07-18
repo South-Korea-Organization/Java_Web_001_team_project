@@ -186,7 +186,7 @@
 
            	   </div>
            	</div><br>
-				<img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:300px; height:200px"><br>
+				<img src="${contextPath}/downloadBoard.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview" style="width:300px; height:200px"><br>
 				<br>
            	</td>
 		  </tr>

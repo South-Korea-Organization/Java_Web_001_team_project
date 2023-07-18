@@ -35,7 +35,7 @@ import com.bookshop01.member.vo.MemberVO;
 
 @Controller("boardController")
 public class BoardControllerImpl  implements BoardController{
-	private static final String ARTICLE_IMAGE_REPO = "C:\\shopping\\file_repo";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\shopping\\file_repo2";
 	@Autowired
 	private BoardService boardService;
 	@Autowired
