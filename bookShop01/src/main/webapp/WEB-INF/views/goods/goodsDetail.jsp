@@ -192,9 +192,9 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 </head>
 <body>
 	<hgroup>
-		<h1>컴퓨터와 인터넷</h1>
+		<h1>${goods.goods_title }</h1>
 		<h2>${goods.goods_sort } &gt; 컴퓨터와 인터넷 &gt; 웹 개발</h2>
-		<h3>${goods.goods_title }</h3>
+		
 	</hgroup>
 	<div id="goods_image">
 		<figure>
@@ -270,11 +270,13 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		</ul>
 	</div>
 	<div class="clear"></div>
-	<!-- 내용 들어 가는 곳 -->
+	
+	<!-- 일단 주석처리 -->
+	<!-- 내용 들어 가는 곳 
 	<div id="container">
 		<ul class="tabs">
 			
-			<li><a href="#tab4">출판사서평</a></li>
+			
 			<li><a href="#tab5">추천사</a></li>
 			<li><a href="#tab6">리뷰</a></li>
 		</ul>
@@ -352,6 +354,8 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
  		</section>
 	</div>
 	</div>
+	-->
+	<!-- 일단 주석처리 -->
 	
 	<div class="clear"></div>
 

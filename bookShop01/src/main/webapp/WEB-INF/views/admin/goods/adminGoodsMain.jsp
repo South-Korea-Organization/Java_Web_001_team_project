@@ -199,12 +199,10 @@ function  calcPeriod(search_period){
 			<tr style="background:lightgray" >
 				<td>상품번호</td>
 				<td>상품이름</td>
-				<td>저자</td>
-				<td>출판사</td>
-				<td>상품가격</td>
+				<td>가격</td>
 				<td>입고일자</td>
-				<td>출판일</td>
-				<td>삭제여부</td>
+				<td>판매일자</td>
+				<td>판매여부</td>
 			</tr>
    <c:choose>
      <c:when test="${empty newGoodsList }">			
