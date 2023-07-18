@@ -92,7 +92,7 @@ footer img {
 /*articles*/
 
 article {
-	margin: 20px 0px 0px 15px; width: 100%; position: static;
+	width: 100%; position: static;
 }
 
 article h3 {

@@ -183,6 +183,8 @@ function fn_order_all_cart_goods(){
 </script>
 </head>
 <body>
+<h1>장바구니
+</h1>
 	<table class="list_view table table-hover text-center">
 		<thead>
 			<tr style="background-color:#e0e0e0">
@@ -321,5 +323,5 @@ function fn_order_all_cart_goods(){
 		 <a class="btn btn-success" href="${contextPath}/main/main.do">
 		 	<h4>쇼핑 계속하기</h4>
 		 </a>
-	<center>
+	<center><br>
 </form>	
