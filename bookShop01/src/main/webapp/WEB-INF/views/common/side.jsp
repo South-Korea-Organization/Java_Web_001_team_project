@@ -15,7 +15,6 @@
   text-align: center;
   /* 추가적인 스타일링 등 */
 }
-
 </style>
 
 <c:choose>
@@ -70,7 +69,6 @@
     	  <div class="dropdown-menu" style="left:30px;">
     	    <a class="dropdown-item" href="${contextPath}/main/main2.do">근조화환</a>
     	    <a class="dropdown-item" href="${contextPath}/main/main3.do">축하화환</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main4.do">개업식화분</a>
     	  </div>
     	</div>
 
@@ -80,11 +78,9 @@
     	    관상식물
     	  </button>
     	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main5.do">관상수</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main6.do">다육이</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main7.do">동양란</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main8.do">서양란</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main9.do">선인장</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main4.do">다육이</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main5.do">동양란</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main6.do">서양란</a>
     	  </div>
     	</div>
 
@@ -94,9 +90,8 @@
     	    기능성식물
     	  </button>
     	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main10.do">과실수</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main11.do">공기정화식물</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main12.do">관엽수</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main7.do">공기정화식물</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main8.do">관엽</a>
     	  </div>
     	</div>
 
@@ -106,7 +101,7 @@
     	    꽃배달서비스
     	  </button>
     	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main13.do">꽃다발</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main9.do">꽃다발</a>
     	  </div>
     	</div>
 
@@ -116,76 +111,8 @@
     	    부가제품
     	  </button>
     	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main14.do">화분</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main15.do">분재</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main16.do">꽃박스</a>
-    	  </div>
-    	</div>
-
-
-    	</nav>
-
-</c:when>
-<c:when test="${side_menu=='cartMap' }">
-	<nav class="navbar navbar-expand-lg navbar-light row shadow p-3 mb-5 bg-white rounded">
-
-    	<!-- 화환 -->
-    	<div class="btn-group col">
-    	  <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    	    화환
-    	  </button>
-    	  <div class="dropdown-menu" style="left:30px;">
-    	    <a class="dropdown-item" href="${contextPath}/main/main2.do">근조화환</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main3.do">축하화환</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main4.do">개업식화분</a>
-    	  </div>
-    	</div>
-
-    	<!-- 관상식물 -->
-    	<div class="btn-group col">
-    	  <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    	    관상식물
-    	  </button>
-    	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main5.do">관상수</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main6.do">다육이</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main7.do">동양란</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main8.do">서양란</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main9.do">선인장</a>
-    	  </div>
-    	</div>
-
-    	<!-- 기능성식물 -->
-    	<div class="btn-group col">
-    	  <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    	    기능성식물
-    	  </button>
-    	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main10.do">과실수</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main11.do">공기정화식물</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main12.do">관엽수</a>
-    	  </div>
-    	</div>
-
-    	<!-- 꽃배달서비스 -->
-    	<div class="btn-group col">
-    	  <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    	    꽃배달서비스
-    	  </button>
-    	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main13.do">꽃다발</a>
-    	  </div>
-    	</div>
-
-    	<!-- 부가제품 -->
-    	<div class="btn-group col">
-    	  <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    	    부가제품
-    	  </button>
-    	  <div class="dropdown-menu">
-    	    <a class="dropdown-item" href="${contextPath}/main/main14.do">화분</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main15.do">분재</a>
-    	    <a class="dropdown-item" href="${contextPath}/main/main16.do">꽃박스</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main10.do">분재</a>
+    	    <a class="dropdown-item" href="${contextPath}/main/main11.do">꽃박스</a>
     	  </div>
     	</div>
 
@@ -204,7 +131,6 @@
 	  <div class="dropdown-menu">
 	    <a class="dropdown-item" href="${contextPath}/main/main2.do">근조화환</a>
 	    <a class="dropdown-item" href="${contextPath}/main/main3.do">축하화환</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main4.do">개업식화분</a>
 	  </div>
 	</div>
 	
@@ -214,11 +140,9 @@
 	    관상식물
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main5.do">관상수</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main6.do">다육이</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main7.do">동양란</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main8.do">서양란</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main9.do">선인장</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main4.do">다육이</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main5.do">동양란</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main6.do">서양란</a>
 	  </div>	  
 	</div>
           
@@ -228,9 +152,8 @@
 	    기능성식물
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main10.do">과실수</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main11.do">공기정화식물</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main12.do">관엽수</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main7.do">공기정화식물</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main8.do">관엽</a>
 	  </div>	  
 	</div>
 	
@@ -240,7 +163,7 @@
 	    꽃배달서비스
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main13.do">꽃다발</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main9.do">꽃다발</a>
 	  </div>	  
 	</div>
 	
@@ -250,9 +173,8 @@
 	    부가제품
 	  </button>
 	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="${contextPath}/main/main14.do">화분</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main15.do">분재</a>
-	    <a class="dropdown-item" href="${contextPath}/main/main16.do">꽃박스</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main10.do">분재</a>
+	    <a class="dropdown-item" href="${contextPath}/main/main11.do">꽃박스</a>
 	  </div>	  
 	</div>
 

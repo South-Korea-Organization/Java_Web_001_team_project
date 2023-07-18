@@ -12,8 +12,8 @@
 
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
-	<h3 class="font-italic">과실수 </h3>
-	<c:forEach var="item" items="${goodsMap.fruit_tree }">
+	<h3 class="font-italic">분재 </h3>
+	<c:forEach var="item" items="${goodsMap['분재']}">
 	   <c:set  var="goods_count" value="${goods_count+1 }" />
 		<div class="book">
 			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">

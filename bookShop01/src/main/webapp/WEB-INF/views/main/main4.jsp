@@ -10,11 +10,10 @@
   request.setCharacterEncoding("UTF-8");
 %>  
 
- 
 <div class="main_book">
    <c:set  var="goods_count" value="0" />
-	<h3 class="font-italic">개업식화분</h3>
-	<c:forEach var="item" items="${goodsMap.congratulatory_wreath }">
+	<h3 class="font-italic">다육이 </h3>
+	<c:forEach var="item" items="${goodsMap['다육이']}">
 	   <c:set  var="goods_count" value="${goods_count+1 }" />
 		<div class="book">
 			<a href="${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id }">
@@ -31,3 +30,5 @@
   </c:forEach>
 </div>
 <div class="clear"></div>
+   
+   

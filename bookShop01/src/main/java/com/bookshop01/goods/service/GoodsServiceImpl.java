@@ -35,35 +35,35 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 	
 	// 일반적인 검색기능(goods_sort 통해 검색)
-	public Map<String,List<GoodsVO>> listGoods_bysort() throws Exception {
-		Map<String,List<GoodsVO>> goodsMap=new HashMap<String,List<GoodsVO>>();
-		List<GoodsVO> goodsList=goodsDAO.selectGoodsList_bysort("fruit_tree");
-		goodsMap.put("fruit_tree",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("air_purifying");
-		goodsMap.put("air_purifying",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("bouquet");
-		goodsMap.put("bouquet",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("condolences_wreath");
-		goodsMap.put("condolences_wreath",goodsList);		
-		goodsList=goodsDAO.selectGoodsList_bysort("western_orchid");
-		goodsMap.put("western_orchid",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("congratulatory_wreath");
-		goodsMap.put("congratulatory_wreath",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("flower_box");
-		goodsMap.put("flower_box",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("foliage_plant");
-		goodsMap.put("foliage_plant",goodsList);		
-		goodsList=goodsDAO.selectGoodsList_bysort("oriental_orchid");
-		goodsMap.put("oriental_orchid",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("potted_plant");
-		goodsMap.put("potted_plant",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("succulents");
-		goodsMap.put("succulents",goodsList);
-		goodsList=goodsDAO.selectGoodsList_bysort("ornamental_tree");
-		goodsMap.put("ornamental_tree",goodsList);
-		
-		return goodsMap;
-	}
+		public Map<String,List<GoodsVO>> listGoods_bysort() throws Exception {
+			Map<String,List<GoodsVO>> goodsMap=new HashMap<String,List<GoodsVO>>();
+			List<GoodsVO> goodsList=goodsDAO.selectGoodsList_bysort("과실수");
+			goodsMap.put("과실수",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("공기정화식물");
+			goodsMap.put("공기정화식물",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("꽃다발");
+			goodsMap.put("꽃다발",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("근조화환");
+			goodsMap.put("근조화환",goodsList);		
+			goodsList=goodsDAO.selectGoodsList_bysort("서양란");
+			goodsMap.put("서양란",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("축하화환");
+			goodsMap.put("축하화환",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("꽃박스");
+			goodsMap.put("꽃박스",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("관엽");
+			goodsMap.put("관엽",goodsList);		
+			goodsList=goodsDAO.selectGoodsList_bysort("동양란");
+			goodsMap.put("동양란",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("분재");
+			goodsMap.put("분재",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("다육이");
+			goodsMap.put("다육이",goodsList);
+			goodsList=goodsDAO.selectGoodsList_bysort("관상수");
+			goodsMap.put("관상수",goodsList);
+			
+			return goodsMap;
+		}
 	
 	public Map goodsDetail(String _goods_id) throws Exception {
 		Map goodsMap=new HashMap();
